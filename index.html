@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Место Россия</title>
+  </head>
+
+  <body class="page">
+    <header class="header">
+      <img
+        class="header__logo"
+        src="<%=require('./images/logo_mesto.svg')%>"
+        alt="Логотип Mesto"
+      />
+    </header>
+
+    <main>
+      <section class="profile">
+        <div class="profile__main">
+          <img
+            class="profile__avatar"
+            src="<%=require('./images/portrait_jack-iv-kusto.jpg')%>"
+            alt="аватарка пользователя"
+          />
+          <div class="profile__main-info">
+            <div class="profile__name-button">
+              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <button
+                class="profile__button-change-name"
+                type="button"
+              ></button>
+            </div>
+            <p class="profile__bio">Исследователь океана</p>
+          </div>
+        </div>
+        <button class="profile__button-add-photo" type="button"></button>
+      </section>
+
+      <div id="card-container" class="gallery"></div>
+    </main>
+
+    <footer class="footer">
+      <p class="footer__author">&copy; 2022 Mesto Russia</p>
+    </footer>
+
+    <div id="edit_profile" class="popup popup_type_edit">
+      <div class="popup-container popup__container">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form class="form" id="submit_name_form" novalidate>
+          <fieldset class="form__set">
+            <label class="form__field">
+              <input
+                type="text"
+                id="text-name"
+                class="popup__text"
+                value="Жак-Ив Кусто"
+                minlength="2"
+                maxlength="40"
+                required
+              />
+              <span class="text-name-error popup__text-error"></span>
+            </label>
+            <label class="form__field">
+              <input
+                type="text"
+                id="text-bio"
+                class="popup__text"
+                value="Исследователь океана"
+                minlength="2"
+                maxlength="200"
+                required
+              />
+              <span class="text-bio-error popup__text-error"></span>
+            </label>
+            <button
+              id="name_save_button"
+              class="popup__save-button"
+              type="submit"
+            >
+              Сохранить
+            </button>
+          </fieldset>
+        </form>
+        <button
+          id="name_close_button"
+          class="popup__close-button"
+          type="button"
+        ></button>
+      </div>
+    </div>
+
+    <div id="popup_type_add-card" class="popup popup_type_add-card">
+      <div class="popup-container popup__container">
+        <h2 class="popup__title">Новое место</h2>
+        <form class="form" id="submit_card_form" novalidate>
+          <fieldset class="form__set">
+            <label id="card-form-field" class="form__field">
+              <input
+                type="text"
+                id="add-card-name"
+                class="popup__text"
+                placeholder="Название"
+                minlength="2"
+                maxlength="30"
+                required
+              />
+              <span class="add-card-name-error popup__text-error"></span>
+            </label>
+            <label id="card-form-field" class="form__field">
+              <input
+                type="url"
+                id="add-card-link"
+                class="popup__text"
+                placeholder="Ссылка на картинку"
+                required
+              />
+              <span class="add-card-link-error popup__text-error"></span>
+            </label>
+            <button
+              id="popup__create-button"
+              class="popup__save-button"
+              type="submit"
+              disabled
+            >
+              Создать
+            </button>
+          </fieldset>
+        </form>
+        <button
+          id="card_close_button"
+          class="popup__close-button"
+          type="button"
+        ></button>
+      </div>
+    </div>
+
+    <div class="popup popup-photo">
+      <div class="popup-container popup-photo__container">
+        <figure class="popup-photo__figure">
+          <img
+            class="popup-photo__full-size"
+            src="<%=require('./images/grid-photo_ergaki.jpg')%>"
+            alt="Национальный парк в Южной Сибири Ергаки"
+          />
+          <figcaption class="popup-photo__name">Ергаки</figcaption>
+        </figure>
+        <button
+          id="full-photo_close_button"
+          class="popup__close-button"
+          type="button"
+        ></button>
+      </div>
+    </div>
+
+    <template id="card-template">
+      <div id="card-form" class="gallery__cell">
+        <img
+          id="card-link"
+          class="gallery__photo"
+          src="<%=require('./images/grid-photo_kamchatka.jpg')%>"
+          alt="Черный берег Камчатки"
+        />
+        <button
+          id="card__delete"
+          class="gallery__delete-button"
+          type="reset"
+        ></button>
+        <div class="gallery__caption">
+          <h2 id="gallery-card-name" class="gallery__name">Камчатка</h2>
+          <div class="gallery__button-like-counter">
+          <button
+            id="card__like"
+            class="gallery__like-button"
+            type="submit"
+          ></button>
+          <span class="gallery__like-counter"></span>
+          </div>
+        </div>
+      </div>
+    </template>
+  </body>
+</html>
