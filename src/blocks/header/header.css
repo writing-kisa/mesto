@@ -1,0 +1,23 @@
+.header {
+  margin-top: 45px;
+  padding-bottom: 41px;
+  margin-bottom: 40px;
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid rgb(84, 84, 84, .7);
+}
+
+@media (max-width: 920px) {
+  .header {
+    max-width: 920px;
+  }
+}
+
+@media (max-width: 320px) {
+  .header {
+    max-width: 320px;
+    margin-top: 28px;
+    padding-bottom: 31.6px;
+    margin-bottom: 42px;
+  }
+}

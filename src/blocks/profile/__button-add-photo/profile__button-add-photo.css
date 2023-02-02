@@ -1,0 +1,29 @@
+.profile__button-add-photo {
+  background-image: url("../../../images/vector_plus.svg");
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: 22px;
+  padding: 0;
+  width: 150px;
+  height: 50px;
+  border: 2px solid white;
+  align-items: flex-end;
+  border-radius: 2px;
+}
+
+.profile__button-add-photo:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 724px) {
+  .profile__button-add-photo {
+    width: 282px;
+  }
+}
+
+@media screen and (max-width: 581px) {
+  .profile__button-add-photo {
+    background-size: 16px;
+  }
+}

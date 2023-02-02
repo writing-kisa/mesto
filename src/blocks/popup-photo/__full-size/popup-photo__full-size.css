@@ -1,0 +1,8 @@
+.popup-photo__full-size {
+  max-width: 75vw;
+  max-height: 75vh;
+  object-fit: cover;
+  margin-bottom: 0;
+  /* vertical-align: middle; */
+  display: block; /* уточнить у наставника: почему без этого стиля появляется пространство между */
+}

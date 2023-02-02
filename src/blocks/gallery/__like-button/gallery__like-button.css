@@ -1,0 +1,14 @@
+.gallery__like-button {
+  background-image: url("../../../images/heart.svg");
+  background-color: transparent;
+  width: 22px;
+  height: 19px;
+  object-fit: cover;
+  border-style: none;
+  margin-top: 30px;
+  padding: 0;
+}
+
+.gallery__like-button:hover {
+  opacity: 0.5;
+}

@@ -1,0 +1,25 @@
+.profile__button-change-name {
+  background-image: url("../../../images/vector.svg");
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: 10px;
+  width: 24px;
+  height: 24px;
+  border: 1px solid white;
+  margin-bottom: 8.5px;
+}
+
+.profile__button-change-name:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 581px) {
+  .profile__button-change-name {
+    margin-bottom: 5px;
+    background-size: 7.5px;
+    width: 18px;
+    height: 18px;
+    margin-left: 10px;
+    }
+}

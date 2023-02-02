@@ -1,0 +1,17 @@
+.profile__name-button {
+  /* border: 2px solid yellow; */
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 18px;
+}
+
+@media screen and (max-width: 581px) {
+  .profile__name-button {
+    justify-content: center;
+    gap: 0;
+  }
+}

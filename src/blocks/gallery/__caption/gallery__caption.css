@@ -1,0 +1,7 @@
+.gallery__caption {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 21px;
+  margin-right: 20px;
+}
