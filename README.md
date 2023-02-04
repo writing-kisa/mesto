@@ -4,4 +4,4 @@
 
 в планах, добавлять удалять карточку на страницу
 
-сслылка на gh-pages
+сслылка на gh-pages: https://writing-kisa.github.io/mesto/src/
