@@ -11,7 +11,7 @@
 @font-face {
   src: url(./Inter-Medium.woff2) format("woff2"),
   url(./Inter-Medium.woff) format("woff"), url(./Inter-Medium.ttf) format("ttf"),
-  url(./Inter-Medium.otf) format("otf");;
+  url(./Inter-Medium.otf) format("otf");
   font-family: "Inter";
   font-weight: 500;
   font-style: normal;
