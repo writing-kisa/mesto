@@ -1,5 +1,5 @@
 .profile__button-change-name {
-  background-image: url("../../../images/vector.svg");
+  background-image: url("../../../src/images/vector.svg");
   background-color: transparent;
   background-repeat: no-repeat;
   background-position: 50%;
@@ -8,6 +8,7 @@
   height: 24px;
   border: 1px solid white;
   margin-bottom: 8.5px;
+  cursor: pointer;
 }
 
 .profile__button-change-name:hover {

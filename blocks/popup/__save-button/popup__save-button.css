@@ -11,6 +11,7 @@
   text-align: center;
   margin: 18px 36px 37px 36px;
   padding: 0;
+  cursor: pointer;
 }
 
 .popup__save-button:hover {

@@ -1,5 +1,5 @@
 .profile__button-add-photo {
-  background-image: url("../../../images/vector_plus.svg");
+  background-image: url("../../../src/images/vector_plus.svg");
   background-color: transparent;
   background-repeat: no-repeat;
   background-position: 50%;
@@ -10,6 +10,7 @@
   border: 2px solid white;
   align-items: flex-end;
   border-radius: 2px;
+  cursor: pointer;
 }
 
 .profile__button-add-photo:hover {
