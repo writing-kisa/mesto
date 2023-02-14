@@ -9,10 +9,11 @@
   }
 }
 
-@media (max-width: 320px) {
+@media (max-width: 321px) {
   .header__logo {
     width: 103px;
-    height: 24px;
+    height: 24.4px;
     padding-left: 27px;
+    padding-bottom: 0;
   }
 }
