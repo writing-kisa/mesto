@@ -11,12 +11,12 @@
 }
 
 @media screen and (max-width: 581px) {
-.profile__bio {
-  padding-top: 9px;
-  padding-bottom: 36px;
-  text-align: center;
-  font-size: 14px;
-  width: 282px;
-  max-height: 14px;
-}
+  .profile__bio {
+    padding-top: 9px;
+    padding-bottom: 36px;
+    text-align: center;
+    font-size: 14px;
+    width: 282px;
+    max-height: 14px;
+  }
 }

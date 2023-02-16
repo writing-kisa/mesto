@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Место Россия</title>
-    <link rel="stylesheet" href="./pages/index.css">
+    <link rel="stylesheet" href="./pages/index.css" />
   </head>
 
   <body class="page">
@@ -28,6 +28,7 @@
             <div class="profile__name-button">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
               <button
+                aria-label="Редактировать"
                 class="profile__button-change-name"
                 type="button"
               ></button>
@@ -35,129 +36,129 @@
             <p class="profile__bio">Исследователь океана</p>
           </div>
         </div>
-        <button class="profile__button-add-photo" type="button"></button>
+        <button 
+          aria-label="Добавить фотографию"
+          class="profile__button-add-photo" 
+          type="button"
+        ></button>
       </section>
 
       <div id="card-container" class="gallery">
+        <div class="gallery__cell">
+          <img
+            class="gallery__photo"
+            src="./src/images/grid-photo_kamchatka.jpg"
+            alt="Черный берег Камчатки"
+          />
+          <div class="gallery__caption">
+            <h2 class="gallery__name">Камчатка</h2>
+              <button 
+                aria-label="Поставить лайк"
+                class="gallery__like-button" 
+                type="button"
+                ></button>
+          </div>
+        </div>
 
-      <div class="gallery__cell">
-        <img
-          class="gallery__photo"
-          src="./src/images/grid-photo_kamchatka.jpg"
-          alt="Черный берег Камчатки"
-        />
-        <div class="gallery__caption">
-          <h2 class="gallery__name">Камчатка</h2>
-          <div class="gallery__button-like-counter">
-          <button
-            class="gallery__like-button"
-            type="submit"
-          ></button>
+        <div class="gallery__cell">
+          <img
+            class="gallery__photo"
+            src="./src/images/grid-photo_dombaj.jpg"
+            alt="Заснеженный Домбай"
+          />
+          <div class="gallery__caption">
+            <h2 class="gallery__name">Домбай</h2>
+              <button 
+              aria-label="Поставить лайк"
+              class="gallery__like-button" 
+              type="button"
+              ></button>
           </div>
         </div>
-      </div>
 
-      <div class="gallery__cell">
-        <img
-          class="gallery__photo"
-          src="./src/images/grid-photo_dombaj.jpg"
-          alt="Заснеженный Домбай"
-        />
-        <div class="gallery__caption">
-          <h2 class="gallery__name">Домбай</h2>
-          <div class="gallery__button-like-counter">
-          <button
-            class="gallery__like-button"
-            type="submit"
-          ></button>
+        <div class="gallery__cell">
+          <img
+            class="gallery__photo"
+            src="./src/images/grid-photo_ergaki.jpg"
+            alt="Национальный парк Ергаки"
+          />
+          <div class="gallery__caption">
+            <h2 class="gallery__name">Ергаки</h2>
+              <button 
+              aria-label="Поставить лайк"
+              class="gallery__like-button" 
+              type="button"
+              ></button>
           </div>
         </div>
-      </div>
 
-      <div class="gallery__cell">
-        <img
-          class="gallery__photo"
-          src="./src/images/grid-photo_ergaki.jpg"
-          alt="Национальный парк Ергаки"
-        />
-        <div class="gallery__caption">
-          <h2 class="gallery__name">Ергаки</h2>
-          <div class="gallery__button-like-counter">
-          <button
-            class="gallery__like-button"
-            type="submit"
-          ></button>
+        <div class="gallery__cell">
+          <img
+            class="gallery__photo"
+            src="./src/images/grid-photo_gora-elbrus.jpg"
+            alt="Цветочный луг и заснеженный Эльбрус"
+          />
+          <div class="gallery__caption">
+            <h2 class="gallery__name">Гора Эльбрус</h2>
+              <button
+              aria-label="Поставить лайк"
+              class="gallery__like-button" 
+              type="button"
+              ></button>
           </div>
         </div>
-      </div>
 
-      <div class="gallery__cell">
-        <img
-          class="gallery__photo"
-          src="./src/images/grid-photo_gora-elbrus.jpg"
-          alt="Цветочный луг и заснеженный Эльбрус"
-        />
-        <div class="gallery__caption">
-          <h2 class="gallery__name">Гора Эльбрус</h2>
-          <div class="gallery__button-like-counter">
-          <button
-            class="gallery__like-button"
-            type="submit"
-          ></button>
+        <div class="gallery__cell">
+          <img
+            class="gallery__photo"
+            src="./src/images/grid-photo_kolskiy.jpg"
+            alt="Водопад на Кольском полуострове"
+          />
+          <div class="gallery__caption">
+            <h2 class="gallery__name">Кольский полуостров</h2>
+              <button
+              aria-label="Поставить лайк"
+              class="gallery__like-button" 
+              type="button"
+              ></button>
+          </div>
+        </div>
+        <div class="gallery__cell">
+          <img
+            class="gallery__photo"
+            src="./src/images/grid-photo_lenskie_stolby.jpg"
+            alt="Ленские столбы летом"
+          />
+          <div class="gallery__caption">
+            <h2 class="gallery__name">Ленские столбы</h2>
+              <button
+              aria-label="Поставить лайк"
+              class="gallery__like-button" 
+              type="button"
+              ></button>
           </div>
         </div>
       </div>
-
-      <div class="gallery__cell">
-        <img
-          class="gallery__photo"
-          src="./src/images/grid-photo_kolskiy.jpg"
-          alt="Водопад на Кольском полуострове"
-        />
-        <div class="gallery__caption">
-          <h2 class="gallery__name">Кольский полуостров</h2>
-          <div class="gallery__button-like-counter">
-          <button
-            class="gallery__like-button"
-            type="submit"
-          ></button>
-          </div>
-        </div>
-      </div>
-      <div class="gallery__cell">
-        <img
-          class="gallery__photo"
-          src="./src/images/grid-photo_lenskie_stolby.jpg"
-          alt="Ленские столбы летом"
-        />
-        <div class="gallery__caption">
-          <h2 class="gallery__name">Ленские столбы</h2>
-          <div class="gallery__button-like-counter">
-          <button
-            class="gallery__like-button"
-            type="submit"
-          ></button>
-          </div>
-        </div>
-      </div>
-    </div>
     </main>
 
     <footer class="footer">
       <p class="footer__author">&copy; 2023 Mesto Russia</p>
     </footer>
 
-    <div id="edit_profile" class="popup popup_type_edit">
-      <div class="popup-container popup__container">
+    <div id="edit_profile" class="popup">
+      <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="form" id="submit_name_form">
+        <form class="form" 
+          id="submit_name_form" 
+          method="post" 
+          name="edit_profile_form">
           <fieldset class="form__set">
             <label class="form__field">
               <input
                 type="text"
                 id="text-name"
                 class="popup__text"
-                value="Жак-Ив Кусто"
+                placeholder="введите имя"
               />
             </label>
             <label class="form__field">
@@ -165,10 +166,11 @@
                 type="text"
                 id="text-bio"
                 class="popup__text"
-                value="Исследователь океана"
+                placeholder="расскажите о себе"
               />
             </label>
             <button
+              aria-label="Сохранить"
               id="name_save_button"
               class="popup__save-button"
               type="submit"
@@ -178,6 +180,7 @@
           </fieldset>
         </form>
         <button
+          aria-label="Закрыть окно"
           id="name_close_button"
           class="popup__close-button"
           type="button"
@@ -185,6 +188,6 @@
       </div>
     </div>
 
-    <script src="./scripts/index.js"></script>  
+    <script src="./scripts/index.js"></script>
   </body>
 </html>
