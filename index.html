@@ -43,7 +43,9 @@
         ></button>
       </section>
 
-      <div id="card-container" class="gallery">
+      <div id="card-container" class="gallery"></div>
+
+      <template id="cards">
         <div class="gallery__cell">
           <img
             class="gallery__photo"
@@ -58,87 +60,9 @@
                 type="button"
                 ></button>
           </div>
-        </div>
-
-        <div class="gallery__cell">
-          <img
-            class="gallery__photo"
-            src="./src/images/grid-photo_dombaj.jpg"
-            alt="Заснеженный Домбай"
-          />
-          <div class="gallery__caption">
-            <h2 class="gallery__name">Домбай</h2>
-              <button 
-              aria-label="Поставить лайк"
-              class="gallery__like-button" 
-              type="button"
-              ></button>
-          </div>
-        </div>
-
-        <div class="gallery__cell">
-          <img
-            class="gallery__photo"
-            src="./src/images/grid-photo_ergaki.jpg"
-            alt="Национальный парк Ергаки"
-          />
-          <div class="gallery__caption">
-            <h2 class="gallery__name">Ергаки</h2>
-              <button 
-              aria-label="Поставить лайк"
-              class="gallery__like-button" 
-              type="button"
-              ></button>
-          </div>
-        </div>
-
-        <div class="gallery__cell">
-          <img
-            class="gallery__photo"
-            src="./src/images/grid-photo_gora-elbrus.jpg"
-            alt="Цветочный луг и заснеженный Эльбрус"
-          />
-          <div class="gallery__caption">
-            <h2 class="gallery__name">Гора Эльбрус</h2>
-              <button
-              aria-label="Поставить лайк"
-              class="gallery__like-button" 
-              type="button"
-              ></button>
-          </div>
-        </div>
-
-        <div class="gallery__cell">
-          <img
-            class="gallery__photo"
-            src="./src/images/grid-photo_kolskiy.jpg"
-            alt="Водопад на Кольском полуострове"
-          />
-          <div class="gallery__caption">
-            <h2 class="gallery__name">Кольский полуостров</h2>
-              <button
-              aria-label="Поставить лайк"
-              class="gallery__like-button" 
-              type="button"
-              ></button>
-          </div>
-        </div>
-        <div class="gallery__cell">
-          <img
-            class="gallery__photo"
-            src="./src/images/grid-photo_lenskie_stolby.jpg"
-            alt="Ленские столбы летом"
-          />
-          <div class="gallery__caption">
-            <h2 class="gallery__name">Ленские столбы</h2>
-              <button
-              aria-label="Поставить лайк"
-              class="gallery__like-button" 
-              type="button"
-              ></button>
-          </div>
-        </div>
       </div>
+    </template>
+
     </main>
 
     <footer class="footer">
@@ -182,6 +106,50 @@
         <button
           aria-label="Закрыть окно"
           id="name_close_button"
+          class="popup__close-button"
+          type="button"
+        ></button>
+      </div>
+    </div>
+
+
+    <div id="add_card" class="popup">
+      <div class="popup__container">
+        <h2 class="popup__title">Новое место</h2>
+        <form class="form" 
+          id="submit_new-card_form" 
+          method="post" 
+          name="add_card_form">
+          <fieldset class="form__set">
+            <label class="form__field">
+              <input
+                type="text"
+                id="card-name"
+                class="form__text"
+                placeholder="название"
+              />
+            </label>
+            <label class="form__field">
+              <input
+                type="text"
+                id="card-link"
+                class="form__text"
+                placeholder="ссылка на картинку"
+              />
+            </label>
+            <button
+              aria-label="Сохранить"
+              id="new-card_save_button"
+              class="form__save-button"
+              type="submit"
+            >
+              Сохранить
+            </button>
+          </fieldset>
+        </form>
+        <button
+          aria-label="Закрыть окно"
+          id="new-card_close_button"
           class="popup__close-button"
           type="button"
         ></button>
