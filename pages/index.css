@@ -21,6 +21,7 @@
 @import url(../blocks/gallery/__name/gallery__name.css);
 @import url(../blocks/gallery/__like-button/gallery__like-button.css);
 @import url(../blocks/gallery/__like-button/_able/gallery__like-button_able.css);
+@import url(../blocks/gallery/__delete-button/gallery__delete-button.css);
 
 @import url(../blocks/footer/__author/footer__author.css);
 @import url(../blocks/footer/footer.css);

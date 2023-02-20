@@ -36,9 +36,9 @@
             <p class="profile__bio">Исследователь океана</p>
           </div>
         </div>
-        <button 
+        <button
           aria-label="Добавить фотографию"
-          class="profile__button-add-photo" 
+          class="profile__button-add-photo"
           type="button"
         ></button>
       </section>
@@ -52,17 +52,21 @@
             src="./src/images/grid-photo_kamchatka.jpg"
             alt="Черный берег Камчатки"
           />
+          <button
+            aria-label="Удалить фотографию"
+            class="gallery__delete-button"
+            type="button"
+          ></button>
           <div class="gallery__caption">
             <h2 class="gallery__name">Камчатка</h2>
-              <button 
-                aria-label="Поставить лайк"
-                class="gallery__like-button" 
-                type="button"
-                ></button>
+            <button
+              aria-label="Поставить лайк"
+              class="gallery__like-button"
+              type="button"
+            ></button>
           </div>
-      </div>
-    </template>
-
+        </div>
+      </template>
     </main>
 
     <footer class="footer">
@@ -72,10 +76,12 @@
     <div id="edit_profile" class="popup">
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="form" 
-          id="submit_name_form" 
-          method="post" 
-          name="edit_profile_form">
+        <form
+          class="form"
+          id="submit_name_form"
+          method="post"
+          name="edit_profile_form"
+        >
           <fieldset class="form__set">
             <label class="form__field">
               <input
@@ -112,14 +118,15 @@
       </div>
     </div>
 
-
     <div id="add_card" class="popup">
       <div class="popup__container">
         <h2 class="popup__title">Новое место</h2>
-        <form class="form" 
-          id="submit_new-card_form" 
-          method="post" 
-          name="add_card_form">
+        <form
+          class="form"
+          id="submit_new-card_form"
+          method="post"
+          name="add_card_form"
+        >
           <fieldset class="form__set">
             <label class="form__field">
               <input

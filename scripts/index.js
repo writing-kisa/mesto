@@ -84,6 +84,10 @@ function createCard(name, link) {
   cardName.textContent = name;
   cardLink.src = link;
 
+  cardElement.querySelector(".gallery__like-button").addEventListener("click", function (evt) {
+    evt.target.classList.toggle("gallery__like-button_able");
+  });
+
   cardContainer.prepend(cardElement);
 }
 
@@ -91,8 +95,15 @@ initialCards.forEach((card) => createCard(card.name, card.link));
 
 function handleAddCardSubmit(evt) {
   evt.preventDefault();
+
   createCard(cardNameInput.value, cardLinkInput.value);
   closePopup(popupAddCard);
+
+  cardNameInput.value = "";
+  cardLinkInput.value = "";
+}
+
+function handlerLikeOnCard(evt) {
 }
 
 formElement.addEventListener("submit", handleFormSubmit);
@@ -101,4 +112,3 @@ popupEditCloseButton.addEventListener("click", () => closePopup(popupEditName));
 buttonAddCard.addEventListener("click", () => openPopup(popupAddCard));
 popupAddCardCloseButton.addEventListener("click", () => closePopup(popupAddCard));
 newCardForm.addEventListener("submit", handleAddCardSubmit);
-
