@@ -76,17 +76,17 @@ function createCard(name, link) {
     .cloneNode(true);
   const cardName = cardElement.querySelector(".gallery__name");
   const cardLink = cardElement.querySelector(".gallery__photo");
-  // console.log(cardTemplate);
-  // console.log(cardElement);
-  // console.log(cardName.textContent);
-  // console.log(cardLink.src);
 
   cardName.textContent = name;
   cardLink.src = link;
 
-  cardElement.querySelector(".gallery__like-button").addEventListener("click", function (evt) {
+  cardElement.querySelector(".gallery__like-button").addEventListener("click", function(evt) {
     evt.target.classList.toggle("gallery__like-button_able");
   });
+
+  cardElement.querySelector(".gallery__delete-button").addEventListener("click", function() {
+    cardElement.remove();
+  })
 
   cardContainer.prepend(cardElement);
 }
@@ -103,8 +103,6 @@ function handleAddCardSubmit(evt) {
   cardLinkInput.value = "";
 }
 
-function handlerLikeOnCard(evt) {
-}
 
 formElement.addEventListener("submit", handleFormSubmit);
 buttonEditName.addEventListener("click", () => openPopup(popupEditName));

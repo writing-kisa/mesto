@@ -1,0 +1,7 @@
+.popup__full-size-photo {
+  background-size: cover;
+  max-width: 75vw;
+  max-height: 75vh;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
