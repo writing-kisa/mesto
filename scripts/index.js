@@ -69,13 +69,21 @@ function handleFormSubmit(evt) {
   closePopup(popupEditName);
 }
 
+
+// function openFullSizePhoto(evt) {
+//   evt.classList.add("popup_opened");
+//   // fullPhotoImage = .closest;
+// }
+
 function createCard(name, link) {
   const cardTemplate = document.querySelector("#cards").content;
   const cardElement = cardTemplate
     .querySelector(".gallery__cell")
     .cloneNode(true);
+  // console.log(cardElement);
   const cardName = cardElement.querySelector(".gallery__name");
   const cardLink = cardElement.querySelector(".gallery__photo");
+  const popupFullPhoto = document.querySelector("#full-size-popup");
 
   cardName.textContent = name;
   cardLink.src = link;
@@ -88,6 +96,17 @@ function createCard(name, link) {
     cardElement.remove();
   })
 
+  cardLink.addEventListener("click", function() {
+    const fullPhotoName = popupFullPhoto.querySelector(".popup__photo-name");
+    const fullPhotoImage = popupFullPhoto.querySelector(".popup__full-size-photo");
+    popupFullPhoto.classList.add("popup_opened");
+    fullPhotoName.textContent = cardName.textContent;
+    fullPhotoImage.src = cardLink.src;
+  });
+
+  popupFullPhoto.querySelector("#full-photo_close_button").addEventListener("click", function() {
+    popupFullPhoto.classList.remove("popup_opened");
+  })
   cardContainer.prepend(cardElement);
 }
 
@@ -102,7 +121,6 @@ function handleAddCardSubmit(evt) {
   cardNameInput.value = "";
   cardLinkInput.value = "";
 }
-
 
 formElement.addEventListener("submit", handleFormSubmit);
 buttonEditName.addEventListener("click", () => openPopup(popupEditName));
