@@ -29,9 +29,6 @@ const imageFullPhoto = popupFullPhoto.querySelector(".popup__full-size-photo");
 
 function openPopup(popup) {
   popup.classList.add("popup_opened");
-
-  nameInput.value = profileName.textContent;
-  bioInput.value = profileBio.textContent;
 }
 
 function closePopup(popup) {
@@ -95,7 +92,11 @@ function handleAddCardSubmit(evt) {
 }
 
 formElement.addEventListener("submit", handleFormSubmit);
-buttonEditName.addEventListener("click", () => openPopup(popupEditName));
+buttonEditName.addEventListener("click", function() {
+  openPopup(popupEditName);
+  nameInput.value = profileName.textContent;
+  bioInput.value = profileBio.textContent;
+});
 popupEditCloseButton.addEventListener("click", () => closePopup(popupEditName));
 buttonAddCard.addEventListener("click", () => openPopup(popupAddCard));
 popupAddCardCloseButton.addEventListener("click", () =>
