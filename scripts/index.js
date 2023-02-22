@@ -29,6 +29,9 @@ const imageFullPhoto = popupFullPhoto.querySelector(".popup__full-size-photo");
 
 function openPopup(popup) {
   popup.classList.add("popup_opened");
+
+  nameInput.value = profileName.textContent;
+  bioInput.value = profileBio.textContent;
 }
 
 function closePopup(popup) {
