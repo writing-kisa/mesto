@@ -24,13 +24,15 @@ const cardNameInput = formSubmitNewCard.querySelector("#card-name");
 const cardLinkInput = formSubmitNewCard.querySelector("#card-link");
 
 const popupFullPhoto = document.querySelector("#full-size-popup");
+const nameFullPhoto = popupFullPhoto.querySelector(".popup__photo-name");
+const imageFullPhoto = popupFullPhoto.querySelector(".popup__full-size-photo");
 
-function openPopup(evt) {
-  evt.classList.add("popup_opened");
+function openPopup(popup) {
+  popup.classList.add("popup_opened");
 }
 
-function closePopup(evt) {
-  evt.classList.remove("popup_opened");
+function closePopup(popup) {
+  popup.classList.remove("popup_opened");
 }
 
 function handleFormSubmit(evt) {
@@ -67,10 +69,6 @@ function createCard(name, link) {
     });
 
   cardLink.addEventListener("click", function () {
-    const nameFullPhoto = popupFullPhoto.querySelector(".popup__photo-name");
-    const imageFullPhoto = popupFullPhoto.querySelector(
-      ".popup__full-size-photo"
-    );
     nameFullPhoto.textContent = cardName.textContent;
     imageFullPhoto.src = cardLink.src;
     openPopup(popupFullPhoto);
