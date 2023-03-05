@@ -89,7 +89,11 @@
                 id="text-name"
                 class="form__text"
                 placeholder="введите имя"
+                minlength="2"
+                maxlength="40"
+                required
               />
+              <span class="name-input-error form__text-error">Вы пропустили это поле.</span>
             </label>
             <label class="form__field">
               <input
@@ -97,7 +101,11 @@
                 id="text-bio"
                 class="form__text"
                 placeholder="расскажите о себе"
+                minlength="2"
+                maxlength="200"
+                required
               />
+              <span class="bio-input-error form__text-error">Вы пропустили это поле.</span>
             </label>
             <button
               aria-label="Сохранить"
@@ -126,6 +134,7 @@
           id="submit_new-card_form"
           method="post"
           name="add_card_form"
+          novalidate
         >
           <fieldset class="form__set">
             <label class="form__field">
@@ -134,7 +143,11 @@
                 id="card-name"
                 class="form__text"
                 placeholder="название"
+                minlength="2"
+                maxlength="30"
+                required
               />
+              <span class="card-name-input-error form__text-error"></span>
             </label>
             <label class="form__field">
               <input
@@ -142,7 +155,10 @@
                 id="card-link"
                 class="form__text"
                 placeholder="ссылка на картинку"
+                type="email"
+                required
               />
+              <span class="email-input-error form__text-error"></span>
             </label>
             <button
               aria-label="Сохранить"

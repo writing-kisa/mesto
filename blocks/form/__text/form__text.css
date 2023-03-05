@@ -11,6 +11,10 @@
   text-align: left;
 }
 
+.form__text:invalid {
+  border-bottom: 1px solid #FF0000;
+}
+
 @media screen and (max-width: 581px) {
   .form__text {
     margin: 0 22px;
