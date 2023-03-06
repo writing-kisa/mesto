@@ -81,6 +81,7 @@
           id="submit_name_form"
           method="post"
           name="edit_profile_form"
+          novalidate
         >
           <fieldset class="form__set">
             <label class="form__field">
@@ -93,7 +94,7 @@
                 maxlength="40"
                 required
               />
-              <span class="name-input-error form__text-error">Вы пропустили это поле.</span>
+              <span class="text-name-error form__text-error"></span>
             </label>
             <label class="form__field">
               <input
@@ -105,7 +106,7 @@
                 maxlength="200"
                 required
               />
-              <span class="bio-input-error form__text-error">Вы пропустили это поле.</span>
+              <span class="text-bio-error form__text-error"></span>
             </label>
             <button
               aria-label="Сохранить"
@@ -134,7 +135,6 @@
           id="submit_new-card_form"
           method="post"
           name="add_card_form"
-          novalidate
         >
           <fieldset class="form__set">
             <label class="form__field">
@@ -147,18 +147,17 @@
                 maxlength="30"
                 required
               />
-              <span class="card-name-input-error form__text-error"></span>
+              <span class="card-name-error form__text-error"></span>
             </label>
             <label class="form__field">
               <input
-                type="text"
+                type="url"
                 id="card-link"
                 class="form__text"
                 placeholder="ссылка на картинку"
-                type="email"
                 required
               />
-              <span class="email-input-error form__text-error"></span>
+              <span class="card-link-error form__text-error"></span>
             </label>
             <button
               aria-label="Сохранить"
@@ -198,5 +197,6 @@
 
     <script src="./data/initial_cards.js"></script>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validate.js"></script>
   </body>
 </html>

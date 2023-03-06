@@ -4,13 +4,17 @@ const popupEditName = document.querySelector(".popup");
 // console.log(popupEditName);
 const popupEditCloseButton = document.querySelector("#name_close_button");
 // console.log(popupCloseButton);
-const formElement = document.querySelector("#submit_name_form");
-const nameInput = formElement.querySelector("#text-name");
+const formEditName = document.querySelector("#submit_name_form");
+const nameInput = formEditName.querySelector("#text-name");
 // console.log(nameInput.value);
-const bioInput = formElement.querySelector("#text-bio");
+const bioInput = formEditName.querySelector("#text-bio");
 // console.log(bioInput.value);
 const profileName = document.querySelector(".profile__name");
 const profileBio = document.querySelector(".profile__bio");
+
+// nameInput.addEventListener('input', function(evt) {
+//   console.log(evt.target.validity.valid);
+// })
 
 const cardContainer = document.querySelector("#card-container");
 const buttonAddCard = document.querySelector(".profile__button-add-photo");
@@ -91,8 +95,8 @@ function handleAddCardSubmit(evt) {
   cardLinkInput.value = "";
 }
 
-formElement.addEventListener("submit", handleFormSubmit);
-buttonEditName.addEventListener("click", function() {
+formEditName.addEventListener("submit", handleFormSubmit);
+buttonEditName.addEventListener("click", function () {
   openPopup(popupEditName);
   nameInput.value = profileName.textContent;
   bioInput.value = profileBio.textContent;

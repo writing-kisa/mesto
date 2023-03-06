@@ -36,6 +36,7 @@
 @import url(../blocks/form/__save-button/form__save-button.css);
 @import url(../blocks/popup/__close-button/popup__close-button.css);
 @import url(../blocks/form/__save-button/_disabled/form__save-button_disabled.css);
+@import url(../blocks/form/__text/_type/form__text_type_error.css);
 @import url(../blocks/form/__text-error/form__text-error.css);
 @import url(../blocks/form/__text-error/_visible/form__text-error_visible.css);
 
