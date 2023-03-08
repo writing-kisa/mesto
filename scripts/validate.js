@@ -8,30 +8,38 @@ const options = {
   inputSectionSelector: ".form__field",
   errorSelector: ".form__text-error", // класс ошибки
   inputErrorClass: "form__text-error_visible", // класс, отвечающий за показ этой ошибки
+  inputErrorBorder: "form__text_type_error", //класс, отвечающий за нижнюю красную границу инпута при ошибке
 };
 
-
-const showError = (errorElement, message, options) => {
+const showError = (errorElement, inputElement, message, options) => {
   errorElement.classList.add(options.inputErrorClass);
-
+  inputElement.classList.add(options.inputErrorBorder);
   errorElement.textContent = message;
 };
 
-const hideError = (errorElement, options) => {
+const hideError = (errorElement, inputElement, options) => {
   errorElement.classList.remove(options.inputErrorClass);
+  inputElement.classList.remove(options.inputErrorBorder);
   errorElement.textContent = "";
 };
 
 const toggleInputState = (inputElement, options) => {
   const isValid = inputElement.validity.valid;
-  const inputClosestSection = inputElement.closest(options.inputSectionSelector);
+  const inputClosestSection = inputElement.closest(
+    options.inputSectionSelector
+  );
   // console.log(inputClosestSection);
   const errorElement = inputClosestSection.querySelector(options.errorSelector);
   // console.log(errorElement);
   if (isValid) {
-    hideError(errorElement, options);
+    hideError(errorElement, inputElement, options);
   } else {
-    showError(errorElement, inputElement.validationMessage, options);
+    showError(
+      errorElement,
+      inputElement,
+      inputElement.validationMessage,
+      options
+    );
   }
 };
 
@@ -59,12 +67,14 @@ const disableButton = (buttonElement, disabledButtonClass) => {
 const setEventListeners = (form, options) => {
   const submitElement = form.querySelector(options.submitSelector);
   const inputs = Array.from(form.querySelectorAll(options.inputSelector));
+
+  toggleButtonState(inputs, submitElement, options.disabledButtonClass);
+
   inputs.forEach((inputElement) => {
     inputElement.addEventListener("input", () => {
       toggleButtonState(inputs, submitElement, options.disabledButtonClass);
       toggleInputState(inputElement, options);
     });
-    toggleButtonState(inputs, submitElement, options.disabledButtonClass);
   });
 };
 

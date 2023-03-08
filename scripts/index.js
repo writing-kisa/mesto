@@ -46,6 +46,7 @@ function handleFormSubmit(evt) {
   profileBio.textContent = bioInput.value;
 
   closePopup(popupEditName);
+
 }
 
 function createCard(name, link) {
@@ -91,8 +92,12 @@ function handleAddCardSubmit(evt) {
   cardContainer.prepend(createCard(cardNameInput.value, cardLinkInput.value));
   closePopup(popupAddCard);
 
-  cardNameInput.value = "";
-  cardLinkInput.value = "";
+  evt.target.reset();
+
+  const formCard = document.querySelector('#submit_new-card_form');
+  const buttonSaveCard = formCard.querySelector('.form__save-button');
+  const option = {disabledButtonClass: "form__save-button_disabled"};
+  disableButton(buttonSaveCard, option.disabledButtonClass);
 }
 
 formEditName.addEventListener("submit", handleFormSubmit);
