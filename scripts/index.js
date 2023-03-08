@@ -33,11 +33,34 @@ const imageFullPhoto = popupFullPhoto.querySelector(".popup__full-size-photo");
 
 function openPopup(popup) {
   popup.classList.add("popup_opened");
+  document.addEventListener('keydown', function(evt) {
+    if (evt.key === "Escape") {
+      closePopup(popup);
+    }
+  })
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  document.removeEventListener('keydown', function(evt) {
+    if (evt.key === "Escape") {
+      closePopup(popup);
+    }
+  })
 }
+
+const closeByOverlay = () => {
+  const popups = Array.from(document.querySelectorAll(".popup"));
+  popups.forEach((element) => {
+    element.addEventListener("click", (evt) => {
+      if (evt.target === evt.currentTarget) {
+        closePopup(element);
+      }
+    });
+  });
+};
+
+closeByOverlay();
 
 function handleFormSubmit(evt) {
   evt.preventDefault();
@@ -46,7 +69,6 @@ function handleFormSubmit(evt) {
   profileBio.textContent = bioInput.value;
 
   closePopup(popupEditName);
-
 }
 
 function createCard(name, link) {
@@ -88,15 +110,15 @@ initialCards.forEach((card) =>
 
 function handleAddCardSubmit(evt) {
   evt.preventDefault();
+  const formCard = document.querySelector('#submit_new-card_form');
+  const buttonSaveCard = formCard.querySelector('.form__save-button');
+  const option = {disabledButtonClass: "form__save-button_disabled"};
 
   cardContainer.prepend(createCard(cardNameInput.value, cardLinkInput.value));
   closePopup(popupAddCard);
 
   evt.target.reset();
 
-  const formCard = document.querySelector('#submit_new-card_form');
-  const buttonSaveCard = formCard.querySelector('.form__save-button');
-  const option = {disabledButtonClass: "form__save-button_disabled"};
   disableButton(buttonSaveCard, option.disabledButtonClass);
 }
 
