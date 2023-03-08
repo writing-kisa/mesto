@@ -1,58 +1,78 @@
 const form = document.querySelector(".form__set");
 
-// const toggleErrorState = () => {
-  
-// }
+const options = {
+  formSelector: ".form",
+  inputSelector: ".form__text",
+  submitSelector: ".form__save-button",
+  disabledButtonClass: "form__save-button_disabled",
+  inputSectionSelector: ".form__field",
+  errorSelector: ".form__text-error", // класс ошибки
+  inputErrorClass: "form__text-error_visible", // класс, отвечающий за показ этой ошибки
+};
 
-const setEventListeners = (form) => {
 
-  const submitElement = form.querySelector(".form__save-button");
-  const inputs = Array.from(form.querySelectorAll(".form__text"));
+const showError = (errorElement, message, options) => {
+  errorElement.classList.add(options.inputErrorClass);
 
-  inputs.forEach((inputElement) => {
-    inputElement.addEventListener('input', () => {
-      const isValid = inputElement.validity.valid;
-      const inputClosestSection = inputElement.closest('.form__field');
-  const errorElement = inputClosestSection.querySelector('.form__text-error');
+  errorElement.textContent = message;
+};
 
+const hideError = (errorElement, options) => {
+  errorElement.classList.remove(options.inputErrorClass);
+  errorElement.textContent = "";
+};
+
+const toggleInputState = (inputElement, options) => {
+  const isValid = inputElement.validity.valid;
+  const inputClosestSection = inputElement.closest(options.inputSectionSelector);
+  // console.log(inputClosestSection);
+  const errorElement = inputClosestSection.querySelector(options.errorSelector);
+  // console.log(errorElement);
   if (isValid) {
-    errorElement.classList.remove('form__text-error_visible');
-    errorElement.textContent = '';
+    hideError(errorElement, options);
   } else {
-    errorElement.classList.add('form__text-error_visible');
-    errorElement.textContent = inputElement.validationMessage;
+    showError(errorElement, inputElement.validationMessage, options);
   }
-  toggleButtonState(inputs, submitElement);
-    });
-  });
-  
-  const toggleButtonState = (inputs, submitElement) => {
+};
+
+const toggleButtonState = (inputs, submitElement, disabledButtonClass) => {
   const formIsValid = inputs.every((inputElement) => {
-    return inputElement.validity.valid; 
+    return inputElement.validity.valid;
   });
   if (formIsValid) {
-    submitElement.removeAttribute('disabled');
-    submitElement.classList.remove('form__save-button_disabled');
+    enableButton(submitElement, disabledButtonClass);
   } else {
-    submitElement.setAttribute('disabled', true);
-    submitElement.classList.add('form__save-button_disabled');
+    disableButton(submitElement, disabledButtonClass);
   }
-  }
-}
+};
 
-const enableValidation = () => {
-  const forms = Array.from(document.querySelectorAll('.form'));
+const enableButton = (buttonElement, disabledButtonClass) => {
+  buttonElement.removeAttribute("disabled");
+  buttonElement.classList.remove(disabledButtonClass);
+};
+
+const disableButton = (buttonElement, disabledButtonClass) => {
+  buttonElement.setAttribute("disabled", true);
+  buttonElement.classList.add(disabledButtonClass);
+};
+
+const setEventListeners = (form, options) => {
+  const submitElement = form.querySelector(options.submitSelector);
+  const inputs = Array.from(form.querySelectorAll(options.inputSelector));
+  inputs.forEach((inputElement) => {
+    inputElement.addEventListener("input", () => {
+      toggleButtonState(inputs, submitElement, options.disabledButtonClass);
+      toggleInputState(inputElement, options);
+    });
+    toggleButtonState(inputs, submitElement, options.disabledButtonClass);
+  });
+};
+
+const enableValidation = (options) => {
+  const forms = Array.from(document.querySelectorAll(options.formSelector));
   forms.forEach((form) => {
-    setEventListeners(form);
-  })
-}; 
+    setEventListeners(form, options);
+  });
+};
 
-enableValidation();
-// const selectors = {
-//   formSelector: '.form__set',
-//   inputSelector: '.form__text',
-//   // submitButtonSelector: '.form__save-button',
-//   // inactiveButtonClass: 'form__save-button_disabled',
-//   inputErrorClass: 'form__text_type_error',
-//   errorClass: 'form__text-error_visible'
-// }; 
+enableValidation(options);
