@@ -25,6 +25,7 @@ const popupAddCardCloseButton = document.querySelector(
 const buttonSubmitCardForm = document.querySelector("#new-card_save_button");
 const formSubmitNewCard = document.querySelector("#submit_new-card_form");
 const cardNameInput = formSubmitNewCard.querySelector("#card-name");
+// console.log(cardNameInput.value);
 const cardLinkInput = formSubmitNewCard.querySelector("#card-link");
 
 const popupFullPhoto = document.querySelector("#full-size-popup");
@@ -125,13 +126,18 @@ function handleAddCardSubmit(evt) {
 }
 
 formEditName.addEventListener("submit", submitEditProfileForm);
-buttonEditName.addEventListener("click", function () {
+buttonEditName.addEventListener("click", function() {
   openPopup(popupEditName);
   nameInput.value = profileName.textContent;
   bioInput.value = profileBio.textContent;
 });
 popupEditCloseButton.addEventListener("click", () => closePopup(popupEditName));
-buttonAddCard.addEventListener("click", () => openPopup(popupAddCard));
+buttonAddCard.addEventListener("click", function() {
+  openPopup(popupAddCard);
+  cardNameInput.value = "";
+  cardLinkInput.value = ""
+});
+
 popupAddCardCloseButton.addEventListener("click", () => 
   closePopup(popupAddCard)
 );
