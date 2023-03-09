@@ -12,10 +12,6 @@ const bioInput = formEditName.querySelector("#text-bio");
 const profileName = document.querySelector(".profile__name");
 const profileBio = document.querySelector(".profile__bio");
 
-// nameInput.addEventListener('input', function(evt) {
-//   console.log(evt.target.validity.valid);
-// })
-
 const cardContainer = document.querySelector("#card-container");
 const buttonAddCard = document.querySelector(".profile__button-add-photo");
 const popupAddCard = document.querySelector("#add_card");
@@ -36,10 +32,17 @@ const cardTemplate = document.querySelector("#cards").content;
 const formCard = document.querySelector('#submit_new-card_form');
 
 const popups = Array.from(document.querySelectorAll(".popup"));
+// const inputs = Array.from(document.querySelectorAll('.form__text'));
 
 function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener('keydown', closeByEsc);
+  // inputs.forEach((input) => {
+  //   const closeSection = input.closest('.form__field');
+  //   const error = closeSection.closest('.form__text-error');
+  //   const option = {inputErrorClass: "form__text-error_visible"};
+  //   hideError(error, input, option.inputErrorClass);
+  // })
 }
 
 function closePopup(popup) {
