@@ -31,26 +31,30 @@ const popupFullPhoto = document.querySelector("#full-size-popup");
 const nameFullPhoto = popupFullPhoto.querySelector(".popup__photo-name");
 const imageFullPhoto = popupFullPhoto.querySelector(".popup__full-size-photo");
 
+const cardTemplate = document.querySelector("#cards").content;
+const formCard = document.querySelector('#submit_new-card_form');
+
+const popups = Array.from(document.querySelectorAll(".popup"));
+
 function openPopup(popup) {
   popup.classList.add("popup_opened");
-  document.addEventListener('keydown', function(evt) {
-    if (evt.key === "Escape") {
-      closePopup(popup);
-    }
-  })
+  document.addEventListener('keydown', closeByEsc);
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
-  document.removeEventListener('keydown', function(evt) {
-    if (evt.key === "Escape") {
-      closePopup(popup);
-    }
-  })
+  document.removeEventListener('keydown', closeByEsc)
 }
 
+const closeByEsc = (evt) => {
+  popups.forEach((element) => {
+    if (evt.key === "Escape") {
+      closePopup(element);
+    }
+  })
+};
+
 const closeByOverlay = () => {
-  const popups = Array.from(document.querySelectorAll(".popup"));
   popups.forEach((element) => {
     element.addEventListener("click", (evt) => {
       if (evt.target === evt.currentTarget) {
@@ -62,7 +66,7 @@ const closeByOverlay = () => {
 
 closeByOverlay();
 
-function handleFormSubmit(evt) {
+function submitEditProfileForm(evt) {
   evt.preventDefault();
 
   profileName.textContent = nameInput.value;
@@ -72,7 +76,6 @@ function handleFormSubmit(evt) {
 }
 
 function createCard(name, link) {
-  const cardTemplate = document.querySelector("#cards").content;
   const cardElement = cardTemplate
     .querySelector(".gallery__cell")
     .cloneNode(true);
@@ -110,7 +113,6 @@ initialCards.forEach((card) =>
 
 function handleAddCardSubmit(evt) {
   evt.preventDefault();
-  const formCard = document.querySelector('#submit_new-card_form');
   const buttonSaveCard = formCard.querySelector('.form__save-button');
   const option = {disabledButtonClass: "form__save-button_disabled"};
 
@@ -122,7 +124,7 @@ function handleAddCardSubmit(evt) {
   disableButton(buttonSaveCard, option.disabledButtonClass);
 }
 
-formEditName.addEventListener("submit", handleFormSubmit);
+formEditName.addEventListener("submit", submitEditProfileForm);
 buttonEditName.addEventListener("click", function () {
   openPopup(popupEditName);
   nameInput.value = profileName.textContent;
@@ -130,7 +132,7 @@ buttonEditName.addEventListener("click", function () {
 });
 popupEditCloseButton.addEventListener("click", () => closePopup(popupEditName));
 buttonAddCard.addEventListener("click", () => openPopup(popupAddCard));
-popupAddCardCloseButton.addEventListener("click", () =>
+popupAddCardCloseButton.addEventListener("click", () => 
   closePopup(popupAddCard)
 );
 formSubmitNewCard.addEventListener("submit", handleAddCardSubmit);

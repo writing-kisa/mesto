@@ -1,5 +1,3 @@
-const form = document.querySelector(".form__set");
-
 const options = {
   formSelector: ".form",
   inputSelector: ".form__text",
