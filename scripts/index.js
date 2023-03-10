@@ -29,28 +29,11 @@ const nameFullPhoto = popupFullPhoto.querySelector(".popup__photo-name");
 const imageFullPhoto = popupFullPhoto.querySelector(".popup__full-size-photo");
 
 const cardTemplate = document.querySelector("#cards").content;
-const formCard = document.querySelector('#submit_new-card_form');
-
 const popups = Array.from(document.querySelectorAll(".popup"));
-const inputs = Array.from(document.querySelectorAll('.form__text'));
-console.log(inputs)
 
 function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener('keydown', closeByEsc);
-  // inputs.forEach((input) => {
-  //   const closeSection = input.closest('.form__field');
-  //   console.log(closeSection)
-  //   const error = closeSection.closest('.form__text-error');
-  //   const option = {inputErrorClass: "form__text-error_visible"};
-  //   hideError(error, input, option.inputErrorClass);
-  // })
-  inputs.forEach((input) => {
-    if (document.querySelector(`.${input.id}-error`).classList.contains('form__text-error_visible')) {
-      popup.querySelector(`.${input.id}-error`).classList.remove('form__text-error_visible');
-      input.classList.remove('form__text_type_error');
-    }
-  })
 }
 
 function closePopup(popup) {
@@ -125,7 +108,7 @@ initialCards.forEach((card) =>
 
 function handleAddCardSubmit(evt) {
   evt.preventDefault();
-  const buttonSaveCard = formCard.querySelector('.form__save-button');
+  const buttonSaveCard = formSubmitNewCard.querySelector('.form__save-button');
   const option = {disabledButtonClass: "form__save-button_disabled"};
 
   cardContainer.prepend(createCard(cardNameInput.value, cardLinkInput.value));
@@ -136,17 +119,20 @@ function handleAddCardSubmit(evt) {
   disableButton(buttonSaveCard, option.disabledButtonClass);
 }
 
+const selector = {inputErrorClass: "form__text-error_visible"};
+
 formEditName.addEventListener("submit", submitEditProfileForm);
 buttonEditName.addEventListener("click", function() {
   openPopup(popupEditName);
   nameInput.value = profileName.textContent;
   bioInput.value = profileBio.textContent;
+  removeValidationErrors(formEditName);
 });
 popupEditCloseButton.addEventListener("click", () => closePopup(popupEditName));
 buttonAddCard.addEventListener("click", function() {
   openPopup(popupAddCard);
-  cardNameInput.value = "";
-  cardLinkInput.value = ""
+  formSubmitNewCard.reset();
+  removeValidationErrors(formSubmitNewCard);
 });
 
 popupAddCardCloseButton.addEventListener("click", () => 

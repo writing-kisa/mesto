@@ -21,6 +21,18 @@ const hideError = (errorElement, inputElement, options) => {
   errorElement.textContent = "";
 };
 
+const forms = Array.from(document.querySelectorAll(options.formSelector));
+
+const removeValidationErrors = (form) => {
+  const inputs = Array.from(form.querySelectorAll('.form__text'));
+  inputs.forEach((input) => {
+    const errorText = form.querySelector(`.${input.id}-error`);
+    if (form.querySelector(`.${input.id}-error`).classList.contains(options.inputErrorClass)) {
+      hideError(errorText, input, options)
+    }
+})
+};
+
 const toggleInputState = (inputElement, options) => {
   const isValid = inputElement.validity.valid;
   const inputClosestSection = inputElement.closest(
@@ -77,7 +89,6 @@ const setEventListeners = (form, options) => {
 };
 
 const enableValidation = (options) => {
-  const forms = Array.from(document.querySelectorAll(options.formSelector));
   forms.forEach((form) => {
     setEventListeners(form, options);
   });
