@@ -23,7 +23,7 @@ const hideError = (errorElement, inputElement, options) => {
 
 const forms = Array.from(document.querySelectorAll(options.formSelector));
 
-const removeValidationErrors = (form) => {
+const removeValidationErrors = (form, options) => {
   const inputs = Array.from(form.querySelectorAll('.form__text'));
   inputs.forEach((input) => {
     const errorText = form.querySelector(`.${input.id}-error`);

@@ -119,20 +119,20 @@ function handleAddCardSubmit(evt) {
   disableButton(buttonSaveCard, option.disabledButtonClass);
 }
 
-const selector = {inputErrorClass: "form__text-error_visible"};
+const selector = {inputErrorClass: "form__text-error_visible", inputErrorBorder: "form__text_type_error"};
 
 formEditName.addEventListener("submit", submitEditProfileForm);
 buttonEditName.addEventListener("click", function() {
   openPopup(popupEditName);
   nameInput.value = profileName.textContent;
   bioInput.value = profileBio.textContent;
-  removeValidationErrors(formEditName);
+  removeValidationErrors(formEditName, selector);
 });
 popupEditCloseButton.addEventListener("click", () => closePopup(popupEditName));
 buttonAddCard.addEventListener("click", function() {
   openPopup(popupAddCard);
   formSubmitNewCard.reset();
-  removeValidationErrors(formSubmitNewCard);
+  removeValidationErrors(formSubmitNewCard, selector);
 });
 
 popupAddCardCloseButton.addEventListener("click", () => 
