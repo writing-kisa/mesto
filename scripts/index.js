@@ -42,11 +42,10 @@ function closePopup(popup) {
 }
 
 const closeByEsc = (evt) => {
-  popups.forEach((element) => {
-    if (evt.key === "Escape") {
-      closePopup(element);
-    }
-  })
+  if (evt.key === "Escape") {
+    const popupOpened = document.querySelector('.popup_opened');
+    closePopup(popupOpened);
+  }
 };
 
 const closeByOverlay = () => {
