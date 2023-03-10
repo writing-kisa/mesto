@@ -11,6 +11,7 @@ const bioInput = formEditName.querySelector("#text-bio");
 // console.log(bioInput.value);
 const profileName = document.querySelector(".profile__name");
 const profileBio = document.querySelector(".profile__bio");
+const buttonSaveCard = formSubmitNewCard.querySelector('.form__save-button');
 
 const cardContainer = document.querySelector("#card-container");
 const buttonAddCard = document.querySelector(".profile__button-add-photo");
@@ -30,6 +31,7 @@ const imageFullPhoto = popupFullPhoto.querySelector(".popup__full-size-photo");
 
 const cardTemplate = document.querySelector("#cards").content;
 const popups = Array.from(document.querySelectorAll(".popup"));
+
 
 function openPopup(popup) {
   popup.classList.add("popup_opened");
@@ -107,7 +109,6 @@ initialCards.forEach((card) =>
 
 function handleAddCardSubmit(evt) {
   evt.preventDefault();
-  const buttonSaveCard = formSubmitNewCard.querySelector('.form__save-button');
   const option = {disabledButtonClass: "form__save-button_disabled"};
 
   cardContainer.prepend(createCard(cardNameInput.value, cardLinkInput.value));
