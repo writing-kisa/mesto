@@ -11,16 +11,15 @@ const bioInput = formEditName.querySelector("#text-bio");
 // console.log(bioInput.value);
 const profileName = document.querySelector(".profile__name");
 const profileBio = document.querySelector(".profile__bio");
+const formSubmitNewCard = document.querySelector("#submit_new-card_form");
 const buttonSaveCard = formSubmitNewCard.querySelector('.form__save-button');
 
-const cardContainer = document.querySelector("#card-container");
 const buttonAddCard = document.querySelector(".profile__button-add-photo");
 const popupAddCard = document.querySelector("#add_card");
 const popupAddCardCloseButton = document.querySelector(
   "#new-card_close_button"
 );
 const buttonSubmitCardForm = document.querySelector("#new-card_save_button");
-const formSubmitNewCard = document.querySelector("#submit_new-card_form");
 const cardNameInput = formSubmitNewCard.querySelector("#card-name");
 // console.log(cardNameInput.value);
 const cardLinkInput = formSubmitNewCard.querySelector("#card-link");
@@ -71,41 +70,94 @@ function submitEditProfileForm(evt) {
   closePopup(popupEditName);
 }
 
-function createCard(name, link) {
-  const cardElement = cardTemplate
-    .querySelector(".gallery__cell")
-    .cloneNode(true);
-  const cardName = cardElement.querySelector(".gallery__name");
-  const cardLink = cardElement.querySelector(".gallery__photo");
+const cardContainer = document.querySelector("#card-container");
 
-  cardName.textContent = name;
-  cardLink.src = link;
-  cardLink.alt = name;
+class Card {
+  static _template = document.querySelector('#cards').content;
 
-  cardElement
-    .querySelector(".gallery__like-button")
-    .addEventListener("click", function (evt) {
-      evt.target.classList.toggle("gallery__like-button_able");
-    });
+  constructor(name, link, container) { //нужно указать container, т.к. классу нужно указание, куда ему отрисоваться
+    this._name = name;
+    this._link = link;
+    this._container = container;
+  }
 
-  cardElement
-    .querySelector(".gallery__delete-button")
-    .addEventListener("click", function () {
-      cardElement.remove();
-    });
+  _addNewCard = (item) => {
 
-  cardLink.addEventListener("click", function () {
-    nameFullPhoto.textContent = cardName.textContent;
-    imageFullPhoto.src = cardLink.src;
-    openPopup(popupFullPhoto);
-  });
+  }
 
-  return cardElement;
+  _likeHandler() { // работает!
+    this.classList.toggle("gallery__like-button_able");
+    }
+
+  _deleteHandler() { //не работает... :( пишет, что Cannot read properties of undefined (reading 'remove') at HTMLButtonElement._deleteHandler
+    this._view.remove();
+  }
+
+  render() {
+    this._view = Card._template.cloneNode(true).children[0]; // где card._template это темплейт того объекта
+
+    this._view.querySelector(".gallery__name").textContent = this._name;
+    this._view.querySelector(".gallery__photo").src = this._link;
+    this._view.querySelector(".gallery__photo").alt = this._name;
+
+    this._view.querySelector('.gallery__like-button').addEventListener('click', this._likeHandler);
+
+    this._view.querySelector('.gallery__delete-button').addEventListener('click', this._deleteHandler);
+
+    this._container.append(this._view);
+
+    // return (Card);
+
+  }
+  // whatCard() {
+  //   console.log(this.name + ", чтобы посмотреть перейди по ссылке" + " " + this.link)
+  // }
 }
 
-initialCards.forEach((card) =>
-  cardContainer.append(createCard(card.name, card.link))
-);
+// const specialCard = new Card("Архыз", "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg");
+// specialCard.whatCard();
+
+const card = new Card("Архыз", "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg", cardContainer); // так работает!!!
+// const card = new Card(initialCards, cardContainer);
+card.render();
+
+// ----- бывшая функция к
+
+// function createCard(name, link) {
+//   const cardElement = cardTemplate
+//     .querySelector(".gallery__cell")
+//     .cloneNode(true);
+//   const cardName = cardElement.querySelector(".gallery__name");
+//   const cardLink = cardElement.querySelector(".gallery__photo");
+
+//   cardName.textContent = name; // соотнесение с разметкой
+//   cardLink.src = link; // соотнесение с разметкой
+//   cardLink.alt = name; // соотнесение с разметкой
+
+//   cardElement //функция добавления лайка
+//     .querySelector(".gallery__like-button")
+//     .addEventListener("click", function (evt) {
+//       evt.target.classList.toggle("gallery__like-button_able");
+//     });
+
+//   cardElement //функция удаления карточки при нажатии на корзину
+//     .querySelector(".gallery__delete-button")
+//     .addEventListener("click", function () {
+//       cardElement.remove();
+//     });
+
+//   cardLink.addEventListener("click", function () {
+//     nameFullPhoto.textContent = cardName.textContent;
+//     imageFullPhoto.src = cardLink.src;
+//     openPopup(popupFullPhoto);
+//   });
+
+//   return cardElement;
+// }
+
+// initialCards.forEach((card) =>
+//   cardContainer.append(createCard(card.name, card.link))
+// );
 
 function handleAddCardSubmit(evt) {
   evt.preventDefault();
