@@ -73,8 +73,6 @@ function submitEditProfileForm(evt) {
 
 const cardContainer = document.querySelector("#card-container");
 
-
-
 initialCards.forEach((item) => {
   const card = new Card(item, cardContainer);
   card.render();
@@ -152,3 +150,5 @@ formSubmitNewCard.addEventListener("submit", handleAddCardSubmit);
 popupFullPhoto
   .querySelector("#full-photo_close_button")
   .addEventListener("click", () => closePopup(popupFullPhoto));
+
+export { openPopup, popupFullPhoto, nameFullPhoto, imageFullPhoto };
