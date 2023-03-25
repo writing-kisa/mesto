@@ -1,3 +1,5 @@
+import Card from "./card.js";
+
 const buttonEditName = document.querySelector(".profile__button-change-name");
 // console.log(buttonEditName);
 const popupEditName = document.querySelector(".popup");
@@ -27,7 +29,6 @@ const cardLinkInput = formSubmitNewCard.querySelector("#card-link");
 const popupFullPhoto = document.querySelector("#full-size-popup");
 const nameFullPhoto = popupFullPhoto.querySelector(".popup__photo-name");
 const imageFullPhoto = popupFullPhoto.querySelector(".popup__full-size-photo");
-
 const cardTemplate = document.querySelector("#cards").content;
 const popups = Array.from(document.querySelectorAll(".popup"));
 
@@ -72,56 +73,13 @@ function submitEditProfileForm(evt) {
 
 const cardContainer = document.querySelector("#card-container");
 
-class Card {
-  static _template = document.querySelector('#cards').content;
 
-  constructor(name, link, container) { //нужно указать container, т.к. классу нужно указание, куда ему отрисоваться
-    this._name = name;
-    this._link = link;
-    this._container = container;
-  }
 
-  _addNewCard = (item) => {
-
-  }
-
-  _likeHandler() { // работает!
-    this.classList.toggle("gallery__like-button_able");
-    }
-
-  _deleteHandler() { //не работает... :( пишет, что Cannot read properties of undefined (reading 'remove') at HTMLButtonElement._deleteHandler
-    this._view.remove();
-  }
-
-  render() {
-    this._view = Card._template.cloneNode(true).children[0]; // где card._template это темплейт того объекта
-
-    this._view.querySelector(".gallery__name").textContent = this._name;
-    this._view.querySelector(".gallery__photo").src = this._link;
-    this._view.querySelector(".gallery__photo").alt = this._name;
-
-    this._view.querySelector('.gallery__like-button').addEventListener('click', this._likeHandler);
-
-    this._view.querySelector('.gallery__delete-button').addEventListener('click', this._deleteHandler);
-
-    this._container.append(this._view);
-
-    // return (Card);
-
-  }
-  // whatCard() {
-  //   console.log(this.name + ", чтобы посмотреть перейди по ссылке" + " " + this.link)
-  // }
+initialCards.forEach((item) => {
+  const card = new Card(item, cardContainer);
+  card.render();
 }
-
-// const specialCard = new Card("Архыз", "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg");
-// specialCard.whatCard();
-
-const card = new Card("Архыз", "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg", cardContainer); // так работает!!!
-// const card = new Card(initialCards, cardContainer);
-card.render();
-
-// ----- бывшая функция к
+);
 
 // function createCard(name, link) {
 //   const cardElement = cardTemplate
@@ -130,17 +88,17 @@ card.render();
 //   const cardName = cardElement.querySelector(".gallery__name");
 //   const cardLink = cardElement.querySelector(".gallery__photo");
 
-//   cardName.textContent = name; // соотнесение с разметкой
+//   cardName.textContent = name; // соотнесение с разметкой DONE
 //   cardLink.src = link; // соотнесение с разметкой
 //   cardLink.alt = name; // соотнесение с разметкой
 
-//   cardElement //функция добавления лайка
+//   cardElement //функция добавления лайка DONE
 //     .querySelector(".gallery__like-button")
 //     .addEventListener("click", function (evt) {
 //       evt.target.classList.toggle("gallery__like-button_able");
 //     });
 
-//   cardElement //функция удаления карточки при нажатии на корзину
+//   cardElement //функция удаления карточки при нажатии на корзину DONE
 //     .querySelector(".gallery__delete-button")
 //     .addEventListener("click", function () {
 //       cardElement.remove();
