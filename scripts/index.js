@@ -21,7 +21,7 @@ const popupAddCard = document.querySelector("#add_card");
 const popupAddCardCloseButton = document.querySelector(
   "#new-card_close_button"
 );
-const buttonSubmitCardForm = document.querySelector("#new-card_save_button");
+// const buttonSubmitCardForm = document.querySelector("#new-card_save_button");
 const cardNameInput = formSubmitNewCard.querySelector("#card-name");
 // console.log(cardNameInput.value);
 const cardLinkInput = formSubmitNewCard.querySelector("#card-link");
@@ -29,7 +29,7 @@ const cardLinkInput = formSubmitNewCard.querySelector("#card-link");
 const popupFullPhoto = document.querySelector("#full-size-popup");
 const nameFullPhoto = popupFullPhoto.querySelector(".popup__photo-name");
 const imageFullPhoto = popupFullPhoto.querySelector(".popup__full-size-photo");
-const cardTemplate = document.querySelector("#cards").content;
+// const cardTemplate = document.querySelector("#cards").content;
 const popups = Array.from(document.querySelectorAll(".popup"));
 
 
@@ -118,40 +118,3 @@ popupFullPhoto
   .addEventListener("click", () => closePopup(popupFullPhoto));
 
 export { openPopup, popupFullPhoto, nameFullPhoto, imageFullPhoto };
-
-
-// function createCard(name, link) {
-//   const cardElement = cardTemplate
-//     .querySelector(".gallery__cell")
-//     .cloneNode(true);
-//   const cardName = cardElement.querySelector(".gallery__name");
-//   const cardLink = cardElement.querySelector(".gallery__photo");
-
-//   cardName.textContent = name; // соотнесение с разметкой DONE
-//   cardLink.src = link; // соотнесение с разметкой
-//   cardLink.alt = name; // соотнесение с разметкой
-
-//   cardElement //функция добавления лайка DONE
-//     .querySelector(".gallery__like-button")
-//     .addEventListener("click", function (evt) {
-//       evt.target.classList.toggle("gallery__like-button_able");
-//     });
-
-//   cardElement //функция удаления карточки при нажатии на корзину DONE
-//     .querySelector(".gallery__delete-button")
-//     .addEventListener("click", function () {
-//       cardElement.remove();
-//     });
-
-//   cardLink.addEventListener("click", function () {
-//     nameFullPhoto.textContent = cardName.textContent;
-//     imageFullPhoto.src = cardLink.src;
-//     openPopup(popupFullPhoto);
-//   });
-
-//   return cardElement;
-// }
-
-// initialCards.forEach((card) =>
-//   cardContainer.append(createCard(card.name, card.link))
-// );

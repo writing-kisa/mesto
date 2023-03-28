@@ -49,35 +49,3 @@ class Card {
 }
 
 export default Card;
-
-// function createCard(name, link) {
-//   const cardElement = cardTemplate
-//     .querySelector(".gallery__cell")
-//     .cloneNode(true);
-//   const cardName = cardElement.querySelector(".gallery__name");
-//   const cardLink = cardElement.querySelector(".gallery__photo");
-
-//   cardName.textContent = name; // соотнесение с разметкой DONE
-//   cardLink.src = link; // соотнесение с разметкой
-//   cardLink.alt = name; // соотнесение с разметкой
-
-//   cardElement //функция добавления лайка DONE
-//     .querySelector(".gallery__like-button")
-//     .addEventListener("click", function (evt) {
-//       evt.target.classList.toggle("gallery__like-button_able");
-//     });
-
-//   cardElement //функция удаления карточки при нажатии на корзину DONE
-//     .querySelector(".gallery__delete-button")
-//     .addEventListener("click", function () {
-//       cardElement.remove();
-//     });
-
-//   cardLink.addEventListener("click", function () { //открытие попапа в полный размер
-//     nameFullPhoto.textContent = cardName.textContent;
-//     imageFullPhoto.src = cardLink.src;
-//     openPopup(popupFullPhoto);
-//   });
-
-//   return cardElement;
-// }
