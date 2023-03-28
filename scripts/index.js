@@ -74,10 +74,51 @@ function submitEditProfileForm(evt) {
 const cardContainer = document.querySelector("#card-container");
 
 initialCards.forEach((item) => {
-  const card = new Card(item, cardContainer);
+  const card = new Card(item.name, item.link, cardContainer);
   card.render();
 }
 );
+
+function handleAddCardSubmit(evt) {
+  evt.preventDefault();
+  const option = {disabledButtonClass: "form__save-button_disabled"};
+
+  const addCard = new Card(cardNameInput.value, cardLinkInput.value, cardContainer);
+  addCard.render();
+
+  closePopup(popupAddCard);
+
+  evt.target.reset();
+
+  disableButton(buttonSaveCard, option.disabledButtonClass);
+}
+
+const selector = {inputErrorClass: "form__text-error_visible", inputErrorBorder: "form__text_type_error"};
+
+formEditName.addEventListener("submit", submitEditProfileForm);
+buttonEditName.addEventListener("click", function() {
+  openPopup(popupEditName);
+  nameInput.value = profileName.textContent;
+  bioInput.value = profileBio.textContent;
+  removeValidationErrors(formEditName, selector);
+});
+popupEditCloseButton.addEventListener("click", () => closePopup(popupEditName));
+buttonAddCard.addEventListener("click", function() {
+  openPopup(popupAddCard);
+  formSubmitNewCard.reset();
+  removeValidationErrors(formSubmitNewCard, selector);
+});
+
+popupAddCardCloseButton.addEventListener("click", () => 
+  closePopup(popupAddCard)
+);
+formSubmitNewCard.addEventListener("submit", handleAddCardSubmit);
+popupFullPhoto
+  .querySelector("#full-photo_close_button")
+  .addEventListener("click", () => closePopup(popupFullPhoto));
+
+export { openPopup, popupFullPhoto, nameFullPhoto, imageFullPhoto };
+
 
 // function createCard(name, link) {
 //   const cardElement = cardTemplate
@@ -114,41 +155,3 @@ initialCards.forEach((item) => {
 // initialCards.forEach((card) =>
 //   cardContainer.append(createCard(card.name, card.link))
 // );
-
-function handleAddCardSubmit(evt) {
-  evt.preventDefault();
-  const option = {disabledButtonClass: "form__save-button_disabled"};
-
-  cardContainer.prepend(createCard(cardNameInput.value, cardLinkInput.value));
-  closePopup(popupAddCard);
-
-  evt.target.reset();
-
-  disableButton(buttonSaveCard, option.disabledButtonClass);
-}
-
-const selector = {inputErrorClass: "form__text-error_visible", inputErrorBorder: "form__text_type_error"};
-
-formEditName.addEventListener("submit", submitEditProfileForm);
-buttonEditName.addEventListener("click", function() {
-  openPopup(popupEditName);
-  nameInput.value = profileName.textContent;
-  bioInput.value = profileBio.textContent;
-  removeValidationErrors(formEditName, selector);
-});
-popupEditCloseButton.addEventListener("click", () => closePopup(popupEditName));
-buttonAddCard.addEventListener("click", function() {
-  openPopup(popupAddCard);
-  formSubmitNewCard.reset();
-  removeValidationErrors(formSubmitNewCard, selector);
-});
-
-popupAddCardCloseButton.addEventListener("click", () => 
-  closePopup(popupAddCard)
-);
-formSubmitNewCard.addEventListener("submit", handleAddCardSubmit);
-popupFullPhoto
-  .querySelector("#full-photo_close_button")
-  .addEventListener("click", () => closePopup(popupFullPhoto));
-
-export { openPopup, popupFullPhoto, nameFullPhoto, imageFullPhoto };

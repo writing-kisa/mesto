@@ -3,25 +3,19 @@ import { openPopup, popupFullPhoto, nameFullPhoto, imageFullPhoto } from "./inde
 class Card {
   static _template = document.querySelector("#cards").content;
 
-  constructor(data, container) {
+  constructor(name, link, container) {
     //нужно указать container, т.к. классу нужно указание, куда ему отрисоваться
-    this._name = data.name;
-    this._link = data.link;
+    this._name = name;
+    this._link = link;
     this._container = container;
   }
 
-  // _addNewCard = (item) => {
-    
-  // }
-
   _likeHandler() {
-    // работает!
     this.classList.toggle("gallery__like-button_able");
     // console.log(this)
   }
 
   _deleteHandler = () => {
-    // работает!
     this._view.remove();
     // console.log(this)
   };
@@ -50,7 +44,7 @@ class Card {
 
     this._view.querySelector(".gallery__photo").addEventListener("click", this._openFullPhoto);
 
-    this._container.append(this._view);
+    this._container.prepend(this._view);
   };
 }
 
@@ -79,7 +73,7 @@ export default Card;
 //       cardElement.remove();
 //     });
 
-//   cardLink.addEventListener("click", function () {
+//   cardLink.addEventListener("click", function () { //открытие попапа в полный размер
 //     nameFullPhoto.textContent = cardName.textContent;
 //     imageFullPhoto.src = cardLink.src;
 //     openPopup(popupFullPhoto);
