@@ -1,4 +1,5 @@
-import Card from "./card.js";
+import Card from "./Сard.js";
+import { removeValidationErrors } from "./validate.js";
 
 const buttonEditName = document.querySelector(".profile__button-change-name");
 // console.log(buttonEditName);
