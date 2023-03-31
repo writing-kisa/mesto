@@ -1,5 +1,5 @@
 import Card from "./Сard.js";
-import { removeValidationErrors } from "./validate.js";
+import { nameFormValidator, cardFormValidator } from "./validate.js";
 
 const buttonEditName = document.querySelector(".profile__button-change-name");
 // console.log(buttonEditName);
@@ -16,6 +16,7 @@ const profileName = document.querySelector(".profile__name");
 const profileBio = document.querySelector(".profile__bio");
 const formSubmitNewCard = document.querySelector("#submit_new-card_form");
 const buttonSaveCard = formSubmitNewCard.querySelector('.form__save-button');
+
 
 const buttonAddCard = document.querySelector(".profile__button-add-photo");
 const popupAddCard = document.querySelector("#add_card");
@@ -91,7 +92,9 @@ function handleAddCardSubmit(evt) {
 
   evt.target.reset();
 
-  disableButton(buttonSaveCard, option.disabledButtonClass);
+  cardFormValidator.publicMethod();
+
+  // disableButton(buttonSaveCard, option.disabledButtonClass); ШТОБЫ НЕ БЫЛО ОШИБКИ ПРИ ОТПРАВКЕ ФОРМЫ
 }
 
 const selector = {inputErrorClass: "form__text-error_visible", inputErrorBorder: "form__text_type_error"};
@@ -101,13 +104,22 @@ buttonEditName.addEventListener("click", function() {
   openPopup(popupEditName);
   nameInput.value = profileName.textContent;
   bioInput.value = profileBio.textContent;
-  removeValidationErrors(formEditName, selector);
+
+  // const validatorErrorsReset1 = new FormValidator(selector, formEditName);
+  // validatorErrorsReset1.removeValidationErrors();
+  // // removeValidationErrors(formEditName, selector); СТИРАНИЕ ТЕКСТА ОШИБОК
+  // const deleteErrors = new FormValidator(formEditName, selector);
+  // deleteErrors.publicMethod();
 });
 popupEditCloseButton.addEventListener("click", () => closePopup(popupEditName));
 buttonAddCard.addEventListener("click", function() {
   openPopup(popupAddCard);
   formSubmitNewCard.reset();
-  removeValidationErrors(formSubmitNewCard, selector);
+  // const validatorErrorsReset2 = new FormValidator(selector, formEditName);
+  // validatorErrorsReset2.removeValidationErrors();
+  // removeValidationErrors(formSubmitNewCard, selector); СТИРАНИЕ ТЕКСТА ОШИБОК
+  // const deleteErrors = new FormValidator(formSubmitNewCard, selector);
+  // deleteErrors.publicMethod();
 });
 
 popupAddCardCloseButton.addEventListener("click", () => 
@@ -118,4 +130,4 @@ popupFullPhoto
   .querySelector("#full-photo_close_button")
   .addEventListener("click", () => closePopup(popupFullPhoto));
 
-export { openPopup, popupFullPhoto, nameFullPhoto, imageFullPhoto };
+export { openPopup, popupFullPhoto, nameFullPhoto, imageFullPhoto, formEditName, formSubmitNewCard };

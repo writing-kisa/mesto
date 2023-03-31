@@ -8,6 +8,7 @@ class FormValidator {
     this._inputErrorClass = options.inputErrorClass;
     this._inputErrorBorder = options.inputErrorBorder;
     this._form = form;
+    this._submitElement = this._form.querySelector(this._submitSelector);
   }
 
   _showError = (errorElement, inputElement, message) => {
@@ -42,6 +43,18 @@ class FormValidator {
     }
   };
 
+  // _removeValidationErrors() {
+  //   this._inputs = Array.from(this._form.querySelectorAll(this._inputSelector));
+  //   // console.log("pik")
+  //   // console.log(this._inputs);
+  //   this._inputs.forEach((input) => {
+  //     const errorText = form.querySelector(`.${input.id}-error`);
+  //     if (this._form.querySelector(`.${input.id}-error`).classList.contains(this._inputErrorClass)) {
+  //       this._hideError(errorText, input)
+  //     }
+  // })
+  // };
+
   _toggleButtonState() {
     const formIsValid = this._inputs.every((inputElement) => {
       return inputElement.validity.valid;
@@ -58,7 +71,7 @@ class FormValidator {
     this._submitElement.classList.remove(this._disabledButtonClass);
   };
 
-  _disableButton = () => {
+  _disableButton() {
     this._submitElement.setAttribute("disabled", true);
     this._submitElement.classList.add(this._disabledButtonClass);
   };
@@ -87,6 +100,34 @@ class FormValidator {
   enableValidation() {
     this._setEventListeners();
   }
+
+  publicMethod() {
+    this._disableButton();
+    // this._removeValidationErrors();
+  }
+  
 }
 
 export default FormValidator;
+
+// const removeValidationErrors = (form, options) => {
+//   const inputs = Array.from(form.querySelectorAll('.form__text'));
+//   inputs.forEach((input) => {
+//     const errorText = form.querySelector(`.${input.id}-error`);
+//     if (form.querySelector(`.${input.id}-error`).classList.contains(options.inputErrorClass)) {
+//       hideError(errorText, input, options)
+//     }
+// })
+// };
+
+  // removeValidationErrors() {
+  //   this._inputs = Array.from(this._form.querySelectorAll(this._inputSelector));
+  //   // console.log("pik")
+  //   // console.log(this._inputs);
+  //   this._inputs.forEach((input) => {
+  //     const errorText = form.querySelector(`.${input.id}-error`);
+  //     if (this._form.querySelector(`.${input.id}-error`).classList.contains(this._inputErrorClass)) {
+  //       this._hideError(errorText, input)
+  //     }
+  // })
+  // };
