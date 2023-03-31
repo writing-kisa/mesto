@@ -15,23 +15,17 @@ const bioInput = formEditName.querySelector("#text-bio");
 const profileName = document.querySelector(".profile__name");
 const profileBio = document.querySelector(".profile__bio");
 const formSubmitNewCard = document.querySelector("#submit_new-card_form");
-const buttonSaveCard = formSubmitNewCard.querySelector('.form__save-button');
-
-
 const buttonAddCard = document.querySelector(".profile__button-add-photo");
 const popupAddCard = document.querySelector("#add_card");
 const popupAddCardCloseButton = document.querySelector(
   "#new-card_close_button"
 );
-// const buttonSubmitCardForm = document.querySelector("#new-card_save_button");
 const cardNameInput = formSubmitNewCard.querySelector("#card-name");
-// console.log(cardNameInput.value);
 const cardLinkInput = formSubmitNewCard.querySelector("#card-link");
 
 const popupFullPhoto = document.querySelector("#full-size-popup");
 const nameFullPhoto = popupFullPhoto.querySelector(".popup__photo-name");
 const imageFullPhoto = popupFullPhoto.querySelector(".popup__full-size-photo");
-// const cardTemplate = document.querySelector("#cards").content;
 const popups = Array.from(document.querySelectorAll(".popup"));
 
 
@@ -83,43 +77,25 @@ initialCards.forEach((item) => {
 
 function handleAddCardSubmit(evt) {
   evt.preventDefault();
-  const option = {disabledButtonClass: "form__save-button_disabled"};
-
   const addCard = new Card(cardNameInput.value, cardLinkInput.value, cardContainer);
   addCard.render();
-
   closePopup(popupAddCard);
-
   evt.target.reset();
-
   cardFormValidator.publicMethod();
-
-  // disableButton(buttonSaveCard, option.disabledButtonClass); ШТОБЫ НЕ БЫЛО ОШИБКИ ПРИ ОТПРАВКЕ ФОРМЫ
 }
-
-const selector = {inputErrorClass: "form__text-error_visible", inputErrorBorder: "form__text_type_error"};
-
 formEditName.addEventListener("submit", submitEditProfileForm);
 buttonEditName.addEventListener("click", function() {
   openPopup(popupEditName);
   nameInput.value = profileName.textContent;
   bioInput.value = profileBio.textContent;
+  nameFormValidator.publicMethod();
 
-  // const validatorErrorsReset1 = new FormValidator(selector, formEditName);
-  // validatorErrorsReset1.removeValidationErrors();
-  // // removeValidationErrors(formEditName, selector); СТИРАНИЕ ТЕКСТА ОШИБОК
-  // const deleteErrors = new FormValidator(formEditName, selector);
-  // deleteErrors.publicMethod();
 });
 popupEditCloseButton.addEventListener("click", () => closePopup(popupEditName));
 buttonAddCard.addEventListener("click", function() {
   openPopup(popupAddCard);
   formSubmitNewCard.reset();
-  // const validatorErrorsReset2 = new FormValidator(selector, formEditName);
-  // validatorErrorsReset2.removeValidationErrors();
-  // removeValidationErrors(formSubmitNewCard, selector); СТИРАНИЕ ТЕКСТА ОШИБОК
-  // const deleteErrors = new FormValidator(formSubmitNewCard, selector);
-  // deleteErrors.publicMethod();
+  cardFormValidator.publicMethod();
 });
 
 popupAddCardCloseButton.addEventListener("click", () => 
