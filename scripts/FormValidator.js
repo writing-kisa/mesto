@@ -8,6 +8,8 @@ class FormValidator {
     this._inputErrorClass = options.inputErrorClass;
     this._inputErrorBorder = options.inputErrorBorder;
     this._form = form;
+    this._inputs = Array.from(this._form.querySelectorAll(this._inputSelector));
+    this._submitElement = this._form.querySelector(this._submitSelector);
   }
 
   _showError = (errorElement, inputElement, message) => {
@@ -43,7 +45,6 @@ class FormValidator {
   };
 
   _removeValidationErrors() {
-    this._inputs = Array.from(this._form.querySelectorAll(this._inputSelector));
     // console.log(this._inputs);
     this._inputs.forEach((input) => {
       const errorText = this._form.querySelector(`.${input.id}-error`);
@@ -76,11 +77,6 @@ class FormValidator {
 
   _setEventListeners = () => {
     // console.log(this);
-    this._inputs = Array.from(this._form.querySelectorAll(this._inputSelector));
-    // console.log(this._inputs);
-    this._submitElement = this._form.querySelector(this._submitSelector);
-    // console.log(this._submitElement);
-
     this._toggleButtonState();
 
     this._inputs.forEach((inputElement) => {
@@ -99,7 +95,7 @@ class FormValidator {
     this._setEventListeners();
   }
 
-  publicMethod() {
+  resetFormValidation() {
     this._disableButton();
     this._removeValidationErrors();
   }

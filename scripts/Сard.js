@@ -1,13 +1,12 @@
-import { openPopup, popupFullPhoto, nameFullPhoto, imageFullPhoto } from "./index.js";
+import { popupFullPhoto, nameFullPhoto, imageFullPhoto, openPopup } from "./utils.js";
 
 class Card {
-  static _template = document.querySelector("#cards").content;
 
-  constructor(name, link, container) {
-    //нужно указать container, т.к. классу нужно указание, куда ему отрисоваться
+  constructor(name, link, container) { //нужно указать container, т.к. классу нужно указание, куда ему отрисоваться
     this._name = name;
     this._link = link;
     this._container = container;
+    this._template = document.querySelector("#cards").content;
   }
 
   _likeHandler() {
@@ -23,12 +22,13 @@ class Card {
   _openFullPhoto = () => {
     nameFullPhoto.textContent = this._name;
     imageFullPhoto.src = this._link;
-    imageFullPhoto.alt = this._link;
+    imageFullPhoto.alt = this._name;
     openPopup(popupFullPhoto);
   }
 
   render = () => {
-    this._view = Card._template.cloneNode(true).children[0]; // где card._template это темплейт того объекта
+    // console.log(this._template);
+    this._view = this._template.cloneNode(true).children[0]; // где card._template это темплейт того объекта
 
     this._view.querySelector(".gallery__name").textContent = this._name;
     this._view.querySelector(".gallery__photo").src = this._link;

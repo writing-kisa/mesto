@@ -1,5 +1,7 @@
 import Card from "./Сard.js";
-import { nameFormValidator, cardFormValidator } from "./validate.js";
+import FormValidator from "./FormValidator.js";
+import options from "./validationConfig.js";
+import { popupFullPhoto, nameFullPhoto, imageFullPhoto, openPopup, closeByEsc } from "./utils.js";
 
 const buttonEditName = document.querySelector(".profile__button-change-name");
 // console.log(buttonEditName);
@@ -22,33 +24,16 @@ const popupAddCardCloseButton = document.querySelector(
 );
 const cardNameInput = formSubmitNewCard.querySelector("#card-name");
 const cardLinkInput = formSubmitNewCard.querySelector("#card-link");
-
-const popupFullPhoto = document.querySelector("#full-size-popup");
-const nameFullPhoto = popupFullPhoto.querySelector(".popup__photo-name");
-const imageFullPhoto = popupFullPhoto.querySelector(".popup__full-size-photo");
 const popups = Array.from(document.querySelectorAll(".popup"));
-
-
-function openPopup(popup) {
-  popup.classList.add("popup_opened");
-  document.addEventListener('keydown', closeByEsc);
-}
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
   document.removeEventListener('keydown', closeByEsc)
 }
 
-const closeByEsc = (evt) => {
-  if (evt.key === "Escape") {
-    const popupOpened = document.querySelector('.popup_opened');
-    closePopup(popupOpened);
-  }
-};
-
 const closeByOverlay = () => {
   popups.forEach((element) => {
-    element.addEventListener("click", (evt) => {
+    element.addEventListener("mousedown", (evt) => {
       if (evt.target === evt.currentTarget) {
         closePopup(element);
       }
@@ -81,21 +66,21 @@ function handleAddCardSubmit(evt) {
   addCard.render();
   closePopup(popupAddCard);
   evt.target.reset();
-  cardFormValidator.publicMethod();
+  cardFormValidator.resetFormValidation();
 }
 formEditName.addEventListener("submit", submitEditProfileForm);
 buttonEditName.addEventListener("click", function() {
   openPopup(popupEditName);
   nameInput.value = profileName.textContent;
   bioInput.value = profileBio.textContent;
-  nameFormValidator.publicMethod();
+  nameFormValidator.resetFormValidation();
 
 });
 popupEditCloseButton.addEventListener("click", () => closePopup(popupEditName));
 buttonAddCard.addEventListener("click", function() {
   openPopup(popupAddCard);
   formSubmitNewCard.reset();
-  cardFormValidator.publicMethod();
+  cardFormValidator.resetFormValidation();
 });
 
 popupAddCardCloseButton.addEventListener("click", () => 
@@ -105,5 +90,11 @@ formSubmitNewCard.addEventListener("submit", handleAddCardSubmit);
 popupFullPhoto
   .querySelector("#full-photo_close_button")
   .addEventListener("click", () => closePopup(popupFullPhoto));
+
+const nameFormValidator = new FormValidator(options, formEditName);
+nameFormValidator.enableValidation();
+
+const cardFormValidator = new FormValidator(options, formSubmitNewCard);
+cardFormValidator.enableValidation();
 
 export { openPopup, popupFullPhoto, nameFullPhoto, imageFullPhoto, formEditName, formSubmitNewCard };
