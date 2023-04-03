@@ -1,8 +1,13 @@
-import { popupFullPhoto, nameFullPhoto, imageFullPhoto, openPopup } from "./utils.js";
+import {
+  popupFullPhoto,
+  nameFullPhoto,
+  imageFullPhoto,
+  openPopup,
+} from "./utils.js";
 
 class Card {
-
-  constructor(name, link, container) { //нужно указать container, т.к. классу нужно указание, куда ему отрисоваться
+  constructor(name, link, container) {
+    //нужно указать container, т.к. классу нужно указание, куда ему отрисоваться
     this._name = name;
     this._link = link;
     this._container = container;
@@ -25,7 +30,7 @@ class Card {
     imageFullPhoto.src = this._link;
     imageFullPhoto.alt = this._name;
     openPopup(popupFullPhoto);
-  }
+  };
 
   render = () => {
     // console.log(this._template);
@@ -44,7 +49,9 @@ class Card {
       .querySelector(".gallery__delete-button")
       .addEventListener("click", this._deleteHandler);
 
-    this._view.querySelector(".gallery__photo").addEventListener("click", this._openFullPhoto);
+    this._view
+      .querySelector(".gallery__photo")
+      .addEventListener("click", this._openFullPhoto);
 
     // this._container.prepend(this._view);
     return this._view;

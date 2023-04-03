@@ -1,7 +1,13 @@
 import Card from "./Сard.js";
 import FormValidator from "./FormValidator.js";
 import options from "./validationConfig.js";
-import { popupFullPhoto, nameFullPhoto, imageFullPhoto, openPopup, closeByEsc } from "./utils.js";
+import {
+  popupFullPhoto,
+  nameFullPhoto,
+  imageFullPhoto,
+  openPopup,
+  closeByEsc,
+} from "./utils.js";
 
 const buttonEditName = document.querySelector(".profile__button-change-name");
 // console.log(buttonEditName);
@@ -28,7 +34,7 @@ const popups = Array.from(document.querySelectorAll(".popup"));
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
-  document.removeEventListener('keydown', closeByEsc)
+  document.removeEventListener("keydown", closeByEsc);
 }
 
 const closeByOverlay = () => {
@@ -56,39 +62,40 @@ const cardContainer = document.querySelector("#card-container");
 
 function addElementToContainer(element, container) {
   container.prepend(element);
-} 
+}
 
 initialCards.forEach((item) => {
   const card = new Card(item.name, item.link, cardContainer);
   addElementToContainer(card.render(), cardContainer);
-}
-);
+});
 
 function handleAddCardSubmit(evt) {
   evt.preventDefault();
-  const addCard = new Card(cardNameInput.value, cardLinkInput.value, cardContainer);
-  // addCard.render();
+  const addCard = new Card(
+    cardNameInput.value,
+    cardLinkInput.value,
+    cardContainer
+  );
   addElementToContainer(addCard.render(), cardContainer);
   closePopup(popupAddCard);
   evt.target.reset();
   cardFormValidator.resetFormValidation();
 }
 formEditName.addEventListener("submit", submitEditProfileForm);
-buttonEditName.addEventListener("click", function() {
+buttonEditName.addEventListener("click", function () {
   openPopup(popupEditName);
   nameInput.value = profileName.textContent;
   bioInput.value = profileBio.textContent;
   nameFormValidator.resetFormValidation();
-
 });
 popupEditCloseButton.addEventListener("click", () => closePopup(popupEditName));
-buttonAddCard.addEventListener("click", function() {
+buttonAddCard.addEventListener("click", function () {
   openPopup(popupAddCard);
   formSubmitNewCard.reset();
   cardFormValidator.resetFormValidation();
 });
 
-popupAddCardCloseButton.addEventListener("click", () => 
+popupAddCardCloseButton.addEventListener("click", () =>
   closePopup(popupAddCard)
 );
 formSubmitNewCard.addEventListener("submit", handleAddCardSubmit);
@@ -102,4 +109,11 @@ nameFormValidator.enableValidation();
 const cardFormValidator = new FormValidator(options, formSubmitNewCard);
 cardFormValidator.enableValidation();
 
-export { openPopup, popupFullPhoto, nameFullPhoto, imageFullPhoto, formEditName, formSubmitNewCard };
+export {
+  openPopup,
+  popupFullPhoto,
+  nameFullPhoto,
+  imageFullPhoto,
+  formEditName,
+  formSubmitNewCard,
+};
