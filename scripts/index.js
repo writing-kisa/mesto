@@ -54,16 +54,21 @@ function submitEditProfileForm(evt) {
 
 const cardContainer = document.querySelector("#card-container");
 
+function addElementToContainer(element, container) {
+  container.prepend(element);
+} 
+
 initialCards.forEach((item) => {
   const card = new Card(item.name, item.link, cardContainer);
-  card.render();
+  addElementToContainer(card.render(), cardContainer);
 }
 );
 
 function handleAddCardSubmit(evt) {
   evt.preventDefault();
   const addCard = new Card(cardNameInput.value, cardLinkInput.value, cardContainer);
-  addCard.render();
+  // addCard.render();
+  addElementToContainer(addCard.render(), cardContainer);
   closePopup(popupAddCard);
   evt.target.reset();
   cardFormValidator.resetFormValidation();

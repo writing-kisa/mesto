@@ -16,7 +16,8 @@ class Card {
 
   _deleteHandler = () => {
     this._view.remove();
-    // console.log(this)
+    // this._view = null;
+    console.log(this._view);
   };
 
   _openFullPhoto = () => {
@@ -29,10 +30,11 @@ class Card {
   render = () => {
     // console.log(this._template);
     this._view = this._template.cloneNode(true).children[0]; // где card._template это темплейт того объекта
+    this._cardLink = this._view.querySelector(".gallery__photo");
 
     this._view.querySelector(".gallery__name").textContent = this._name;
-    this._view.querySelector(".gallery__photo").src = this._link;
-    this._view.querySelector(".gallery__photo").alt = this._name;
+    this._cardLink.src = this._link;
+    this._cardLink.alt = this._name;
 
     this._view
       .querySelector(".gallery__like-button")
@@ -44,7 +46,8 @@ class Card {
 
     this._view.querySelector(".gallery__photo").addEventListener("click", this._openFullPhoto);
 
-    this._container.prepend(this._view);
+    // this._container.prepend(this._view);
+    return this._view;
   };
 }
 
