@@ -6,12 +6,12 @@ import {
 } from "./utils.js";
 
 class Card {
-  constructor(name, link, container) {
+  constructor(name, link, container, template) {
     //нужно указать container, т.к. классу нужно указание, куда ему отрисоваться
     this._name = name;
     this._link = link;
     this._container = container;
-    this._template = document.querySelector("#cards").content;
+    this._template = template;
   }
 
   _likeHandler() {
@@ -34,6 +34,7 @@ class Card {
 
   render = () => {
     // console.log(this._template);
+    this._template = document.querySelector("#cards").content;
     this._view = this._template.cloneNode(true).children[0]; // где card._template это темплейт того объекта
     this._cardLink = this._view.querySelector(".gallery__photo");
 

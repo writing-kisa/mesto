@@ -8,6 +8,7 @@ import {
   openPopup,
   closeByEsc,
 } from "./utils.js";
+import initialCards from "../data/initial_cards.js";
 
 const buttonEditName = document.querySelector(".profile__button-change-name");
 // console.log(buttonEditName);
