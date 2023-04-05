@@ -34,7 +34,6 @@ class Card {
 
   render = () => {
     // console.log(this._template);
-    this._template = document.querySelector("#cards").content;
     this._view = this._template.cloneNode(true).children[0]; // где card._template это темплейт того объекта
     this._cardLink = this._view.querySelector(".gallery__photo");
 

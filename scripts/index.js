@@ -32,6 +32,7 @@ const popupAddCardCloseButton = document.querySelector(
 const cardNameInput = formSubmitNewCard.querySelector("#card-name");
 const cardLinkInput = formSubmitNewCard.querySelector("#card-link");
 const popups = Array.from(document.querySelectorAll(".popup"));
+const cardTemplate = document.querySelector("#cards").content;
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
@@ -66,7 +67,7 @@ function addElementToContainer(element, container) {
 }
 
 initialCards.forEach((item) => {
-  const card = new Card(item.name, item.link, cardContainer);
+  const card = new Card(item.name, item.link, cardContainer, cardTemplate);
   addElementToContainer(card.render(), cardContainer);
 });
 
@@ -75,7 +76,8 @@ function handleAddCardSubmit(evt) {
   const addCard = new Card(
     cardNameInput.value,
     cardLinkInput.value,
-    cardContainer
+    cardContainer,
+    cardTemplate
   );
   addElementToContainer(addCard.render(), cardContainer);
   closePopup(popupAddCard);
