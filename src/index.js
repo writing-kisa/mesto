@@ -10,6 +10,7 @@ import {
 } from "../scripts/utils.js";
 import initialCards from "../data/initial_cards.js";
 import '../pages/index.css';
+import Section from "../scripts/Section.js";
 
 const buttonEditName = document.querySelector(".profile__button-change-name");
 // console.log(buttonEditName);
@@ -34,6 +35,21 @@ const cardNameInput = formSubmitNewCard.querySelector("#card-name");
 const cardLinkInput = formSubmitNewCard.querySelector("#card-link");
 const popups = Array.from(document.querySelectorAll(".popup"));
 const cardTemplate = document.querySelector("#cards").content;
+
+const cardListSection = ".gallery";
+console.log(cardListSection);
+
+const cardList = new Section({
+  items: initialCards,
+  renderer: (card) => { // функция, которая отвечает за создание и отрисовку данных на странице
+    
+    cardList.addItem();
+  },
+}, 
+cardListSection
+)
+
+cardList.renderItems();
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
