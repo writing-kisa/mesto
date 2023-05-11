@@ -36,14 +36,40 @@ const cardLinkInput = formSubmitNewCard.querySelector("#card-link");
 const popups = Array.from(document.querySelectorAll(".popup"));
 const cardTemplate = document.querySelector("#cards").content;
 
+const cardContainer = document.querySelector("#card-container");
+
+// function addElementToContainer(element, container) { //это теперь addItem, который вставляет в разметку
+//   container.prepend(element);
+// }
+
+// initialCards.forEach((item) => {
+//   const card = new Card(item.name, item.link, cardContainer, cardTemplate);
+//   addElementToContainer(card.render(), cardContainer);
+// });
+
+function handleAddCardSubmit(evt) {
+  evt.preventDefault();
+  const addCard = new Card(
+    cardNameInput.value,
+    cardLinkInput.value,
+    cardContainer,
+    cardTemplate
+  );
+  addElementToContainer(addCard.render(), cardContainer);
+  closePopup(popupAddCard);
+  evt.target.reset();
+  cardFormValidator.resetFormValidation();
+}
+
 const cardListSection = ".gallery";
 console.log(cardListSection);
 
 const cardList = new Section({
   items: initialCards,
-  renderer: (card) => { // функция, которая отвечает за создание и отрисовку данных на странице
-    
-    cardList.addItem();
+  renderer: ({name, link}) => {    // функция, которая отвечает за создание и отрисовку данных на странице
+    const newCard = new Card({name: cardNameInput.value, link: cardLinkInput.value});
+    cardContainer.addItem(Card);
+    cardList.addItem(newCard);
   },
 }, 
 cardListSection
@@ -77,30 +103,6 @@ function submitEditProfileForm(evt) {
   closePopup(popupEditName);
 }
 
-const cardContainer = document.querySelector("#card-container");
-
-function addElementToContainer(element, container) {
-  container.prepend(element);
-}
-
-initialCards.forEach((item) => {
-  const card = new Card(item.name, item.link, cardContainer, cardTemplate);
-  addElementToContainer(card.render(), cardContainer);
-});
-
-function handleAddCardSubmit(evt) {
-  evt.preventDefault();
-  const addCard = new Card(
-    cardNameInput.value,
-    cardLinkInput.value,
-    cardContainer,
-    cardTemplate
-  );
-  addElementToContainer(addCard.render(), cardContainer);
-  closePopup(popupAddCard);
-  evt.target.reset();
-  cardFormValidator.resetFormValidation();
-}
 formEditName.addEventListener("submit", submitEditProfileForm);
 buttonEditName.addEventListener("click", function () {
   openPopup(popupEditName);
