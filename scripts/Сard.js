@@ -6,11 +6,9 @@ import {
 } from "./utils.js";
 
 class Card {
-  constructor(name, link, container, template) {
-    //нужно указать container, т.к. классу нужно указание, куда ему отрисоваться
+  constructor(name, link, template) {
     this._name = name;
     this._link = link;
-    this._container = container;
     this._template = template;
   }
 
@@ -53,7 +51,6 @@ class Card {
       .querySelector(".gallery__photo")
       .addEventListener("click", this._openFullPhoto);
 
-    // this._container.prepend(this._view);
     return this._view;
   };
 }

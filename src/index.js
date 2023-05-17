@@ -36,20 +36,56 @@ const cardLinkInput = formSubmitNewCard.querySelector("#card-link");
 const popups = Array.from(document.querySelectorAll(".popup"));
 const cardTemplate = document.querySelector("#cards").content;
 
+const cardContainer = document.querySelector("#card-container");
+
+// function addElementToContainer(element, container) { //это теперь addItem, который вставляет в разметку
+//   container.prepend(element);
+// }
+
+// initialCards.forEach((item) => {
+//   const card = new Card(item.name, item.link, cardTemplate);
+//   addElementToContainer(card.render(), cardContainer);
+// });
+
+// function handleAddCardSubmit(evt) {
+//   evt.preventDefault();
+//   const addCard = new Card(
+//     cardNameInput.value,
+//     cardLinkInput.value,
+//     cardTemplate
+//   );
+//   addElementToContainer(addCard.render(), cardContainer);
+//   closePopup(popupAddCard);
+//   evt.target.reset();
+//   cardFormValidator.resetFormValidation();
+// }
+
+// formSubmitNewCard.addEventListener("submit", handleAddCardSubmit);
+
+
 const cardListSection = ".gallery";
-console.log(cardListSection);
+// console.log(cardListSection);
+
+const createCard = (item) => { //функция создания карточки через форму //   возможно понадобится evt.preventDefault();
+  const newCard = new Card(item.name, item.link, cardTemplate); //создаем экземпляр класса
+  const cardElement = newCard.render();//отрисовываем карточку
+  return cardElement;//возвращаем карточку
+}; 
 
 const cardList = new Section({
   items: initialCards,
-  renderer: (card) => { // функция, которая отвечает за создание и отрисовку данных на странице
-    
-    cardList.addItem();
+  renderer: (element) => {    // функция, которая отвечает за создание и отрисовку данных на странице
+    const cardElement = createCard(element);
+    cardList.addItem(cardElement)
   },
 }, 
 cardListSection
 )
 
-cardList.renderItems();
+cardList.renderItems(); // добавляем карточки из массива в DOM
+
+formSubmitNewCard.addEventListener("submit", createCard);
+
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
@@ -118,7 +154,6 @@ buttonAddCard.addEventListener("click", function () {
 popupAddCardCloseButton.addEventListener("click", () =>
   closePopup(popupAddCard)
 );
-formSubmitNewCard.addEventListener("submit", handleAddCardSubmit);
 popupFullPhoto
   .querySelector("#full-photo_close_button")
   .addEventListener("click", () => closePopup(popupFullPhoto));
