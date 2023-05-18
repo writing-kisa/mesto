@@ -8,7 +8,7 @@ export default class Section { // у класса Section нет своей ра
     renderItems () { // публичный метод, который отвечает за отрисовку всех элементов, отрисовку элементов по отдельности делает ф-ия renderer
       this._items.forEach((item) => {
         this._renderer(item);
-        // this.addItem();
+     // this.addItem();
       });
     }
   

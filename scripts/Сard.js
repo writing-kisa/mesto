@@ -2,7 +2,7 @@ import {
   popupFullPhoto,
   nameFullPhoto,
   imageFullPhoto,
-  openPopup,
+  // openPopup,
 } from "./utils.js";
 
 class Card {
@@ -27,7 +27,7 @@ class Card {
     nameFullPhoto.textContent = this._name;
     imageFullPhoto.src = this._link;
     imageFullPhoto.alt = this._name;
-    openPopup(popupFullPhoto);
+    // openPopup(popupFullPhoto);
   };
 
   render = () => {
