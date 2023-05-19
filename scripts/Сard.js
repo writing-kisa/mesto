@@ -1,9 +1,9 @@
-import {
-  popupFullPhoto,
-  nameFullPhoto,
-  imageFullPhoto,
-  // openPopup,
-} from "./utils.js";
+// import {
+//   popupFullPhoto,
+//   nameFullPhoto,
+//   imageFullPhoto,
+//   // openPopup,
+// } from "./utils.js";
 
 class Card {
   constructor(name, link, template) {
@@ -19,16 +19,15 @@ class Card {
 
   _deleteHandler = () => {
     this._view.remove();
-    // this._view = null;
     console.log(this._view);
   };
 
-  _openFullPhoto = () => {
-    nameFullPhoto.textContent = this._name;
-    imageFullPhoto.src = this._link;
-    imageFullPhoto.alt = this._name;
-    // openPopup(popupFullPhoto);
-  };
+  // _openFullPhoto = () => {
+  //   nameFullPhoto.textContent = this._name;
+  //   imageFullPhoto.src = this._link;
+  //   imageFullPhoto.alt = this._name;
+  //   openPopup(popupFullPhoto);
+  // };
 
   render = () => {
     // console.log(this._template);
@@ -47,9 +46,9 @@ class Card {
       .querySelector(".gallery__delete-button")
       .addEventListener("click", this._deleteHandler);
 
-    this._view
-      .querySelector(".gallery__photo")
-      .addEventListener("click", this._openFullPhoto);
+    // this._view
+    //   .querySelector(".gallery__photo")
+    //   .addEventListener("click", this._openFullPhoto);
 
     return this._view;
   };

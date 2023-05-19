@@ -51,7 +51,7 @@ const cardList = new Section({
   items: initialCards,
   renderer: (element) => {    // функция, которая отвечает за создание и отрисовку данных на странице
     const cardElement = createCard(element);
-    cardList.addItem(cardElement)
+    cardList.addItem(cardElement);
   },
 }, 
 cardListSection
@@ -122,6 +122,7 @@ buttonAddCard.addEventListener("click", function () {
 // popupAddCardCloseButton.addEventListener("click", () =>
 //   closePopup(popupAddCard)
 // );
+
 // popupFullPhoto
 //   .querySelector("#full-photo_close_button")
 //   .addEventListener("click", () => closePopup(popupFullPhoto));

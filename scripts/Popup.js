@@ -3,17 +3,17 @@ export default class Popup {
     this._popupSelector = document.querySelector(popupSelector);
   }
 
-  open() {
+  open = () => {
     this._popupSelector.classList.add("popup_opened");
     document.addEventListener("keydown", this._handleEscClose);
   }
 
-  close() {
+  close = () => {
     this._popupSelector.classList.remove("popup_opened");
     //   document.removeEventListener("keydown", closeByEsc);
   }
 
-  _handleEscClose() {
+  _handleEscClose = () => {
     //содержит логику закрытия попапа клавишей Esc
     if (this.key === "Escape") {
       const popupOpened = document.querySelector(".popup_opened");
