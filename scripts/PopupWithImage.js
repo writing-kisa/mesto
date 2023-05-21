@@ -7,15 +7,10 @@ export default class PopupWithImage extends Popup {
     this._photoName = this._popupSelector.querySelector(".popup__photo-name"); // так, ошибка тут, я всегда нахожу один и тот же элемент в дом
     this._photoLink = this._popupSelector.querySelector(".popup__full-size-photo");
   }
-  open(item) { 
-    this._photoName.textContent = item.name; 
-    this._photoLink.src = item.link;
-    this._photoLink.alt = item.name;
-    console.log(item);
+  open(data) { 
+    this._photoName.textContent = data.name; 
+    this._photoLink.src = data.link;
+    this._photoLink.alt = data.name;
     super.open();
   }
-
-//   test() {
-//     console.log(lupa)
-//   }
 }

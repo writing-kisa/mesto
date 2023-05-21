@@ -35,7 +35,6 @@ const cardNameInput = formSubmitNewCard.querySelector("#card-name");
 const cardLinkInput = formSubmitNewCard.querySelector("#card-link");
 const cardContainer = document.querySelector("#card-container");
 
-
 const popups = Array.from(document.querySelectorAll(".popup"));
 const cardTemplate = document.querySelector("#cards").content;
 
@@ -44,7 +43,6 @@ const cardListSection = ".gallery";
 
 const popupOpenFullPhotoSelector = '#full-size-popup';
 
-
 const popupWithImage = new PopupWithImage(popupOpenFullPhotoSelector);
 
 const createCard = (item) => { //функция создания карточки
@@ -52,9 +50,8 @@ const createCard = (item) => { //функция создания карточк�
     item.name, 
     item.link, 
     { handleCardClick: () => {
+      // console.log(item)
       popupWithImage.open(item);
-      // popupWithImage.test();
-      // console.log(item) //все правильно показывает: нужные линк и нейм
     }},
     cardTemplate); 
   const cardElement = newCard.render();//отрисовываем карточку
@@ -99,17 +96,17 @@ const popupFullPhotoClass = new Popup(popupOpenFullPhotoSelector);
 // }
 
 
-const closeByOverlay = () => {
-  popups.forEach((element) => {
-    element.addEventListener("mousedown", (evt) => {
-      if (evt.target === evt.currentTarget) {
-        closePopup(element);
-      }
-    });
-  });
-};
+// const closeByOverlay = () => {
+//   popups.forEach((element) => {
+//     element.addEventListener("mousedown", (evt) => {
+//       if (evt.target === evt.currentTarget) {
+//         closePopup(element);
+//       }
+//     });
+//   });
+// };
 
-closeByOverlay();
+// closeByOverlay();
 
 function submitEditProfileForm(evt) {
   evt.preventDefault();
