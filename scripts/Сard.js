@@ -6,9 +6,10 @@
 // } from "./utils.js";
 
 class Card {
-  constructor(name, link, template) {
+  constructor(name, link, { handleCardClick }, template) {
     this._name = name;
     this._link = link;
+    this._handleCardClick = handleCardClick; //эта функция открывает попап с картинкой при клике на карточку
     this._template = template;
   }
 
@@ -46,9 +47,9 @@ class Card {
       .querySelector(".gallery__delete-button")
       .addEventListener("click", this._deleteHandler);
 
-    // this._view
-    //   .querySelector(".gallery__photo")
-    //   .addEventListener("click", this._openFullPhoto);
+    this._view
+      .querySelector(".gallery__photo")
+      .addEventListener("click", this._handleCardClick);
 
     return this._view;
   };

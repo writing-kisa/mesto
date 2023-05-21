@@ -10,6 +10,7 @@ import initialCards from "../data/initial_cards.js";
 import '../pages/index.css';
 import Section from "../scripts/Section.js";
 import Popup from "../scripts/Popup.js";
+import PopupWithImage from "../scripts/PopupWithImage.js";
 
 const buttonEditName = document.querySelector(".profile__button-change-name");
 // console.log(buttonEditName);
@@ -26,7 +27,7 @@ const profileName = document.querySelector(".profile__name");
 const profileBio = document.querySelector(".profile__bio");
 const formSubmitNewCard = document.querySelector("#submit_new-card_form");
 const buttonAddCard = document.querySelector(".profile__button-add-photo");
-const popupAddCard = document.querySelector("#add_card");
+// const popupAddCard = document.querySelector("#add_card");
 const popupAddCardCloseButton = document.querySelector(
   "#new-card_close_button"
 );
@@ -41,8 +42,21 @@ const cardTemplate = document.querySelector("#cards").content;
 const cardListSection = ".gallery";
 // console.log(cardListSection);
 
-const createCard = (item) => { //функция создания карточки через форму //   возможно понадобится evt.preventDefault();
-  const newCard = new Card(item.name, item.link, cardTemplate); //создаем экземпляр класса
+const popupOpenFullPhotoSelector = '#full-size-popup';
+
+
+const popupWithImage = new PopupWithImage(popupOpenFullPhotoSelector);
+
+const createCard = (item) => { //функция создания карточки
+  const newCard = new Card(
+    item.name, 
+    item.link, 
+    { handleCardClick: () => {
+      popupWithImage.open(item);
+      // popupWithImage.test();
+      // console.log(item) //все правильно показывает: нужные линк и нейм
+    }},
+    cardTemplate); 
   const cardElement = newCard.render();//отрисовываем карточку
   return cardElement;//возвращаем карточку
 }; 
@@ -59,26 +73,27 @@ cardListSection
 
 cardList.renderItems(); // добавляем карточки из массива в DOM
 
-formSubmitNewCard.addEventListener("submit", createCard);
+// formSubmitNewCard.addEventListener("submit", createCard);
 
 //================================================================================================
 
 //создаем экз класса Popup
 
 const popupEditNameSelector = "#edit_profile";
-// const popupAddfCardSelector = '#add_card';
+const popupAddCardSelector = '#add_card';
 // const popupOpenFullPhotoSelector = '#full-size-popup';
 
 
 const popupEditName = new Popup(popupEditNameSelector);
-// popup.render();
+const popupAddCard = new Popup(popupAddCardSelector);
+const popupFullPhotoClass = new Popup(popupOpenFullPhotoSelector);
 
 // console.log(popupEditNameSelector);
 
 //================================================================================================
 
 
-// function closePopup(popup) {
+// // function closePopup(popup) {
 //   popup.classList.remove("popup_opened");
 //   document.removeEventListener("keydown", closeByEsc);
 // }
@@ -101,7 +116,7 @@ function submitEditProfileForm(evt) {
 
   profileName.textContent = nameInput.value;
   profileBio.textContent = bioInput.value;
-
+  popupEditName.close();
   // closePopup(popupEditName);
 }
 
@@ -112,20 +127,22 @@ buttonEditName.addEventListener("click", function () {
   nameFormValidator.resetFormValidation();
 });
 
-// popupEditCloseButton.addEventListener("click", () => closePopup(popupEditName));
+popupEditCloseButton.addEventListener("click", () => popupEditName.close());
 buttonAddCard.addEventListener("click", function () {
+  popupAddCard.open()
   // openPopup(popupAddCard);
   formSubmitNewCard.reset();
   cardFormValidator.resetFormValidation();
 });
 
-// popupAddCardCloseButton.addEventListener("click", () =>
+popupAddCardCloseButton.addEventListener("click", () =>
 //   closePopup(popupAddCard)
-// );
+  popupAddCard.close()
+);
 
-// popupFullPhoto
-//   .querySelector("#full-photo_close_button")
-//   .addEventListener("click", () => closePopup(popupFullPhoto));
+popupFullPhoto
+  .querySelector("#full-photo_close_button")
+  .addEventListener("click", () => popupFullPhotoClass.close()); // closePopup(popupFullPhoto)
 
 const nameFormValidator = new FormValidator(options, formEditName);
 nameFormValidator.enableValidation();
@@ -141,6 +158,14 @@ export {
   formSubmitNewCard,
 };
 
+
+
+  // openFullPhotoPopup = () => {
+  //   const popupWithImage = new PopupWithImage(popupOpenFullPhotoSelector);
+  //   popupWithImage.open(item.name, item.link);
+  // };
+
+  // newCard.querySelector('.gallery__photo').addEventListener('click', openFullPhotoPopup);
 
 
 
