@@ -6,7 +6,7 @@ import {
   nameFullPhoto,
   imageFullPhoto,
 } from "../scripts/utils.js";
-import initialCards from "../data/initial_cards.js";
+import initialCards from "./data/initial_cards.js";
 import '../pages/index.css';
 import Section from "../scripts/Section.js";
 import Popup from "../scripts/Popup.js";
@@ -18,8 +18,6 @@ const buttonEditName = document.querySelector(".profile__button-change-name");
 const formEditName = document.querySelector("#submit_name_form");
 const nameInput = formEditName.querySelector("#text-name");
 const bioInput = formEditName.querySelector("#text-bio");
-const profileName = document.querySelector(".profile__name");
-const profileBio = document.querySelector(".profile__bio");
 const formSubmitNewCard = document.querySelector("#submit_new-card_form");
 const buttonAddCard = document.querySelector(".profile__button-add-photo");
 
@@ -114,6 +112,10 @@ export {
   bioInput
 };
 
+
+
+// const profileName = document.querySelector(".profile__name");
+// const profileBio = document.querySelector(".profile__bio");
 
 // const popupEditCloseButton = document.querySelector("#name_close_button");
 // const popupAddCardCloseButton = document.querySelector(
