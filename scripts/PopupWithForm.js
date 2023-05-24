@@ -16,12 +16,17 @@ export default class PopupWithForm extends Popup {
       return this._inputData;
     }
 
+    setInputValues(user) {
+      this._inputs.forEach(input => {
+        input.value = user[input.name];
+    })
+    }
+
     setEventListeners() {
       super.setEventListeners();
       this._form.addEventListener("submit", (evt) => {
         evt.preventDefault();
         this._handleSubmit(this._getInputValues()); // колбэк сабмита формы (для каждой формы будет разным)
-        console.log(this._form);
         this.close();
     }); 
     }

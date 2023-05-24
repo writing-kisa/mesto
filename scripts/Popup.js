@@ -9,9 +9,8 @@ export default class Popup {
   }
 
   close = () => {
-    //это начало работать только когда сделала через стрелочку создание функции
+    //это начало работать только когда сделала создание функции через стрелочку
     this._popupSelector.classList.remove("popup_opened");
-    //   document.removeEventListener("keydown", closeByEsc);
   };
 
   _handleEscClose = (evt) => {

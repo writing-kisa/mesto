@@ -12,6 +12,7 @@ import Section from "../scripts/Section.js";
 import Popup from "../scripts/Popup.js";
 import PopupWithImage from "../scripts/PopupWithImage.js";
 import PopupWithForm from "../scripts/PopupWithForm.js";
+import UserInfo from "../scripts/UserInfo.js";
 
 const buttonEditName = document.querySelector(".profile__button-change-name");
 const formEditName = document.querySelector("#submit_name_form");
@@ -32,7 +33,6 @@ const createCard = (item) => { //функция создания карточк�
     item.name, 
     item.link, 
     { handleCardClick: () => {
-      // console.log(item)
       popupWithImage.open(item);
       popupWithImage.setEventListeners();
     }},
@@ -54,10 +54,18 @@ cardListSection
 cardList.renderItems(); // добавляем карточки из массива в DOM
 
 const popupEditNameSelector = "#edit_profile";
-const popupAddCardSelector = '#add_card';
+const popupAddCardSelector = "#add_card";
 
 const popupEditName = new Popup(popupEditNameSelector);
 const popupAddCard = new Popup(popupAddCardSelector);
+
+const profileInfoSelectors = {
+  nameSelector: ".profile__name",
+  bioSelector: ".profile__bio"
+}
+
+const userInfo = new UserInfo(profileInfoSelectors);
+
 
 // экземпляр попапа с формой для добавления карточки через нее
 
@@ -70,11 +78,9 @@ popupAddNewCardForm.setEventListeners();
 // popupAddNewCardForm.test();
 
 // экземпляр попапа с формой для изменения информации о пользователе
-
 const popupEditNameForm = new PopupWithForm(popupEditNameSelector, 
   { handleSubmit: (data) => {
-    profileName.textContent = data.name;
-    profileBio.textContent = data.bio;
+      userInfo.setUserInfo(data);
   }
   });
 
@@ -82,8 +88,7 @@ popupEditNameForm.setEventListeners();
 
 buttonEditName.addEventListener("click", function () {
   popupEditName.open();
-  nameInput.value = profileName.textContent;
-  bioInput.value = profileBio.textContent;
+  popupEditNameForm.setInputValues(userInfo.getUserInfo());  
   nameFormValidator.resetFormValidation();
 });
 
@@ -105,6 +110,8 @@ export {
   imageFullPhoto,
   formEditName,
   formSubmitNewCard,
+  nameInput,
+  bioInput
 };
 
 
