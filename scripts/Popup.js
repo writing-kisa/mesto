@@ -19,7 +19,7 @@ export default class Popup {
     if (evt.key === "Escape") {
       this._popupSelector.classList.remove("popup_opened");
     }
-  }
+  };
 
   setEventListeners() {
     //добавляет слушатель клика иконке закрытия попапа
@@ -27,7 +27,12 @@ export default class Popup {
       .querySelector(".popup__close-button")
       .addEventListener("click", this.close);
     // console.log(this._popupSelector.querySelector(".popup__close-button"));
+
+    //закрытия попапа при нажатии на оверлей
+    this._popupSelector.addEventListener("mousedown", (evt) => {
+      if (evt.target === evt.currentTarget) {
+        this.close();
+      }
+    });
   }
 }
-
-// document.addEventListener("keydown", closeByEsc);
