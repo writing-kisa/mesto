@@ -8,21 +8,24 @@ export default class Popup {
     document.addEventListener("keydown", this._handleEscClose);
   }
 
-  close = () => { //это начало работать только когда сделала через стрелочку создание функции
+  close = () => {
+    //это начало работать только когда сделала через стрелочку создание функции
     this._popupSelector.classList.remove("popup_opened");
     //   document.removeEventListener("keydown", closeByEsc);
-  }
+  };
 
-//   _handleEscClose() { //содержит логику закрытия попапа клавишей Esc
-//     if (this.key === "Escape") {
-//       const popupOpened = document.querySelector(".popup_opened");
-//       close(popupOpened);
-//     }
-//   }
+  _handleEscClose = (evt) => {
+    //содержит логику закрытия попапа клавишей Esc
+    if (evt.key === "Escape") {
+      this._popupSelector.classList.remove("popup_opened");
+    }
+  }
 
   setEventListeners() {
     //добавляет слушатель клика иконке закрытия попапа
-    this._popupSelector.querySelector(".popup__close-button").addEventListener('click', this.close);
+    this._popupSelector
+      .querySelector(".popup__close-button")
+      .addEventListener("click", this.close);
     // console.log(this._popupSelector.querySelector(".popup__close-button"));
   }
 }

@@ -23,13 +23,6 @@ class Card {
     console.log(this._view);
   };
 
-  // _openFullPhoto = () => {
-  //   nameFullPhoto.textContent = this._name;
-  //   imageFullPhoto.src = this._link;
-  //   imageFullPhoto.alt = this._name;
-  //   openPopup(popupFullPhoto);
-  // };
-
   render = () => {
     // console.log(this._template);
     this._view = this._template.cloneNode(true).children[0]; // где card._template это темплейт того объекта

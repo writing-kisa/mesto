@@ -21,6 +21,7 @@ export default class PopupWithForm extends Popup {
       this._form.addEventListener("submit", (evt) => {
         evt.preventDefault();
         this._handleSubmit(this._getInputValues()); // колбэк сабмита формы (для каждой формы будет разным)
+        console.log(this._form);
         this.close();
     }); 
     }
@@ -29,4 +30,8 @@ export default class PopupWithForm extends Popup {
       super.close();
       this._form.reset();
     }
+
+    // test() {
+    //   console.log(this._form)
+    // }
 }
