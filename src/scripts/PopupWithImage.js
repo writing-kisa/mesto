@@ -4,7 +4,7 @@ export default class PopupWithImage extends Popup {
 
   constructor(popupSelector) {
     super(popupSelector);
-    this._photoName = this._popupSelector.querySelector(".popup__photo-name"); // так, ошибка тут, я всегда нахожу один и тот же элемент в дом
+    this._photoName = this._popupSelector.querySelector(".popup__photo-name");
     this._photoLink = this._popupSelector.querySelector(".popup__full-size-photo");
   }
 

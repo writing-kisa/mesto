@@ -1,10 +1,3 @@
-// import {
-//   popupFullPhoto,
-//   nameFullPhoto,
-//   imageFullPhoto,
-//   // openPopup,
-// } from "./utils.js";
-
 class Card {
   constructor(name, link, { handleCardClick }, template) {
     this._name = name;

@@ -1,5 +1,3 @@
-import { nameInput, bioInput } from '../src/index.js';
-
 export default class UserInfo {
   constructor({ nameSelector, bioSelector }) { //объект с селекторами двух элементов ДОМ
     this._userName = document.querySelector(nameSelector);

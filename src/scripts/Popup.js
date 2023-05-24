@@ -10,7 +10,6 @@ export default class Popup {
   }
 
   close() {
-    //это начало работать только когда сделала создание функции через стрелочку
     this._popupSelector.classList.remove("popup_opened");
   };
 

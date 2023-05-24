@@ -1,18 +1,18 @@
-import Card from "../scripts/Сard.js";
-import FormValidator from "../scripts/FormValidator.js";
-import options from "../scripts/validationConfig.js";
+import Card from "./scripts/Сard.js";
+import FormValidator from "./scripts/FormValidator.js";
+import options from "./scripts/validationConfig.js";
 import {
   popupFullPhoto,
   nameFullPhoto,
   imageFullPhoto,
-} from "../scripts/utils.js";
+} from "./scripts/utils.js";
 import initialCards from "./data/initial_cards.js";
-import '../pages/index.css';
-import Section from "../scripts/Section.js";
-import Popup from "../scripts/Popup.js";
-import PopupWithImage from "../scripts/PopupWithImage.js";
-import PopupWithForm from "../scripts/PopupWithForm.js";
-import UserInfo from "../scripts/UserInfo.js";
+import './pages/index.css';
+import Section from "./scripts/Section.js";
+import Popup from "./scripts/Popup.js";
+import PopupWithImage from "./scripts/PopupWithImage.js";
+import PopupWithForm from "./scripts/PopupWithForm.js";
+import UserInfo from "./scripts/UserInfo.js";
 
 const buttonEditName = document.querySelector(".profile__button-change-name");
 const formEditName = document.querySelector("#submit_name_form");
@@ -73,7 +73,6 @@ const popupAddNewCardForm = new PopupWithForm(popupAddCardSelector, { handleSubm
 }});
 
 popupAddNewCardForm.setEventListeners();
-// popupAddNewCardForm.test();
 
 // экземпляр попапа с формой для изменения информации о пользователе
 const popupEditNameForm = new PopupWithForm(popupEditNameSelector, 
@@ -92,7 +91,6 @@ buttonEditName.addEventListener("click", function () {
 
 buttonAddCard.addEventListener("click", function () {
   popupAddCard.open()
-  // formSubmitNewCard.reset();
   cardFormValidator.resetFormValidation();
 });
 
@@ -111,94 +109,3 @@ export {
   nameInput,
   bioInput
 };
-
-
-
-// const profileName = document.querySelector(".profile__name");
-// const profileBio = document.querySelector(".profile__bio");
-
-// const popupEditCloseButton = document.querySelector("#name_close_button");
-// const popupAddCardCloseButton = document.querySelector(
-//   "#new-card_close_button"
-// );
-
-// const cardNameInput = formSubmitNewCard.querySelector("#card-name");
-// const cardLinkInput = formSubmitNewCard.querySelector("#card-link");
-
-// popupEditCloseButton.addEventListener("click", () => popupEditName.close());
-// popupAddCardCloseButton.addEventListener("click", () =>
-//   popupAddNewCardForm.close()
-// );
-// popupFullPhoto
-//   .querySelector("#full-photo_close_button")
-//   .addEventListener("click", () => popupFullPhotoClass.close());
-
-// function handleAddCardSubmit(evt) {
-//   evt.preventDefault();
-//   const addCard = new Card(
-//     cardNameInput.value,
-//     cardLinkInput.value,
-//     cardTemplate
-//   );
-//   addElementToContainer(addCard.render(), cardContainer);
-//   closePopup(popupAddCard);
-//   // evt.target.reset();
-//   cardFormValidator.resetFormValidation();
-// }
-
-// function submitEditProfileForm(evt) {
-//   evt.preventDefault();
-
-//   profileName.textContent = nameInput.value;
-//   profileBio.textContent = bioInput.value;
-//   popupEditName.close();
-// }
-
-
-// // function closePopup(popup) {
-//   popup.classList.remove("popup_opened");
-//   document.removeEventListener("keydown", closeByEsc);
-// }
-
-// const closeByOverlay = () => {
-//   popups.forEach((element) => {
-//     element.addEventListener("mousedown", (evt) => {
-//       if (evt.target === evt.currentTarget) {
-//         closePopup(element);
-//       }
-//     });
-//   });
-// };
-
-// closeByOverlay();
-
-// const popupEditName = document.querySelector(".popup");
-// const popupAddCard = document.querySelector("#add_card");
-
-// const cardContainer = document.querySelector("#card-container");
-// const popups = Array.from(document.querySelectorAll(".popup"));
-
-// openFullPhotoPopup = () => {
-//   const popupWithImage = new PopupWithImage(popupOpenFullPhotoSelector);
-//   popupWithImage.open(item.name, item.link);
-// };
-
-// newCard.querySelector('.gallery__photo').addEventListener('click', openFullPhotoPopup);
-
-// function addElementToContainer(element, container) { //это теперь addItem, который вставляет в разметку
-//   container.prepend(element);
-// }
-
-// initialCards.forEach((item) => {
-//   const card = new Card(item.name, item.link, cardTemplate);
-//   addElementToContainer(card.render(), cardContainer);
-// });
-
-// formSubmitNewCard.addEventListener("submit", handleAddCardSubmit);
-
-//buttonEditName.addEventListener("click", function () {
-//   openPopup(popupEditName);
-//   nameInput.value = profileName.textContent;
-//   bioInput.value = profileBio.textContent;
-//   nameFormValidator.resetFormValidation();
-// });
