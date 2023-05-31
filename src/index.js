@@ -21,6 +21,7 @@ import Section from "./scripts/Section.js";
 import PopupWithImage from "./scripts/PopupWithImage.js";
 import PopupWithForm from "./scripts/PopupWithForm.js";
 import UserInfo from "./scripts/UserInfo.js";
+import Api from "./scripts/Api.js";
 
 const popupWithImage = new PopupWithImage(popupOpenFullPhotoSelector);
 popupWithImage.setEventListeners();
@@ -40,6 +41,14 @@ const createCard = (item) => {
   const cardElement = newCard.render(); //отрисовываем карточку
   return cardElement; //возвращаем карточку
 };
+
+api.getInitialCards()
+  .then((res) => {
+    console.log(res)
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 const cardList = new Section(
   {
@@ -61,12 +70,12 @@ const popupAddCardSelector = "#add_card";
 const profileInfoSelectors = {
   nameSelector: ".profile__name",
   bioSelector: ".profile__bio",
+  avatarSelector: ".profile__avatar"
 };
 
 const userInfo = new UserInfo(profileInfoSelectors);
 
 // экземпляр попапа с формой для добавления карточки через нее
-
 const popupAddNewCardForm = new PopupWithForm(popupAddCardSelector, {
   handleSubmit: (data) => {
     const cardElement = createCard(data);
@@ -80,7 +89,7 @@ popupAddNewCardForm.setEventListeners();
 const popupEditNameForm = new PopupWithForm(popupEditNameSelector, {
   handleSubmit: (data) => {
     userInfo.setUserInfo(data);
-  },
+  }, 
 });
 
 popupEditNameForm.setEventListeners();
@@ -101,6 +110,33 @@ nameFormValidator.enableValidation();
 
 const cardFormValidator = new FormValidator(options, formSubmitNewCard);
 cardFormValidator.enableValidation();
+
+const info = {
+  baseUrl: "https://mesto.nomoreparties.co/v1",
+  token: "72492c1e-f4dd-45b5-9419-ceb3c83aff61",
+  groupId: "cohort-66",
+};
+
+const api = new Api(info);
+
+// api.debug()
+
+// api.getInfo()
+//   .then((res) => {
+//     console.log(res);
+//     console.log(res.avatar);
+//     const userInfo = res;
+//     console.log(userInfo)
+//     const userName = res.name;
+//     const userBio = res.about;
+//     const userAvatar = res.avatar
+//   })
+//   .then()
+//   .catch((err) => {
+//     console.log(err);
+//   });
+
+
 
 export {
   popupFullPhoto,

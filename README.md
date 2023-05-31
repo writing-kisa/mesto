@@ -6,6 +6,6 @@
 
 добавила в проект ООП, создала два новых класса: Card (для отрисовки карточки) и FormValidator (для валидации). подключила их в index.js, добавила type="module", чтобы все правильно подключалось
 
-сслылка на gh-pages: https://writing-kisa.github.io/mesto/
+ссылка на сайт: https://writing-kisa.github.io/mesto/
 
 чтобы запустить проект: в терминале ввести строчку  npm run dev
