@@ -30,7 +30,7 @@ export default class Api {
       .then((res) => (res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)));
   }
 
-
+  
 
   // debug() {
   //   console.log("DEBUGGING API CLASS")
@@ -51,7 +51,7 @@ export default class Api {
 
 //   changeUserAvatar() {}
 
-//   getAppInfo() {
-//     // дополнительный метод, который будет возвращать Promise.all с отработкой двух методов - получение всех карточек и получение данных пользователя
-//   }
+  getAppInfo() { // дополнительный метод, который будет возвращать Promise.all с отработкой двух методов - получение всех карточек и получение данных пользователя
+    return Promise.all([this.getInfo(), this.getInitialCards()])
+  }
 }

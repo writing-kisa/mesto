@@ -42,17 +42,24 @@ const createCard = (item) => {
   return cardElement; //возвращаем карточку
 };
 
-api.getInitialCards()
-  .then((res) => {
-    console.log(res)
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+const info = {
+  baseUrl: "https://mesto.nomoreparties.co/v1",
+  token: "72492c1e-f4dd-45b5-9419-ceb3c83aff61",
+  groupId: "cohort-66",
+};
+
+const api = new Api(info);
+
+// api.getInitialCards()
+//   .then((res) => {
+//     console.log(res)
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
 
 const cardList = new Section(
-  {
-    items: initialCards,
+  { items: initialCards,
     renderer: (element) => {
       // функция, которая отвечает за создание и отрисовку данных на странице
       const cardElement = createCard(element);
@@ -70,7 +77,7 @@ const popupAddCardSelector = "#add_card";
 const profileInfoSelectors = {
   nameSelector: ".profile__name",
   bioSelector: ".profile__bio",
-  avatarSelector: ".profile__avatar"
+  avatarSelector: ".profile__avatar",
 };
 
 const userInfo = new UserInfo(profileInfoSelectors);
@@ -89,7 +96,7 @@ popupAddNewCardForm.setEventListeners();
 const popupEditNameForm = new PopupWithForm(popupEditNameSelector, {
   handleSubmit: (data) => {
     userInfo.setUserInfo(data);
-  }, 
+  },
 });
 
 popupEditNameForm.setEventListeners();
@@ -111,32 +118,22 @@ nameFormValidator.enableValidation();
 const cardFormValidator = new FormValidator(options, formSubmitNewCard);
 cardFormValidator.enableValidation();
 
-const info = {
-  baseUrl: "https://mesto.nomoreparties.co/v1",
-  token: "72492c1e-f4dd-45b5-9419-ceb3c83aff61",
-  groupId: "cohort-66",
-};
-
-const api = new Api(info);
-
 // api.debug()
 
-// api.getInfo()
-//   .then((res) => {
-//     console.log(res);
-//     console.log(res.avatar);
-//     const userInfo = res;
-//     console.log(userInfo)
-//     const userName = res.name;
-//     const userBio = res.about;
-//     const userAvatar = res.avatar
-//   })
-//   .then()
-//   .catch((err) => {
-//     console.log(err);
-//   });
+api.getInfo()
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((err) => {
+    console.log(err);
+  })
 
-
+api.getAppInfo().then((args) => {
+  // console.log(args)
+  const [ dataFromFirstPromise, dataFromSecondPromise ] = args;
+  userInfo.setUserInfo(dataFromFirstPromise);
+  // cardList.renderItems(dataFromSecondPromise);
+})
 
 export {
   popupFullPhoto,
