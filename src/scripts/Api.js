@@ -48,7 +48,21 @@ export default class Api {
     );
   }
 
-  // addCard() {}
+  addCard(card) {
+    return fetch(`${this._url}/${this._id}/cards`, {
+      method: "POST",
+      headers: {
+        authorization: this._token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: card.name,
+        link: card.link
+      })
+    }).then((res) =>
+      res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
+    );
+  }
 
   // debug() {
   //   console.log("DEBUGGING API CLASS")

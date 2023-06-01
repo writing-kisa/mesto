@@ -81,10 +81,14 @@ const profileInfoSelectors = {
 const userInfo = new UserInfo(profileInfoSelectors);
 
 // экземпляр попапа с формой для добавления карточки через нее
+
 const popupAddNewCardForm = new PopupWithForm(popupAddCardSelector, {
   handleSubmit: (data) => {
     const cardElement = createCard(data);
     cardList.addItem(cardElement);
+    api.addCard(data)
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
   },
 });
 
@@ -94,7 +98,7 @@ popupAddNewCardForm.setEventListeners();
 const popupEditNameForm = new PopupWithForm(popupEditNameSelector, {
   handleSubmit: (data) => {
     userInfo.setUserInfo(data);
-    api.changeUserInfo(data) //нужно вызвать этот метод внутри функции, в которой мы значения инпутов присваиваем странице
+    api.changeUserInfo(data)
       .then((res) => {
         console.log(res);
       })
