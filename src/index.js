@@ -15,7 +15,6 @@ import {
   cardListSection,
   popupOpenFullPhotoSelector,
 } from "./scripts/utils.js";
-import initialCards from "./data/initial_cards.js";
 import "./pages/index.css";
 import Section from "./scripts/Section.js";
 import PopupWithImage from "./scripts/PopupWithImage.js";
@@ -50,16 +49,16 @@ const info = {
 
 const api = new Api(info);
 
-// api.getInitialCards()
-//   .then((res) => {
-//     console.log(res)
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
+api.getInitialCards()
+  .then((res) => {
+    console.log(res)
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 const cardList = new Section(
-  { items: initialCards,
+  {
     renderer: (element) => {
       // функция, которая отвечает за создание и отрисовку данных на странице
       const cardElement = createCard(element);
@@ -68,8 +67,6 @@ const cardList = new Section(
   },
   cardListSection
 );
-
-cardList.renderItems(); // добавляем карточки из массива в DOM
 
 const popupEditNameSelector = "#edit_profile";
 const popupAddCardSelector = "#add_card";
@@ -103,7 +100,7 @@ popupEditNameForm.setEventListeners();
 
 buttonEditName.addEventListener("click", function () {
   popupEditNameForm.open();
-  popupEditNameForm.setInputValues(userInfo.getUserInfo());
+  popupEditNameForm.setInputValues(userInfo.getUserInfo()); //ощущение, что эту строчку надо как-то засунуть в айпи для изменения инфы о юзере
   nameFormValidator.resetFormValidation();
 });
 
@@ -120,20 +117,34 @@ cardFormValidator.enableValidation();
 
 // api.debug()
 
-api.getInfo()
+api
+  .getInfo()
   .then((res) => {
     console.log(res);
   })
   .catch((err) => {
     console.log(err);
+  });
+
+//========================================================
+
+api
+  .changeUserInfo()
+  .then((res) => {
+    console.log(res);
   })
+  .catch((err) => {
+    console.log(err);
+  });
+
+//========================================================
 
 api.getAppInfo().then((args) => {
   // console.log(args)
-  const [ dataFromFirstPromise, dataFromSecondPromise ] = args;
-  userInfo.setUserInfo(dataFromFirstPromise);
-  // cardList.renderItems(dataFromSecondPromise);
-})
+  const [dataFromUserInfoPromise, dataFromCardsPromise] = args;
+  userInfo.setUserInfo(dataFromUserInfoPromise);
+  cardList.renderItems(dataFromCardsPromise);
+});
 
 export {
   popupFullPhoto,

@@ -13,7 +13,7 @@ class Card {
 
   _deleteHandler = () => {
     this._view.remove();
-    console.log(this._view);
+    // console.log(this._view);
   };
 
   render = () => {
