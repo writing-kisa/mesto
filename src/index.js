@@ -49,9 +49,10 @@ const info = {
 
 const api = new Api(info);
 
-api.getInitialCards()
+api
+  .getInitialCards()
   .then((res) => {
-    console.log(res)
+    console.log(res);
   })
   .catch((err) => {
     console.log(err);
@@ -93,6 +94,13 @@ popupAddNewCardForm.setEventListeners();
 const popupEditNameForm = new PopupWithForm(popupEditNameSelector, {
   handleSubmit: (data) => {
     userInfo.setUserInfo(data);
+    api.changeUserInfo(data) //нужно вызвать этот метод внутри функции, в которой мы значения инпутов присваиваем странице
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 });
 
@@ -100,7 +108,7 @@ popupEditNameForm.setEventListeners();
 
 buttonEditName.addEventListener("click", function () {
   popupEditNameForm.open();
-  popupEditNameForm.setInputValues(userInfo.getUserInfo()); //ощущение, что эту строчку надо как-то засунуть в айпи для изменения инфы о юзере
+  popupEditNameForm.setInputValues(userInfo.getUserInfo());
   nameFormValidator.resetFormValidation();
 });
 
@@ -128,14 +136,13 @@ api
 
 //========================================================
 
-api
-  .changeUserInfo()
-  .then((res) => {
-    console.log(res);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+// api.changeUserInfo() //нужно вызвать этот метод внутри функции, в которой мы значения инпутов присваиваем странице
+//   .then((res) => {
+//     console.log(res);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
 
 //========================================================
 

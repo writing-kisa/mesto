@@ -32,7 +32,7 @@ export default class Api {
     );
   }
 
-  changeUserInfo() {
+  changeUserInfo(newUserData) {
     return fetch(`${this._url}/${this._id}/users/me`, {
       method: "PATCH",
       headers: {
@@ -40,8 +40,8 @@ export default class Api {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: 'Marie Skłodowska Curie',
-        about: 'Physicist and Chemist'
+        name: newUserData.name,
+        about: newUserData.about
       })
     }).then((res) =>
       res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
