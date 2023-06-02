@@ -13,7 +13,7 @@ import {
   buttonAddCard,
   cardTemplate,
   cardListSection,
-  popupOpenFullPhotoSelector,
+  popupOpenFullPhotoSelector
 } from "./scripts/utils.js";
 import "./pages/index.css";
 import Section from "./scripts/Section.js";
@@ -21,6 +21,9 @@ import PopupWithImage from "./scripts/PopupWithImage.js";
 import PopupWithForm from "./scripts/PopupWithForm.js";
 import UserInfo from "./scripts/UserInfo.js";
 import Api from "./scripts/Api.js";
+import PopupWithSubmitForm from "./scripts/PopupWithSubmitForm.js";
+
+let myId = null;
 
 const info = {
   baseUrl: "https://mesto.nomoreparties.co/v1",
@@ -33,16 +36,30 @@ const api = new Api(info);
 const popupWithImage = new PopupWithImage(popupOpenFullPhotoSelector);
 popupWithImage.setEventListeners();
 
+const popupDeleteCardSelector = "#popup-before-delete";
+const popupDeleteCard = new PopupWithSubmitForm(popupDeleteCardSelector);
+
 const createCard = (item) => {
   //функция создания карточки
   const newCard = new Card(
     item.name,
     item.link,
     item.likes,
+    item.owner._id,
+    item._id,
+    myId,
     {
       handleCardClick: () => {
         popupWithImage.open(item);
       },
+
+      handleDeleteCard: () => {
+        popupDeleteCard.open();
+        popupDeleteCard.setSubmitAction(() => {   //здесь будет вызываться api delete card
+          console.log('pikpik') //почему-то вызывается сразу как открывается попап, а должен после нажатия на соответствующую кнопку
+        })
+        popupDeleteCard.setEventListeners();
+      }
     },
     cardTemplate
   );
@@ -84,12 +101,25 @@ const userInfo = new UserInfo(profileInfoSelectors);
 
 // экземпляр попапа с формой для добавления карточки через нее
 
+// const popupAddNewCardForm = new PopupWithForm(popupAddCardSelector, {
+//   handleSubmit: (data) => {
+//     const cardElement = createCard(data);
+//     cardList.addItem(cardElement);
+//     api.addCard(data)
+//       .then(res => console.log(res))
+//       .catch(err => console.log(err))
+//   },
+// });
+
 const popupAddNewCardForm = new PopupWithForm(popupAddCardSelector, {
   handleSubmit: (data) => {
-    const cardElement = createCard(data);
-    cardList.addItem(cardElement);
     api.addCard(data)
-      .then(res => console.log(res))
+      .then((res) => {
+        console.log(res);
+        console.log("тут должен быть айдишник автора новой карточки", res.owner._id); //все верно
+        const cardElement = createCard(res);
+        cardList.addItem(cardElement);
+      })
       .catch(err => console.log(err))
   },
 });
@@ -112,16 +142,31 @@ const popupEditNameForm = new PopupWithForm(popupEditNameSelector, {
 
 popupEditNameForm.setEventListeners();
 
-buttonEditName.addEventListener("click", function () {
+buttonEditName.addEventListener("click", function() {
   popupEditNameForm.open();
   popupEditNameForm.setInputValues(userInfo.getUserInfo());
   nameFormValidator.resetFormValidation();
 });
 
-buttonAddCard.addEventListener("click", function () {
+buttonAddCard.addEventListener("click", function() {
   popupAddNewCardForm.open();
   cardFormValidator.resetFormValidation();
 });
+
+
+// function deleteCardSubmit(item) {
+//   item.remove()
+// }
+// popupDeleteCard.setSubmitAction(deleteCardSubmit);
+// popupDeleteCard.setEventListeners();
+
+// const buttonDeleteCard = document.querySelectorAll(".gallery__delete-button");
+
+// console.log(buttonDeleteCard)
+
+// // buttonDeleteCard.addEventListener("click", function() {
+// //   popupDeleteCard.open();
+// // })
 
 const nameFormValidator = new FormValidator(options, formEditName);
 nameFormValidator.enableValidation();
@@ -145,6 +190,9 @@ api
 api.getAppInfo().then((args) => {
   // console.log(args)
   const [dataFromUserInfoPromise, dataFromCardsPromise] = args;
+    // console.log("здесь покажется инфа пользователя ===>", dataFromUserInfoPromise);
+    // console.log("здесь покажется id пользователя ===>", dataFromUserInfoPromise._id);
+  myId = dataFromUserInfoPromise._id;
   userInfo.setUserInfo(dataFromUserInfoPromise);
   cardList.renderItems(dataFromCardsPromise);
 });
