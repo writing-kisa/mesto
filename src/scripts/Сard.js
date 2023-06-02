@@ -36,6 +36,13 @@ class Card {
     }
   }
 
+  //метод, который навешивает слушатель на кнопки с корзиной на те карточки, где корзина есть
+  _deleteHandler() {
+    if (this._view.querySelector(".gallery__delete-button")) {
+      this._view.querySelector(".gallery__delete-button").addEventListener("click", this._handleDeleteCard);
+    }
+  }
+
   // _deleteHandler = () => {
   //   this._view.remove();
   // };
@@ -55,8 +62,12 @@ class Card {
       .querySelector(".gallery__like-button")
       .addEventListener("click", this._likeHandler);
 
-
     this._deleteTrashCanForOtherUsersCards();
+
+    console.log(this._view.querySelector(".gallery__delete-button"));
+    // this._view.querySelector(".gallery__delete-button").addEventListener("click", this._handleDeleteCard);
+    
+    this._deleteHandler();
 
     this._view
       .querySelector(".gallery__photo")
@@ -76,6 +87,3 @@ export default Card;
 
     // console.log("мой айди внутри класса кард", this._myId); // все корректно
 
-  //   this._view
-    //   .querySelector(".gallery__delete-button")
-    //   .addEventListener("click", this._handleDeleteCard
