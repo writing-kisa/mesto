@@ -59,11 +59,14 @@
           ></button>
           <div class="gallery__caption">
             <h2 class="gallery__name">Камчатка</h2>
-            <button
-              aria-label="Поставить лайк"
-              class="gallery__like-button"
-              type="button"
-            ></button>
+            <div class="gallery__like-counter">
+              <button
+                aria-label="Поставить лайк"
+                class="gallery__like-button"
+                type="button"
+              ></button>
+              <h3 class="gallery__like-number">0</h3>
+            </div>
           </div>
         </div>
       </template>
@@ -192,10 +195,10 @@
         />
         <figcaption class="popup__photo-name">Камчатка</figcaption>
         <button
-        aria-label="Закрыть окно"
-        id="full-photo_close_button"
-        class="popup__close-button"
-        type="button"
+          aria-label="Закрыть окно"
+          id="full-photo_close_button"
+          class="popup__close-button"
+          type="button"
         ></button>
       </figure>
     </div>

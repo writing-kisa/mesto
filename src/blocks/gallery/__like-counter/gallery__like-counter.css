@@ -1,0 +1,6 @@
+.gallery__like-counter {
+  display: flex;
+  flex-direction: column;
+  row-gap: 3px;
+  margin-top: 22px;
+}

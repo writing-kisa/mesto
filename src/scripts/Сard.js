@@ -1,7 +1,13 @@
 class Card {
-  constructor(name, link, { handleCardClick }, template) {
+  constructor(name, 
+    link, 
+    likes,
+    // cardId, 
+    { handleCardClick }, template) {
     this._name = name;
     this._link = link;
+    // this._id = cardId;
+    this._likes = likes.length; //передаем количество лайков = длину массива, отвечающего за лайки = цифру
     this._handleCardClick = handleCardClick; //эта функция открывает попап с картинкой при клике на карточку
     this._template = template;
   }
@@ -24,6 +30,9 @@ class Card {
     this._view.querySelector(".gallery__name").textContent = this._name;
     this._cardLink.src = this._link;
     this._cardLink.alt = this._name;
+
+    // console.log(this._view.querySelector(".gallery__like-number"));
+    this._view.querySelector(".gallery__like-number").textContent = this._likes;
 
     this._view
       .querySelector(".gallery__like-button")

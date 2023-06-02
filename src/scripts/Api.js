@@ -5,9 +5,9 @@ export default class Api {
     this._id = info.groupId;
   }
 
-  // checkRes() {
-  //   (res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`));
-  // }
+  checkRes(res) {
+    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
+  }
 
   getInfo() {
     return fetch(`${this._url}/${this._id}/users/me`, {
@@ -16,9 +16,7 @@ export default class Api {
         authorization: this._token,
         "Content-Type": "application/json",
       },
-    }).then((res) =>
-      res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
-    );
+    }).then(this.checkRes);
   }
 
   getInitialCards() {
@@ -27,9 +25,7 @@ export default class Api {
         authorization: this._token,
         "Content-Type": "application/json",
       },
-    }).then((res) =>
-      res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
-    );
+    }).then(this.checkRes);
   }
 
   changeUserInfo(newUserData) {
@@ -41,11 +37,9 @@ export default class Api {
       },
       body: JSON.stringify({
         name: newUserData.name,
-        about: newUserData.about
-      })
-    }).then((res) =>
-      res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
-    );
+        about: newUserData.about,
+      }),
+    }).then(this.checkRes);
   }
 
   addCard(card) {
@@ -57,11 +51,19 @@ export default class Api {
       },
       body: JSON.stringify({
         name: card.name,
-        link: card.link
-      })
-    }).then((res) =>
-      res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`)
-    );
+        link: card.link,
+      }),
+    }).then(this.checkRes);
+  }
+
+  likeCounter() {
+    return fetch(`${this._url}/${this._id}/cards`, {
+      method: "GET", //так как нам надо получить с сервера количество лайков
+      headers: {
+        authorization: this._token,
+        "Content-Type": "application/json",
+      },
+    }).then(this.checkRes);
   }
 
   // debug() {
@@ -69,14 +71,11 @@ export default class Api {
   //   console.log(`${this._url}/${this._id}/users/me`)
   // }
 
-  //   likeCard() {}
-
-  //   likeCounter() {}
-
   //   deleteCard() {}
 
   //   openPopup() {}
 
+  //   likeCard() {}
 
   //   changeUserAvatar() {}
 

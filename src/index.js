@@ -22,14 +22,35 @@ import PopupWithForm from "./scripts/PopupWithForm.js";
 import UserInfo from "./scripts/UserInfo.js";
 import Api from "./scripts/Api.js";
 
+const info = {
+  baseUrl: "https://mesto.nomoreparties.co/v1",
+  token: "72492c1e-f4dd-45b5-9419-ceb3c83aff61",
+  groupId: "cohort-66",
+};
+
+const api = new Api(info);
+
 const popupWithImage = new PopupWithImage(popupOpenFullPhotoSelector);
 popupWithImage.setEventListeners();
+
+api.likeCounter()
+  .then((res) => {
+    console.log(res);
+    const array = res;
+    array.forEach((item) => {
+      console.log("лайки ====>", item.likes.length)
+    })
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 const createCard = (item) => {
   //функция создания карточки
   const newCard = new Card(
     item.name,
     item.link,
+    item.likes,
     {
       handleCardClick: () => {
         popupWithImage.open(item);
@@ -41,13 +62,6 @@ const createCard = (item) => {
   return cardElement; //возвращаем карточку
 };
 
-const info = {
-  baseUrl: "https://mesto.nomoreparties.co/v1",
-  token: "72492c1e-f4dd-45b5-9419-ceb3c83aff61",
-  groupId: "cohort-66",
-};
-
-const api = new Api(info);
 
 api
   .getInitialCards()
@@ -140,13 +154,6 @@ api
 
 //========================================================
 
-// api.changeUserInfo() //нужно вызвать этот метод внутри функции, в которой мы значения инпутов присваиваем странице
-//   .then((res) => {
-//     console.log(res);
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
 
 //========================================================
 
