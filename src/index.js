@@ -33,18 +33,6 @@ const api = new Api(info);
 const popupWithImage = new PopupWithImage(popupOpenFullPhotoSelector);
 popupWithImage.setEventListeners();
 
-api.likeCounter()
-  .then((res) => {
-    console.log(res);
-    const array = res;
-    array.forEach((item) => {
-      console.log("лайки ====>", item.likes.length)
-    })
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
 const createCard = (item) => {
   //функция создания карточки
   const newCard = new Card(
@@ -154,9 +142,6 @@ api
 
 //========================================================
 
-
-//========================================================
-
 api.getAppInfo().then((args) => {
   // console.log(args)
   const [dataFromUserInfoPromise, dataFromCardsPromise] = args;
@@ -173,3 +158,16 @@ export {
   nameInput,
   bioInput,
 };
+
+
+// api.likeCounter()
+//   .then((res) => {
+//     console.log(res);
+//     const array = res;
+//     array.forEach((item) => {
+//       console.log("лайки ====>", item.likes.length)
+//     })
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
