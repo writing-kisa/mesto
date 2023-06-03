@@ -6,9 +6,7 @@ class Card {
     ownerCardId,
     cardId,
     myId,
-    { handleCardClick, 
-      handleDeleteCard 
-    },
+    { handleCardClick, handleDeleteCard },
     template
   ) {
     this._name = name;
@@ -36,17 +34,6 @@ class Card {
     }
   }
 
-  //метод, который навешивает слушатель на кнопки с корзиной на те карточки, где корзина есть
-  _deleteHandler() {
-    if (this._view.querySelector(".gallery__delete-button")) {
-      this._view.querySelector(".gallery__delete-button").addEventListener("click", this._handleDeleteCard);
-    }
-  }
-
-  // _deleteHandler = () => {
-  //   this._view.remove();
-  // };
-
   render = () => {
     // console.log(this._template);
     this._view = this._template.cloneNode(true).children[0]; // где card._template это темплейт того объекта
@@ -62,12 +49,15 @@ class Card {
       .querySelector(".gallery__like-button")
       .addEventListener("click", this._likeHandler);
 
+    console.log(this._view.querySelector(".gallery__delete-button"));
+    console.log("в зис вью в рендере =====> ", this._view);
+    this._view
+      .querySelector(".gallery__delete-button")
+      .addEventListener("click", this._handleDeleteCard);
+
     this._deleteTrashCanForOtherUsersCards();
 
-    console.log(this._view.querySelector(".gallery__delete-button"));
-    // this._view.querySelector(".gallery__delete-button").addEventListener("click", this._handleDeleteCard);
-    
-    this._deleteHandler();
+    // this._deleteHandler();
 
     this._view
       .querySelector(".gallery__photo")
@@ -80,10 +70,12 @@ class Card {
 export default Card;
 
 
+  // _deleteHandler = () => {
+  //   this._view.remove();
+  // };
 
-    // console.log(this._likes); //верно отображается
-    // console.log(this._ownerCardId); //верно отображается
-    // console.log(this._cardId);
+// console.log(this._likes); //верно отображается
+// console.log(this._ownerCardId); //верно отображается
+// console.log(this._cardId);
 
-    // console.log("мой айди внутри класса кард", this._myId); // все корректно
-
+// console.log("мой айди внутри класса кард", this._myId); // все корректно

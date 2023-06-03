@@ -56,12 +56,14 @@ export default class Api {
     }).then(this.checkRes);
   }
 
+  deleteCard() {
+    
+  }
+
   // debug() {
   //   console.log("DEBUGGING API CLASS")
   //   console.log(`${this._url}/${this._id}/users/me`)
   // }
-
-  //   deleteCard() {}
 
   //   openPopup() {}
 
@@ -75,13 +77,12 @@ export default class Api {
   }
 }
 
-
-  // likeCounter() {
-  //   return fetch(`${this._url}/${this._id}/cards`, {
-  //     method: "GET", //так как нам надо получить с сервера количество лайков
-  //     headers: {
-  //       authorization: this._token,
-  //       "Content-Type": "application/json",
-  //     },
-  //   }).then(this.checkRes);
-  // }
+// likeCounter() {
+//   return fetch(`${this._url}/${this._id}/cards`, {
+//     method: "GET", //так как нам надо получить с сервера количество лайков
+//     headers: {
+//       authorization: this._token,
+//       "Content-Type": "application/json",
+//     },
+//   }).then(this.checkRes);
+// }
