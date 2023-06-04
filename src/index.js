@@ -13,7 +13,7 @@ import {
   buttonAddCard,
   cardTemplate,
   cardListSection,
-  popupOpenFullPhotoSelector
+  popupOpenFullPhotoSelector,
 } from "./scripts/utils.js";
 import "./pages/index.css";
 import Section from "./scripts/Section.js";
@@ -39,6 +39,8 @@ popupWithImage.setEventListeners();
 const popupDeleteCardSelector = "#popup-before-delete";
 const popupDeleteCard = new PopupWithSubmitForm(popupDeleteCardSelector);
 
+popupDeleteCard.setEventListeners();
+
 const createCard = (item) => {
   //функция создания карточки
   const newCard = new Card(
@@ -55,18 +57,30 @@ const createCard = (item) => {
 
       handleDeleteCard: () => {
         popupDeleteCard.open();
-        popupDeleteCard.setSubmitAction(() => {   //здесь будет вызываться api delete card
-          console.log('pikpik') //почему-то вызывается сразу как открывается попап, а должен после нажатия на соответствующую кнопку
-        })
-        popupDeleteCard.setEventListeners();
-      }
+        popupDeleteCard.setSubmitAction(() => {
+          api
+            .deleteCard(item._id)
+            .then(() => {
+              newCard.deleteHandler();
+              popupDeleteCard.close();
+            })
+            .catch((err) => console.log(err));
+        });
+      },
+
+      handleLike: () => {
+        api
+          .likeCard(item._id)
+          .then((res) => console.log("внутри функции хэндл лайк", res))
+          .catch((err) => console.log(err));
+      },
+      handleDislike: () => {},
     },
     cardTemplate
   );
   const cardElement = newCard.render(); //отрисовываем карточку
   return cardElement; //возвращаем карточку
 };
-
 
 api
   .getInitialCards()
@@ -99,28 +113,17 @@ const profileInfoSelectors = {
 
 const userInfo = new UserInfo(profileInfoSelectors);
 
-// экземпляр попапа с формой для добавления карточки через нее
-
-// const popupAddNewCardForm = new PopupWithForm(popupAddCardSelector, {
-//   handleSubmit: (data) => {
-//     const cardElement = createCard(data);
-//     cardList.addItem(cardElement);
-//     api.addCard(data)
-//       .then(res => console.log(res))
-//       .catch(err => console.log(err))
-//   },
-// });
-
 const popupAddNewCardForm = new PopupWithForm(popupAddCardSelector, {
   handleSubmit: (data) => {
-    api.addCard(data)
+    api
+      .addCard(data)
       .then((res) => {
-        console.log(res);
-        console.log("тут должен быть айдишник автора новой карточки", res.owner._id); //все верно
+        // console.log(res);
+        // console.log("тут должен быть айдишник автора новой карточки ====>", res.owner._id);
         const cardElement = createCard(res);
         cardList.addItem(cardElement);
       })
-      .catch(err => console.log(err))
+      .catch((err) => console.log(err));
   },
 });
 
@@ -130,7 +133,8 @@ popupAddNewCardForm.setEventListeners();
 const popupEditNameForm = new PopupWithForm(popupEditNameSelector, {
   handleSubmit: (data) => {
     userInfo.setUserInfo(data);
-    api.changeUserInfo(data)
+    api
+      .changeUserInfo(data)
       .then((res) => {
         console.log(res);
       })
@@ -142,17 +146,27 @@ const popupEditNameForm = new PopupWithForm(popupEditNameSelector, {
 
 popupEditNameForm.setEventListeners();
 
-buttonEditName.addEventListener("click", function() {
+buttonEditName.addEventListener("click", function () {
   popupEditNameForm.open();
   popupEditNameForm.setInputValues(userInfo.getUserInfo());
   nameFormValidator.resetFormValidation();
 });
 
-buttonAddCard.addEventListener("click", function() {
+buttonAddCard.addEventListener("click", function () {
   popupAddNewCardForm.open();
   cardFormValidator.resetFormValidation();
 });
 
+// popupDeleteCard.open(); //при нажатии на корзину открывается попап ВЕРНО!
+// popupDeleteCard.setSubmitAction(() => { //вызывается метод попапа-функция, которую мы пишем ниже, здесь будет вызываться api delete card и после удаления закрываться попап
+//   // console.log(item._id)
+//   api.deleteCard(item._id)
+//     .then(res => console.log(res))
+//     .catch(err => console.log(err)); //ВЕРНО!
+//     // console.log(item);
+// })
+// }
+// popupDeleteCard.setEventListeners();
 
 // function deleteCardSubmit(item) {
 //   item.remove()
@@ -190,8 +204,8 @@ api
 api.getAppInfo().then((args) => {
   // console.log(args)
   const [dataFromUserInfoPromise, dataFromCardsPromise] = args;
-    // console.log("здесь покажется инфа пользователя ===>", dataFromUserInfoPromise);
-    // console.log("здесь покажется id пользователя ===>", dataFromUserInfoPromise._id);
+  // console.log("здесь покажется инфа пользователя ===>", dataFromUserInfoPromise);
+  // console.log("здесь покажется id пользователя ===>", dataFromUserInfoPromise._id);
   myId = dataFromUserInfoPromise._id;
   userInfo.setUserInfo(dataFromUserInfoPromise);
   cardList.renderItems(dataFromCardsPromise);
@@ -207,7 +221,6 @@ export {
   bioInput,
 };
 
-
 // api.likeCounter()
 //   .then((res) => {
 //     console.log(res);
@@ -219,3 +232,15 @@ export {
 //   .catch((err) => {
 //     console.log(err);
 //   });
+
+// экземпляр попапа с формой для добавления карточки через нее
+
+// const popupAddNewCardForm = new PopupWithForm(popupAddCardSelector, {
+//   handleSubmit: (data) => {
+//     const cardElement = createCard(data);
+//     cardList.addItem(cardElement);
+//     api.addCard(data)
+//       .then(res => console.log(res))
+//       .catch(err => console.log(err))
+//   },
+// });

@@ -56,18 +56,32 @@ export default class Api {
     }).then(this.checkRes);
   }
 
-  deleteCard() {
-    
+  deleteCard(cardId) {
+    return fetch(`${this._url}/${this._id}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: {
+        authorization: this._token,
+      },
+    }).then(this.checkRes);
   }
 
-  // debug() {
-  //   console.log("DEBUGGING API CLASS")
-  //   console.log(`${this._url}/${this._id}/users/me`)
-  // }
+  likeCard(cardId) {
+    return fetch(`${this._url}/${this._id}/cards/${cardId}/likes`, {
+      method: "PUT",
+      headers: {
+        authorization: this._token,
+      },
+    }).then(this.checkRes);
+  }
 
-  //   openPopup() {}
-
-  //   likeCard() {}
+  deleteLikeCard() {
+    return fetch(`${this._url}/${this._id}/cards/${cardId}/likes`, {
+      method: "DELETE",
+      headers: {
+        authorization: this._token,
+      },
+    }).then(this.checkRes);
+  }
 
   //   changeUserAvatar() {}
 
