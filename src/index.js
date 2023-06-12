@@ -71,10 +71,25 @@ const createCard = (item) => {
       handleLike: () => {
         api
           .likeCard(item._id)
-          .then((res) => console.log("внутри функции хэндл лайк", res))
+          // .then(res => console.log("внутри айпи на лайк карточки", res))
+          .then((res) => {
+            console.log("внутри хэндл LIKE индекс джс")
+            newCard.setLikeInfo(res);
+          })
           .catch((err) => console.log(err));
       },
-      handleDislike: () => {},
+
+      handleDislike: () => {
+        api
+          .deleteLikeCard(item._id)
+          // .then(res => console.log("внутри айпи на ДИЗлайк карточки", res))
+          .then((res) => {
+            console.log("внутри хэндл дизлайк индекс джс")
+            newCard.setLikeInfo(res);
+            // console.log("внутри хэндл дизлайк индекс джс")
+          })
+          .catch((err) => console.log(err));
+      },
     },
     cardTemplate
   );
