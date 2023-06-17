@@ -35,7 +35,7 @@ class Card {
 
   debug() {
     const result = this._isLiked();
-    console.log(result) //выводит значение булиан!!!!
+    console.log(result) 
   }
 
   _heartColorHandler() {
