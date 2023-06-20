@@ -83,7 +83,17 @@ export default class Api {
     }).then(this.checkRes);
   }
 
-  //   changeUserAvatar() {}
+  changeUserAvatar() {
+    return fetch(`${this._url}/${this._id}/users/me/avatar`, {
+      method: "PATCH",
+      headers: {
+        authorization: this._token,
+      },
+      body: JSON.stringify({
+        avatar: userAvatar,
+      }),
+    }).then(this.checkRes);
+  }
 
   getAppInfo() {
     // дополнительный метод, который будет возвращать Promise.all с отработкой двух методов - получение всех карточек и получение данных пользователя

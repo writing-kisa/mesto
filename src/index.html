@@ -19,16 +19,23 @@
     <main class="main">
       <section class="profile">
         <div class="profile__main">
+          <div class="profile__avatar-block">
           <img
             class="profile__avatar"
             src="<%=require('./images/portrait_jack-iv-kusto.jpg')%>"
             alt="аватарка пользователя"
           />
+          <button 
+            aria-label="Изменить аватарку"
+            class="profile__button-change-avatar"
+            type="button">
+          </button>
+          </div>
           <div class="profile__main-info">
             <div class="profile__name-button">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
               <button
-                aria-label="Редактировать"
+                aria-label="Редактировать имя"
                 class="profile__button-change-name"
                 type="button"
               ></button>
