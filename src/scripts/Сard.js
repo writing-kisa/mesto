@@ -1,17 +1,7 @@
 class Card {
   constructor(
-    name,
-    link,
-    likes,
-    ownerCardId,
-    cardId,
-    myId,
-    { 
-      handleCardClick, 
-      handleDeleteCard,
-      handleLike,
-      handleDislike
-      },
+    name, link, likes, ownerCardId, cardId, myId,
+    { handleCardClick, handleDeleteCard, handleLike, handleDislike },
     template
   ) {
     this._name = name;
@@ -27,41 +17,6 @@ class Card {
     this._template = template;
   }
 
-  _isLiked() { // проверяет, есть ли мой лайк на карточке
-    const isLikedByMe = this._likes.some(owner => { return owner._id === this._myId} );
-    // console.log("inside isLiked ====> likes", this._likes);
-    return isLikedByMe;
-  }
-
-  debug() {
-    const result = this._isLiked();
-    console.log(result) 
-  }
-
-  _heartColorHandler() {
-    if (this._isLiked()) { //проверять, есть ли среди лайков тот, который был поставлен текущим пользователем и исходя из этого выставлять нужный класс индикатору лайка, то есть this.classList.add("gallery__like-button_able");
-      this._view.querySelector(".gallery__like-button").classList.add("gallery__like-button_able"); // color heart
-      console.log("вызов внутри _heartColorHandler должно сердечко стать черным") //нашла ошибку, эта строчка не выводится при нажатии на светлое сердечко = сюда функция не попадает!
-    } else {
-      this._view.querySelector(".gallery__like-button").classList.remove("gallery__like-button_able"); // remove color
-      console.log("вызов внутри _heartColorHandler должно сердечко стать светлым")
-    }
-  }
-
-  _likeCounter() { //будет отвечать за обновление счетчика лайков, за визуальное отображение лайков
-    console.log("вызов внутри _likeCounter 11111")
-    this._view.querySelector(".gallery__like-number").textContent = this._likes.length; //строка выставлять нужное количество лайков в счетчик - готово
-    this._heartColorHandler();
-    console.log("вызов внутри _likeCounter 22222")
-    console.log("вызов внутри _likeCounter 33333")
-  }
-
-  setLikeInfo(card) { //method B
-    this._likes.length = card.likes.length; //- обновлять массив лайков в свойствах класса 
-    this._likeCounter();
-    // console.log("вызов публичного метода сетлайк инфо")
-  }
-
   //приватный метод, который сравнивает айди оунера карточки с моим айди, для того, чтобы я могла удалять только свои карточки
   _deleteTrashCanForOtherUsersCards() {
     if (this._ownerCardId !== this._myId) {
@@ -72,6 +27,30 @@ class Card {
   deleteHandler = () => {
     this._view.remove();
   };
+  
+  _isLiked() { //метод, который показывает, лайкнута карточка или нет
+    return this._likes.some(cardLike => cardLike._id === this._myId);
+  }
+
+  _colorHeartHandler() {
+    if (this._isLiked()) {
+      this._view.querySelector(".gallery__like-button").classList.add("gallery__like-button_able");
+    } else {
+      this._view.querySelector(".gallery__like-button").classList.remove("gallery__like-button_able");
+    }
+  }
+
+  //приватный метод, который отвечает за количество лайков и цвет сердечка на странице и отрисовывает
+  _likeCounter() {
+    this._view.querySelector('.gallery__like-number').textContent = this._likes.length;
+    this._colorHeartHandler();
+  }
+
+  setLikeInfo(card) { //принимает данные карточки после отправки api запросов, включая лайки, она должна отображать новые данные на странице
+    this._likes = card.likes; //здесь обновляем весь массив лайков, а не только длину массива, в этом была моя ошибка, потому что это не отображает реальных данных
+    this._likeCounter();
+  }
+
 
   render = () => {
     this._view = this._template.cloneNode(true).children[0]; // где card._template это темплейт того объекта
@@ -83,17 +62,13 @@ class Card {
 
     this._likeCounter();
 
-    this.debug();
-
     this._view
       .querySelector(".gallery__like-button")
       .addEventListener("click", () => {
-        if (this._isLiked()) { //если при клике на сердечко карточка лайкнута, то убираем лайк
-          console.log("вызываю хэндл дизлайк")
-          this._handleDislike()
-        } else { //но если не лайкнута, то ставим
-          console.log("вызываю хэндл ЛАЙК")
+        if (!this._isLiked()) {
           this._handleLike();
+        } else {
+          this._handleDislike();
         }
       });
 

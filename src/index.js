@@ -27,8 +27,8 @@ let myId = null;
 
 const info = {
   baseUrl: "https://mesto.nomoreparties.co/v1",
-  token: "72492c1e-f4dd-45b5-9419-ceb3c83aff61",
-  groupId: "cohort-66",
+  token: "a4986e69-919a-4d96-95e3-0fca16f812eb",
+  groupId: "cohort-69",
 };
 
 const api = new Api(info);
@@ -71,9 +71,9 @@ const createCard = (item) => {
       handleLike: () => {
         api
           .likeCard(item._id)
-          // .then(res => console.log("внутри айпи на лайк карточки", res))
+          // .then(res => console.log("внутри айпи на лайк карточки", res)) // покажи инфу о лайках и карточке, на которую нажали
           .then((res) => {
-            console.log("внутри хэндл LIKE индекс джс")
+            console.log("внутри хэндл LIKE индекс джс RES 1111", res)
             newCard.setLikeInfo(res);
           })
           .catch((err) => console.log(err));
@@ -82,11 +82,9 @@ const createCard = (item) => {
       handleDislike: () => {
         api
           .deleteLikeCard(item._id)
-          // .then(res => console.log("внутри айпи на ДИЗлайк карточки", res))
           .then((res) => {
-            console.log("внутри хэндл дизлайк индекс джс")
+            console.log("внутри хэндл DISLIKE индекс джс RES 1111", res)
             newCard.setLikeInfo(res);
-            // console.log("внутри хэндл дизлайк индекс джс")
           })
           .catch((err) => console.log(err));
       },
@@ -236,26 +234,23 @@ export {
   bioInput,
 };
 
-// api.likeCounter()
-//   .then((res) => {
-//     console.log(res);
-//     const array = res;
-//     array.forEach((item) => {
-//       console.log("лайки ====>", item.likes.length)
-//     })
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
+        // api
+        //   .likeCard(item._id)
+        //   // .then(res => console.log("внутри айпи на лайк карточки", res))
+        //   .then((res) => {
+        //     console.log("внутри хэндл LIKE индекс джс RES", res)
+        //     newCard.setLikeInfo(res);
+        //   })
+        //   .catch((err) => console.log(err));
 
-// экземпляр попапа с формой для добавления карточки через нее
 
-// const popupAddNewCardForm = new PopupWithForm(popupAddCardSelector, {
-//   handleSubmit: (data) => {
-//     const cardElement = createCard(data);
-//     cardList.addItem(cardElement);
-//     api.addCard(data)
-//       .then(res => console.log(res))
-//       .catch(err => console.log(err))
-//   },
-// });
+                // api
+        //   .deleteLikeCard(item._id)
+        //   // .then(res => console.log("внутри айпи на ДИЗлайк карточки", res))
+        //   .then((res) => {
+        //     console.log("внутри хэндл дизлайк индекс джс RES", res)
+        //     newCard.setLikeInfo(res);
+        //     // console.log("внутри хэндл дизлайк индекс джс")
+        //   })
+        //   .catch((err) => console.log(err));
+
