@@ -1,3 +1,26 @@
 .profile__avatar-block {
-    
+  position: relative;
+  height: 120px;
+}
+
+.profile__avatar-block::before {
+  content: "";
+  position: absolute;
+  background-color: rgba(0, 0, 0);
+  background-position: center;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  opacity: 0;
+  /* display: block; */
+}
+
+.profile__avatar-block:hover:before {
+  opacity: 0.8;
+  transition: 0.6s;
+}
+
+.profile__avatar-block:hover .profile__button-change-avatar{
+  display: block;
 }
