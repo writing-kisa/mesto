@@ -159,14 +159,14 @@ const popupEditNameForm = new PopupWithForm(popupEditNameSelector, {
 
 popupEditNameForm.setEventListeners();
 
-// экземпляр попапа с формой для изменения аватара пользователя
+// экземпляр попапа с формой для изменения АВАТАРА пользователя
 const popupChangeAvatarForm = new PopupWithForm(popupChangeAvatarSelector, {
   handleSubmit: (data) => {  //колбэк сабмита формы
-    console.log("делаю консоль лог внутри хэндл сабмита ===>", data) // сюда попадает объект с ссылкой для аватара, которую я ввела в поле, в таком виде: {avatar: 'https://images.unsplash.com/photo-1545733099-15248…fDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2788&q=80'}
-    console.log("делаю консоль лог внутри хэндл сабмита ===>", data.avatar) // здесь я получаю ту самую ссылку, которую я вставила в поле
-    userInfo.setUserAvatar(data.avatar);
+    // console.log("делаю консоль лог внутри хэндл сабмита ===>", data) // сюда попадает объект с ссылкой для аватара, которую я ввела в поле, в таком виде: {avatar: 'https://images.unsplash.com/photo-1545733099-15248…fDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2788&q=80'}
+    // console.log("делаю консоль лог внутри хэндл сабмита ===>", data.avatar) // здесь я получаю ту самую ссылку, которую я вставила в поле
+    userInfo.setUserInfo(data);
     api.changeUserAvatar(data.avatar)
-      .then(res => console.log(res))
+      .then(res => console.log("внутри запроса айпи на изменение аватара ===>", res))
       .catch((err) => console.log(err));
   }
 });

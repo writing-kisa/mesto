@@ -11,7 +11,7 @@ export default class Api {
 
   getInfo() {
     return fetch(`${this._url}/${this._id}/users/me`, {
-      method: "GET",
+      // method: "GET",
       headers: {
         authorization: this._token,
         "Content-Type": "application/json",
@@ -88,7 +88,7 @@ export default class Api {
       method: "PATCH",
       headers: {
         authorization: this._token,
-        "Content-Type": "application/json",
+        "Content-type": "application/json",
       },
       body: JSON.stringify({
         avatar: avatarLink,
@@ -101,13 +101,3 @@ export default class Api {
     return Promise.all([this.getInfo(), this.getInitialCards()]);
   }
 }
-
-// likeCounter() {
-//   return fetch(`${this._url}/${this._id}/cards`, {
-//     method: "GET", //так как нам надо получить с сервера количество лайков
-//     headers: {
-//       authorization: this._token,
-//       "Content-Type": "application/json",
-//     },
-//   }).then(this.checkRes);
-// }
