@@ -14,6 +14,7 @@ import {
   cardTemplate,
   cardListSection,
   popupOpenFullPhotoSelector,
+  buttonChangeAvatar
 } from "./scripts/utils.js";
 import "./pages/index.css";
 import Section from "./scripts/Section.js";
@@ -117,6 +118,16 @@ const cardList = new Section(
 
 const popupEditNameSelector = "#edit_profile";
 const popupAddCardSelector = "#add_card";
+const popupChangeAvatarSelector = "#change-avatar";
+
+// экземпляр попапа с формой для изменения аватара пользователя
+const popupChangeAvatarForm = new PopupWithForm(popupChangeAvatarSelector, {
+  handleSubmit: (data) => {
+    console.log(data)
+  }
+});
+
+popupChangeAvatarForm.setEventListeners();
 
 const profileInfoSelectors = {
   nameSelector: ".profile__name",
@@ -159,49 +170,26 @@ const popupEditNameForm = new PopupWithForm(popupEditNameSelector, {
 
 popupEditNameForm.setEventListeners();
 
-buttonEditName.addEventListener("click", function () {
+buttonEditName.addEventListener("click", function() {
   popupEditNameForm.open();
   popupEditNameForm.setInputValues(userInfo.getUserInfo());
   nameFormValidator.resetFormValidation();
 });
 
-buttonAddCard.addEventListener("click", function () {
+buttonAddCard.addEventListener("click", function() {
   popupAddNewCardForm.open();
   cardFormValidator.resetFormValidation();
 });
 
-// popupDeleteCard.open(); //при нажатии на корзину открывается попап ВЕРНО!
-// popupDeleteCard.setSubmitAction(() => { //вызывается метод попапа-функция, которую мы пишем ниже, здесь будет вызываться api delete card и после удаления закрываться попап
-//   // console.log(item._id)
-//   api.deleteCard(item._id)
-//     .then(res => console.log(res))
-//     .catch(err => console.log(err)); //ВЕРНО!
-//     // console.log(item);
-// })
-// }
-// popupDeleteCard.setEventListeners();
-
-// function deleteCardSubmit(item) {
-//   item.remove()
-// }
-// popupDeleteCard.setSubmitAction(deleteCardSubmit);
-// popupDeleteCard.setEventListeners();
-
-// const buttonDeleteCard = document.querySelectorAll(".gallery__delete-button");
-
-// console.log(buttonDeleteCard)
-
-// // buttonDeleteCard.addEventListener("click", function() {
-// //   popupDeleteCard.open();
-// // })
+buttonChangeAvatar.addEventListener("click", function() {
+  popupChangeAvatarForm.open();
+})
 
 const nameFormValidator = new FormValidator(options, formEditName);
 nameFormValidator.enableValidation();
 
 const cardFormValidator = new FormValidator(options, formSubmitNewCard);
 cardFormValidator.enableValidation();
-
-// api.debug()
 
 api
   .getInfo()
@@ -254,3 +242,31 @@ export {
         //   })
         //   .catch((err) => console.log(err));
 
+
+        // popupDeleteCard.open(); //при нажатии на корзину открывается попап ВЕРНО!
+// popupDeleteCard.setSubmitAction(() => { //вызывается метод попапа-функция, которую мы пишем ниже, здесь будет вызываться api delete card и после удаления закрываться попап
+//   // console.log(item._id)
+//   api.deleteCard(item._id)
+//     .then(res => console.log(res))
+//     .catch(err => console.log(err)); //ВЕРНО!
+//     // console.log(item);
+// })
+// }
+// popupDeleteCard.setEventListeners();
+
+// function deleteCardSubmit(item) {
+//   item.remove()
+// }
+// popupDeleteCard.setSubmitAction(deleteCardSubmit);
+// popupDeleteCard.setEventListeners();
+
+// const buttonDeleteCard = document.querySelectorAll(".gallery__delete-button");
+
+// console.log(buttonDeleteCard)
+
+// // buttonDeleteCard.addEventListener("click", function() {
+// //   popupDeleteCard.open();
+// // })
+
+
+// api.debug()

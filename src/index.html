@@ -230,5 +230,47 @@
       </div>
     </div>
 
+
+    <div id="change-avatar" class="popup">
+      <div class="popup__container">
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form
+          class="form"
+          id="change-avatar_form"
+          method="post"
+          name="change-avatar_form"
+          novalidate
+        >
+          <fieldset class="form__set">
+            <label class="form__field">
+              <input
+                name="link"
+                type="url"
+                id="avatar-link"
+                class="form__text"
+                placeholder="ссылка на картинку"
+                required
+              />
+              <span class="card-link-error form__text-error"></span>
+            </label>
+            <button
+              aria-label="Сохранить"
+              id="avatar-link_save_button"
+              class="form__save-button"
+              type="submit"
+            >
+              Сохранить
+            </button>
+          </fieldset>
+        </form>
+        <button
+          aria-label="Закрыть окно"
+          id="avatar-link_close_button"
+          class="popup__close-button"
+          type="button"
+        ></button>
+      </div>
+    </div>
+
   </body>
 </html>

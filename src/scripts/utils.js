@@ -11,6 +11,7 @@ const buttonAddCard = document.querySelector(".profile__button-add-photo");
 const cardTemplate = document.querySelector("#cards").content;
 const cardListSection = ".gallery";
 const popupOpenFullPhotoSelector = "#full-size-popup";
+const buttonChangeAvatar = document.querySelector(".profile__button-change-avatar");
 
 export {
   popupFullPhoto,
@@ -25,4 +26,5 @@ export {
   cardTemplate,
   cardListSection,
   popupOpenFullPhotoSelector,
+  buttonChangeAvatar
 };

@@ -8,15 +8,10 @@
   height: 26px;
   border: none;
   padding: 0;
-  cursor: pointer;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   display: none;
+  cursor: pointer;
 }
-
-/* .profile__button-change-avatar:hover {
-    display: block;
-    background-color: rgba(0, 0, 0, 0.8);
-  } */
