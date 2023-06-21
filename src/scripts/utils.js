@@ -12,6 +12,7 @@ const cardTemplate = document.querySelector("#cards").content;
 const cardListSection = ".gallery";
 const popupOpenFullPhotoSelector = "#full-size-popup";
 const buttonChangeAvatar = document.querySelector(".profile__button-change-avatar");
+const formChangeAvatar = document.querySelector("#change-avatar_form");
 
 export {
   popupFullPhoto,
@@ -26,5 +27,6 @@ export {
   cardTemplate,
   cardListSection,
   popupOpenFullPhotoSelector,
-  buttonChangeAvatar
+  buttonChangeAvatar,
+  formChangeAvatar
 };

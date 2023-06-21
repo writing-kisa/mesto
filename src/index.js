@@ -14,7 +14,8 @@ import {
   cardTemplate,
   cardListSection,
   popupOpenFullPhotoSelector,
-  buttonChangeAvatar
+  buttonChangeAvatar,
+  formChangeAvatar
 } from "./scripts/utils.js";
 import "./pages/index.css";
 import Section from "./scripts/Section.js";
@@ -193,6 +194,9 @@ nameFormValidator.enableValidation();
 
 const cardFormValidator = new FormValidator(options, formSubmitNewCard);
 cardFormValidator.enableValidation();
+
+const avatarFormValidator = new FormValidator(options, formChangeAvatar);
+avatarFormValidator.enableValidation();
 
 api
   .getInfo()
