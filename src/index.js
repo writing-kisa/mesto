@@ -42,8 +42,8 @@ const popupDeleteCard = new PopupWithSubmitForm(popupDeleteCardSelector);
 
 popupDeleteCard.setEventListeners();
 
+//функция создания карточки
 const createCard = (item) => {
-  //функция создания карточки
   const newCard = new Card(
     item.name,
     item.link,
@@ -107,8 +107,7 @@ api
 
 const cardList = new Section(
   {
-    renderer: (element) => {
-      // функция, которая отвечает за создание и отрисовку данных на странице
+    renderer: (element) => { // функция, которая отвечает за создание и отрисовку данных на странице
       const cardElement = createCard(element);
       cardList.addItem(cardElement);
     },
@@ -120,15 +119,6 @@ const popupEditNameSelector = "#edit_profile";
 const popupAddCardSelector = "#add_card";
 const popupChangeAvatarSelector = "#change-avatar";
 
-// экземпляр попапа с формой для изменения аватара пользователя
-const popupChangeAvatarForm = new PopupWithForm(popupChangeAvatarSelector, {
-  handleSubmit: (data) => {
-    console.log(data)
-  }
-});
-
-popupChangeAvatarForm.setEventListeners();
-
 const profileInfoSelectors = {
   nameSelector: ".profile__name",
   bioSelector: ".profile__bio",
@@ -137,13 +127,12 @@ const profileInfoSelectors = {
 
 const userInfo = new UserInfo(profileInfoSelectors);
 
+// экземпляр попапа с формой для добавления новой карточки
 const popupAddNewCardForm = new PopupWithForm(popupAddCardSelector, {
   handleSubmit: (data) => {
     api
       .addCard(data)
       .then((res) => {
-        // console.log(res);
-        // console.log("тут должен быть айдишник автора новой карточки ====>", res.owner._id);
         const cardElement = createCard(res);
         cardList.addItem(cardElement);
       })
@@ -169,6 +158,20 @@ const popupEditNameForm = new PopupWithForm(popupEditNameSelector, {
 });
 
 popupEditNameForm.setEventListeners();
+
+// экземпляр попапа с формой для изменения аватара пользователя
+const popupChangeAvatarForm = new PopupWithForm(popupChangeAvatarSelector, {
+  handleSubmit: (data) => {  //колбэк сабмита формы
+    console.log("делаю консоль лог внутри хэндл сабмита ===>", data) // сюда попадает объект с ссылкой для аватара, которую я ввела в поле, в таком виде: {avatar: 'https://images.unsplash.com/photo-1545733099-15248…fDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2788&q=80'}
+    console.log("делаю консоль лог внутри хэндл сабмита ===>", data.avatar) // здесь я получаю ту самую ссылку, которую я вставила в поле
+    userInfo.setUserAvatar(data.avatar);
+    api.changeUserAvatar(data.avatar)
+      .then(res => console.log(res))
+      .catch((err) => console.log(err));
+  }
+});
+
+popupChangeAvatarForm.setEventListeners();
 
 buttonEditName.addEventListener("click", function() {
   popupEditNameForm.open();
@@ -200,13 +203,9 @@ api
     console.log(err);
   });
 
-//========================================================
 
 api.getAppInfo().then((args) => {
-  // console.log(args)
   const [dataFromUserInfoPromise, dataFromCardsPromise] = args;
-  // console.log("здесь покажется инфа пользователя ===>", dataFromUserInfoPromise);
-  // console.log("здесь покажется id пользователя ===>", dataFromUserInfoPromise._id);
   myId = dataFromUserInfoPromise._id;
   userInfo.setUserInfo(dataFromUserInfoPromise);
   cardList.renderItems(dataFromCardsPromise);
@@ -221,52 +220,3 @@ export {
   nameInput,
   bioInput,
 };
-
-        // api
-        //   .likeCard(item._id)
-        //   // .then(res => console.log("внутри айпи на лайк карточки", res))
-        //   .then((res) => {
-        //     console.log("внутри хэндл LIKE индекс джс RES", res)
-        //     newCard.setLikeInfo(res);
-        //   })
-        //   .catch((err) => console.log(err));
-
-
-                // api
-        //   .deleteLikeCard(item._id)
-        //   // .then(res => console.log("внутри айпи на ДИЗлайк карточки", res))
-        //   .then((res) => {
-        //     console.log("внутри хэндл дизлайк индекс джс RES", res)
-        //     newCard.setLikeInfo(res);
-        //     // console.log("внутри хэндл дизлайк индекс джс")
-        //   })
-        //   .catch((err) => console.log(err));
-
-
-        // popupDeleteCard.open(); //при нажатии на корзину открывается попап ВЕРНО!
-// popupDeleteCard.setSubmitAction(() => { //вызывается метод попапа-функция, которую мы пишем ниже, здесь будет вызываться api delete card и после удаления закрываться попап
-//   // console.log(item._id)
-//   api.deleteCard(item._id)
-//     .then(res => console.log(res))
-//     .catch(err => console.log(err)); //ВЕРНО!
-//     // console.log(item);
-// })
-// }
-// popupDeleteCard.setEventListeners();
-
-// function deleteCardSubmit(item) {
-//   item.remove()
-// }
-// popupDeleteCard.setSubmitAction(deleteCardSubmit);
-// popupDeleteCard.setEventListeners();
-
-// const buttonDeleteCard = document.querySelectorAll(".gallery__delete-button");
-
-// console.log(buttonDeleteCard)
-
-// // buttonDeleteCard.addEventListener("click", function() {
-// //   popupDeleteCard.open();
-// // })
-
-
-// api.debug()

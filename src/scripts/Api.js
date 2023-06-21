@@ -82,15 +82,16 @@ export default class Api {
       },
     }).then(this.checkRes);
   }
-
-  changeUserAvatar() {
+  
+  changeUserAvatar(avatarLink) {
     return fetch(`${this._url}/${this._id}/users/me/avatar`, {
       method: "PATCH",
       headers: {
         authorization: this._token,
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        avatar: userAvatar,
+        avatar: avatarLink,
       }),
     }).then(this.checkRes);
   }
