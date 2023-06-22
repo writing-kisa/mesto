@@ -43,6 +43,7 @@
 @import url(../blocks/form/__text/_type/form__text_type_error.css);
 @import url(../blocks/form/__text-error/form__text-error.css);
 @import url(../blocks/form/__text-error/_visible/form__text-error_visible.css);
+@import url(../blocks/popup/__sure-button/popup__sure-button.css);
 
 @import url(../blocks/popup/__full-size-photo/popup__full-size-photo.css);
 @import url(../blocks/popup/__photo-name/popup__photo-name.css);
