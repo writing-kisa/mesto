@@ -15,7 +15,7 @@ import {
   cardListSection,
   popupOpenFullPhotoSelector,
   buttonChangeAvatar,
-  formChangeAvatar
+  formChangeAvatar,
 } from "./scripts/utils.js";
 import "./pages/index.css";
 import Section from "./scripts/Section.js";
@@ -75,7 +75,7 @@ const createCard = (item) => {
           .likeCard(item._id)
           // .then(res => console.log("внутри айпи на лайк карточки", res)) // покажи инфу о лайках и карточке, на которую нажали
           .then((res) => {
-            console.log("внутри хэндл LIKE индекс джс RES 1111", res)
+            console.log("внутри хэндл LIKE индекс джс RES 1111", res);
             newCard.setLikeInfo(res);
           })
           .catch((err) => console.log(err));
@@ -85,7 +85,7 @@ const createCard = (item) => {
         api
           .deleteLikeCard(item._id)
           .then((res) => {
-            console.log("внутри хэндл DISLIKE индекс джс RES 1111", res)
+            console.log("внутри хэндл DISLIKE индекс джс RES 1111", res);
             newCard.setLikeInfo(res);
           })
           .catch((err) => console.log(err));
@@ -108,7 +108,8 @@ api
 
 const cardList = new Section(
   {
-    renderer: (element) => { // функция, которая отвечает за создание и отрисовку данных на странице
+    renderer: (element) => {
+      // функция, которая отвечает за создание и отрисовку данных на странице
       const cardElement = createCard(element);
       cardList.addItem(cardElement);
     },
@@ -139,7 +140,7 @@ const popupAddNewCardForm = new PopupWithForm(popupAddCardSelector, {
         cardList.addItem(cardElement);
       })
       .catch((err) => console.log(err))
-      .finally(() => popupAddNewCardForm.renderLoading(false))
+      .finally(() => popupAddNewCardForm.renderLoading(false));
   },
 });
 
@@ -166,15 +167,19 @@ popupEditNameForm.setEventListeners();
 
 // экземпляр попапа с формой для изменения аватара пользователя
 const popupChangeAvatarForm = new PopupWithForm(popupChangeAvatarSelector, {
-  handleSubmit: (data) => {  //колбэк сабмита формы
-    console.log('inside handlesubmit DATA ====>', data)
+  handleSubmit: (data) => {
+    //колбэк сабмита формы
+    console.log("inside handlesubmit DATA ====>", data);
     popupChangeAvatarForm.renderLoading(true);
     userInfo.setUserAvatar(data);
-    api.changeUserAvatar(data.avatar)
-      .then(res => console.log("внутри запроса айпи на изменение аватара ===>", res))
+    api
+      .changeUserAvatar(data.avatar)
+      .then((res) =>
+        console.log("внутри запроса айпи на изменение аватара ===>", res)
+      )
       .catch((err) => console.log(err))
       .finally(() => popupChangeAvatarForm.renderLoading(false));
-  }
+  },
 });
 
 popupChangeAvatarForm.setEventListeners();
@@ -188,21 +193,21 @@ cardFormValidator.enableValidation();
 const avatarFormValidator = new FormValidator(options, formChangeAvatar);
 avatarFormValidator.enableValidation();
 
-buttonEditName.addEventListener("click", function() {
+buttonEditName.addEventListener("click", function () {
   popupEditNameForm.open();
   popupEditNameForm.setInputValues(userInfo.getUserInfo());
   nameFormValidator.resetFormValidation();
 });
 
-buttonAddCard.addEventListener("click", function() {
+buttonAddCard.addEventListener("click", function () {
   popupAddNewCardForm.open();
   cardFormValidator.resetFormValidation();
 });
 
-buttonChangeAvatar.addEventListener("click", function() {
+buttonChangeAvatar.addEventListener("click", function () {
   popupChangeAvatarForm.open();
   avatarFormValidator.resetFormValidation();
-})
+});
 
 api
   .getInfo()
@@ -213,14 +218,18 @@ api
     console.log(err);
   });
 
-
-api.getAppInfo().then((args) => {
-  const [dataFromUserInfoPromise, dataFromCardsPromise] = args;
-  myId = dataFromUserInfoPromise._id;
-  userInfo.setUserInfo(dataFromUserInfoPromise);
-  userInfo.setUserAvatar(dataFromUserInfoPromise);
-  cardList.renderItems(dataFromCardsPromise);
-});
+api
+  .getAppInfo()
+  .then((args) => {
+    const [dataFromUserInfoPromise, dataFromCardsPromise] = args;
+    myId = dataFromUserInfoPromise._id;
+    userInfo.setUserInfo(dataFromUserInfoPromise);
+    userInfo.setUserAvatar(dataFromUserInfoPromise);
+    cardList.renderItems(dataFromCardsPromise);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 export {
   popupFullPhoto,
