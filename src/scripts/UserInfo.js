@@ -6,15 +6,17 @@ export default class UserInfo {
   }
 
   getUserInfo() { //публичный метод возвращает объект с данными пользователя
-      return { name: this._userName.textContent, about: this._userBio.textContent, avatar: this._userAvatar.src  }
+      return { name: this._userName.textContent, about: this._userBio.textContent, avatar: this._userAvatar.src }
 }
 
   setUserInfo(user) { //принимает новые данные пользователя и добавляет их на страницу
-    if (user.name || user.bio) {
       this._userName.textContent = user.name;
       this._userBio.textContent = user.about;
-    } else {
-      this._userAvatar.src = user.avatar;
-    }    
+    }
+
+  setUserAvatar(user) {
+    this._userAvatar.src = user.avatar;
+    // console.log(this._userAvatar.src); 
+    // console.log(user.avatar)
   }
 }

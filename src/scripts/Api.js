@@ -14,7 +14,7 @@ export default class Api {
       method: "GET",
       headers: {
         authorization: this._token,
-        "Content-Type": "application/json",
+        "Content-type": "application/json",
       },
     }).then(this.checkRes);
   }
@@ -23,7 +23,7 @@ export default class Api {
     return fetch(`${this._url}/${this._id}/cards`, {
       headers: {
         authorization: this._token,
-        "Content-Type": "application/json",
+        "Content-type": "application/json",
       },
     }).then(this.checkRes);
   }
@@ -33,7 +33,7 @@ export default class Api {
       method: "PATCH",
       headers: {
         authorization: this._token,
-        "Content-Type": "application/json",
+        "Content-type": "application/json",
       },
       body: JSON.stringify({
         name: newUserData.name,
@@ -47,7 +47,7 @@ export default class Api {
       method: "POST",
       headers: {
         authorization: this._token,
-        "Content-Type": "application/json",
+        "Content-type": "application/json",
       },
       body: JSON.stringify({
         name: card.name,

@@ -167,8 +167,9 @@ popupEditNameForm.setEventListeners();
 // экземпляр попапа с формой для изменения аватара пользователя
 const popupChangeAvatarForm = new PopupWithForm(popupChangeAvatarSelector, {
   handleSubmit: (data) => {  //колбэк сабмита формы
+    console.log('inside handlesubmit DATA ====>', data)
     popupChangeAvatarForm.renderLoading(true);
-    userInfo.setUserInfo(data);
+    userInfo.setUserAvatar(data);
     api.changeUserAvatar(data.avatar)
       .then(res => console.log("внутри запроса айпи на изменение аватара ===>", res))
       .catch((err) => console.log(err))
@@ -177,7 +178,6 @@ const popupChangeAvatarForm = new PopupWithForm(popupChangeAvatarSelector, {
 });
 
 popupChangeAvatarForm.setEventListeners();
-
 
 const nameFormValidator = new FormValidator(options, formEditName);
 nameFormValidator.enableValidation();
@@ -207,7 +207,7 @@ buttonChangeAvatar.addEventListener("click", function() {
 api
   .getInfo()
   .then((res) => {
-    console.log(res);
+    console.log("api getInfo ====>", res);
   })
   .catch((err) => {
     console.log(err);
@@ -218,6 +218,7 @@ api.getAppInfo().then((args) => {
   const [dataFromUserInfoPromise, dataFromCardsPromise] = args;
   myId = dataFromUserInfoPromise._id;
   userInfo.setUserInfo(dataFromUserInfoPromise);
+  userInfo.setUserAvatar(dataFromUserInfoPromise);
   cardList.renderItems(dataFromCardsPromise);
 });
 
