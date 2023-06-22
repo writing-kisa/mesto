@@ -11,7 +11,7 @@ export default class Api {
 
   getInfo() {
     return fetch(`${this._url}/${this._id}/users/me`, {
-      // method: "GET",
+      method: "GET",
       headers: {
         authorization: this._token,
         "Content-Type": "application/json",

@@ -131,13 +131,15 @@ const userInfo = new UserInfo(profileInfoSelectors);
 // экземпляр попапа с формой для добавления новой карточки
 const popupAddNewCardForm = new PopupWithForm(popupAddCardSelector, {
   handleSubmit: (data) => {
+    popupAddNewCardForm.renderLoading(true);
     api
       .addCard(data)
       .then((res) => {
         const cardElement = createCard(res);
         cardList.addItem(cardElement);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => popupAddNewCardForm.renderLoading(false))
   },
 });
 
@@ -146,6 +148,7 @@ popupAddNewCardForm.setEventListeners();
 // экземпляр попапа с формой для изменения информации о пользователе
 const popupEditNameForm = new PopupWithForm(popupEditNameSelector, {
   handleSubmit: (data) => {
+    popupEditNameForm.renderLoading(true);
     userInfo.setUserInfo(data);
     api
       .changeUserInfo(data)
@@ -154,25 +157,36 @@ const popupEditNameForm = new PopupWithForm(popupEditNameSelector, {
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+      .finally(() => popupEditNameForm.renderLoading(false));
   },
 });
 
 popupEditNameForm.setEventListeners();
 
-// экземпляр попапа с формой для изменения АВАТАРА пользователя
+// экземпляр попапа с формой для изменения аватара пользователя
 const popupChangeAvatarForm = new PopupWithForm(popupChangeAvatarSelector, {
   handleSubmit: (data) => {  //колбэк сабмита формы
-    // console.log("делаю консоль лог внутри хэндл сабмита ===>", data) // сюда попадает объект с ссылкой для аватара, которую я ввела в поле, в таком виде: {avatar: 'https://images.unsplash.com/photo-1545733099-15248…fDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2788&q=80'}
-    // console.log("делаю консоль лог внутри хэндл сабмита ===>", data.avatar) // здесь я получаю ту самую ссылку, которую я вставила в поле
+    popupChangeAvatarForm.renderLoading(true);
     userInfo.setUserInfo(data);
     api.changeUserAvatar(data.avatar)
       .then(res => console.log("внутри запроса айпи на изменение аватара ===>", res))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => popupChangeAvatarForm.renderLoading(false));
   }
 });
 
 popupChangeAvatarForm.setEventListeners();
+
+
+const nameFormValidator = new FormValidator(options, formEditName);
+nameFormValidator.enableValidation();
+
+const cardFormValidator = new FormValidator(options, formSubmitNewCard);
+cardFormValidator.enableValidation();
+
+const avatarFormValidator = new FormValidator(options, formChangeAvatar);
+avatarFormValidator.enableValidation();
 
 buttonEditName.addEventListener("click", function() {
   popupEditNameForm.open();
@@ -187,16 +201,8 @@ buttonAddCard.addEventListener("click", function() {
 
 buttonChangeAvatar.addEventListener("click", function() {
   popupChangeAvatarForm.open();
+  avatarFormValidator.resetFormValidation();
 })
-
-const nameFormValidator = new FormValidator(options, formEditName);
-nameFormValidator.enableValidation();
-
-const cardFormValidator = new FormValidator(options, formSubmitNewCard);
-cardFormValidator.enableValidation();
-
-const avatarFormValidator = new FormValidator(options, formChangeAvatar);
-avatarFormValidator.enableValidation();
 
 api
   .getInfo()
