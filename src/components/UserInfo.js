@@ -10,13 +10,19 @@ export default class UserInfo {
 }
 
   setUserInfo(user) { //принимает новые данные пользователя и добавляет их на страницу
+    if (user.name || user.about) {
       this._userName.textContent = user.name;
       this._userBio.textContent = user.about;
+    } else {
+      return "error"
+    }
   }
 
   setUserAvatar(user) {
-    this._userAvatar.src = user.avatar;
-    // console.log(this._userAvatar.src); 
-    // console.log(user.avatar)
+    if (user.avatar) {
+      this._userAvatar.src = user.avatar;
+    } else {
+      return "error"
+    }
   }
 }

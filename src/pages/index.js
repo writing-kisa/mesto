@@ -207,7 +207,8 @@ api
     myId = dataFromUserInfoPromise._id;
     userInfo.setUserInfo(dataFromUserInfoPromise);
     userInfo.setUserAvatar(dataFromUserInfoPromise);
-    cardList.renderItems(dataFromCardsPromise);
+    const reversedData = dataFromCardsPromise.reverse();
+    cardList.renderItems(reversedData);
   })
   .catch((err) => {
     console.log(err);
