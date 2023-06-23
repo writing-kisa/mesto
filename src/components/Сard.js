@@ -6,7 +6,7 @@ class Card {
   ) {
     this._name = name;
     this._link = link;
-    this._likes = likes;    //передаем массив лайков
+    this._likes = likes; //передаем массив лайков
     this._ownerCardId = ownerCardId;
     this._cardId = cardId;
     this._myId = myId;

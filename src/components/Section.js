@@ -9,7 +9,6 @@ export default class Section {
     // публичный метод, который отвечает за отрисовку всех элементов, отрисовку элементов по отдельности делает ф-ия renderer
     array.forEach((item) => {
       this._renderer(item);
-      // this.addItem();
     });
   }
 

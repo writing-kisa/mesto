@@ -5,7 +5,7 @@ export default class Api {
     this._id = info.groupId;
   }
 
-  checkRes(res) {
+  _checkRes(res) {
     return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
   }
 
@@ -16,7 +16,7 @@ export default class Api {
         authorization: this._token,
         "Content-type": "application/json",
       },
-    }).then(this.checkRes);
+    }).then(this._checkRes);
   }
 
   getInitialCards() {
@@ -25,7 +25,7 @@ export default class Api {
         authorization: this._token,
         "Content-type": "application/json",
       },
-    }).then(this.checkRes);
+    }).then(this._checkRes);
   }
 
   changeUserInfo(newUserData) {
@@ -39,7 +39,7 @@ export default class Api {
         name: newUserData.name,
         about: newUserData.about,
       }),
-    }).then(this.checkRes);
+    }).then(this._checkRes);
   }
 
   addCard(card) {
@@ -53,7 +53,7 @@ export default class Api {
         name: card.name,
         link: card.link,
       }),
-    }).then(this.checkRes);
+    }).then(this._checkRes);
   }
 
   deleteCard(cardId) {
@@ -62,7 +62,7 @@ export default class Api {
       headers: {
         authorization: this._token,
       },
-    }).then(this.checkRes);
+    }).then(this._checkRes);
   }
 
   likeCard(cardId) {
@@ -71,7 +71,7 @@ export default class Api {
       headers: {
         authorization: this._token,
       },
-    }).then(this.checkRes);
+    }).then(this._checkRes);
   }
 
   deleteLikeCard(cardId) {
@@ -80,7 +80,7 @@ export default class Api {
       headers: {
         authorization: this._token,
       },
-    }).then(this.checkRes);
+    }).then(this._checkRes);
   }
   
   changeUserAvatar(avatarLink) {
@@ -93,7 +93,7 @@ export default class Api {
       body: JSON.stringify({
         avatar: avatarLink,
       }),
-    }).then(this.checkRes);
+    }).then(this._checkRes);
   }
 
   getAppInfo() {

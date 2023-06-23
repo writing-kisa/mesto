@@ -1,6 +1,6 @@
-import Card from "./scripts/Сard.js";
-import FormValidator from "./scripts/FormValidator.js";
-import options from "./scripts/validationConfig.js";
+import Card from "../components/Сard.js";
+import FormValidator from "../components/FormValidator.js";
+import options from "../scripts/validationConfig.js";
 import {
   popupFullPhoto,
   nameFullPhoto,
@@ -16,14 +16,14 @@ import {
   popupOpenFullPhotoSelector,
   buttonChangeAvatar,
   formChangeAvatar,
-} from "./scripts/utils.js";
-import "./pages/index.css";
-import Section from "./scripts/Section.js";
-import PopupWithImage from "./scripts/PopupWithImage.js";
-import PopupWithForm from "./scripts/PopupWithForm.js";
-import UserInfo from "./scripts/UserInfo.js";
-import Api from "./scripts/Api.js";
-import PopupWithSubmitForm from "./scripts/PopupWithSubmitForm.js";
+} from "../scripts/utils.js";
+import "./index.css";
+import Section from "../components/Section.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
+import Api from "../components/Api.js";
+import PopupWithSubmitForm from "../components/PopupWithSubmitForm.js";
 
 let myId = null;
 
@@ -96,15 +96,6 @@ const createCard = (item) => {
   const cardElement = newCard.render(); //отрисовываем карточку
   return cardElement; //возвращаем карточку
 };
-
-api
-  .getInitialCards()
-  .then((res) => {
-    console.log(res);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
 
 const cardList = new Section(
   {
@@ -208,15 +199,6 @@ buttonChangeAvatar.addEventListener("click", function () {
   popupChangeAvatarForm.open();
   avatarFormValidator.resetFormValidation();
 });
-
-api
-  .getInfo()
-  .then((res) => {
-    console.log("api getInfo ====>", res);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
 
 api
   .getAppInfo()
