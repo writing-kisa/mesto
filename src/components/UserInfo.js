@@ -10,7 +10,7 @@ export default class UserInfo {
 }
 
   setUserInfo(user) { //принимает новые данные пользователя и добавляет их на страницу
-    if (user.name || user.about) {
+    if (user.name && user.about) {
       this._userName.textContent = user.name;
       this._userBio.textContent = user.about;
     } else {
